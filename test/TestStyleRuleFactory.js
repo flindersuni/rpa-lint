@@ -1,6 +1,9 @@
 const StyleRuleFactory = require( "../app/StyleRuleFactory.js" ).StyleRuleFactory;
 const assert = require( "assert" );
 
+// Use a constant to make updating this value during development / test cycles easier.
+const expectedNamespaceCount = 3;
+
 /**
  * Test the static functions of the StyleRuleFactory class.
  */
@@ -16,7 +19,7 @@ describe( "StyleRuleFactory", function() {
 
     it( "should return a object with 1 property", function() {
       let obj = StyleRuleFactory.getXamlNamespaces();
-      assert.equal( Object.keys( obj ).length, 1 );
+      assert.equal( Object.keys( obj ).length, expectedNamespaceCount );
     } );
 
     it( "should return an object that contains a xaml property", function() {

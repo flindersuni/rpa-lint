@@ -24,7 +24,9 @@ class StyleRuleFactory {
    */
   static getXamlNamespaces() {
     return {
-      "xaml": "http://schemas.microsoft.com/netfx/2009/xaml/activities"
+      "xaml": "http://schemas.microsoft.com/netfx/2009/xaml/activities",
+      "x": "http://schemas.microsoft.com/winfx/2006/xaml",
+      "sap2010": "http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
     };
   }
 
