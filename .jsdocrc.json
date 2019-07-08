@@ -1,0 +1,16 @@
+{
+  "plugins": [
+    "plugins/markdown"
+  ],
+  "source": {
+    "include": [
+      "./app/"
+    ],
+    "includePattern": ".+\\.js$"
+  },
+  "opts": {
+    "encoding": "utf8",
+    "destination": "./docs/",
+    "readme": "./README.md"
+  }
+}

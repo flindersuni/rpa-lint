@@ -1,0 +1,36 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "plugins":[
+    "jsdoc",
+    "mocha",
+    "security"
+  ],
+  "env": {
+    "es6": true,
+    "node": true,
+    "mocha": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "jquery",
+    "plugin:jsdoc/recommended",
+    "plugin:security/recommended"
+  ],
+  "rules":{
+      "mocha/no-exclusive-tests": "error",
+      "mocha/max-top-level-suites": "warn",
+      "mocha/no-global-tests": "error",
+      "mocha/no-identical-title": "error",
+      "mocha/no-nested-tests": "error",
+      "mocha/no-pending-tests": "warn",
+      "mocha/no-setup-in-describe": "error",
+      "mocha/no-hooks": "error",
+      "mocha/no-skipped-tests": "error",
+      "mocha/no-top-level-hooks": "error",
+      "mocha/valid-suite-description": ["warn", "^[A-Z]|^#"],
+      "mocha/valid-test-description": "warn",
+      "jsdoc/require-description-complete-sentence": "warn"
+  }
+}
