@@ -85,6 +85,25 @@ describe( "ArgumentsMustHaveAnnotations", function() {
 
       } );
     } );
+
+    context( "With partially valid XAML to process", function() {
+      it( "should return an array with four matching nodes", function() {
+        let styleCheck = new ArgumentsMustHaveAnnotations(
+          StyleRuleFactory.getXpathProcessor()
+        );
+
+        assert.ok( Array.isArray( styleCheck.getLenientMatches() ) );
+
+        let xamlContent = fs.readFileSync( "./test/artefacts/tre.xaml" );
+        styleCheck.checkStyleRule( xamlContent.toString() );
+
+        let lenientMatches = styleCheck.getLenientMatches();
+
+        assert.ok( Array.isArray( lenientMatches ) );
+        assert.equal( lenientMatches.length, 4 );
+
+      } );
+    } );
   } );
 
   /**
@@ -143,6 +162,25 @@ describe( "ArgumentsMustHaveAnnotations", function() {
 
       } );
     } );
+
+    context( "With partially valid XAML to process", function() {
+      it( "should return an array with three matching nodes", function() {
+        let styleCheck = new ArgumentsMustHaveAnnotations(
+          StyleRuleFactory.getXpathProcessor()
+        );
+
+        assert.ok( Array.isArray( styleCheck.getStrictMatches() ) );
+
+        let xamlContent = fs.readFileSync( "./test/artefacts/tre.xaml" );
+        styleCheck.checkStyleRule( xamlContent.toString() );
+
+        let strictMatches = styleCheck.getStrictMatches();
+
+        assert.ok( Array.isArray( strictMatches ) );
+        assert.equal( strictMatches.length, 3 );
+
+      } );
+    } );
   } );
 
   /**
@@ -196,6 +234,23 @@ describe( "ArgumentsMustHaveAnnotations", function() {
 
       } );
     } );
+
+    context( "With partially valid XAML to process", function() {
+      it( "should return an empty array", function() {
+        let styleCheck = new ArgumentsMustHaveAnnotations(
+          StyleRuleFactory.getXpathProcessor()
+        );
+
+        let xamlContent = fs.readFileSync( "./test/artefacts/tre.xaml" );
+        styleCheck.checkStyleRule( xamlContent.toString() );
+
+        let warnings = styleCheck.getWarnings();
+
+        assert.ok( Array.isArray( warnings ) );
+        assert.equal( warnings.length, 0 );
+
+      } );
+    } );
   } );
 
   /**
@@ -234,12 +289,29 @@ describe( "ArgumentsMustHaveAnnotations", function() {
     } );
 
     context( "With invvalid XAML to process", function() {
-      it( "should return an array with one", function() {
+      it( "should return an array with one element", function() {
         let styleCheck = new ArgumentsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
         let xamlContent = fs.readFileSync( "./test/artefacts/dos.xaml" );
+        styleCheck.checkStyleRule( xamlContent.toString() );
+
+        let errors = styleCheck.getErrors();
+
+        assert.ok( Array.isArray( errors ) );
+        assert.equal( errors.length, 1 );
+
+      } );
+    } );
+
+    context( "With partially valid XAML to process", function() {
+      it( "should return an array with one element", function() {
+        let styleCheck = new ArgumentsMustHaveAnnotations(
+          StyleRuleFactory.getXpathProcessor()
+        );
+
+        let xamlContent = fs.readFileSync( "./test/artefacts/tre.xaml" );
         styleCheck.checkStyleRule( xamlContent.toString() );
 
         let errors = styleCheck.getErrors();
