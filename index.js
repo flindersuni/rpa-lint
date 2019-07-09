@@ -66,6 +66,7 @@ xamlFiles.forEach( function( file ) {
     errors: []
   };
 
+  // eslint-disable-next-line security/detect-non-literal-fs-filename
   let xamlContent = fs.readFileSync( path.join( program.input, file ) );
   xamlContent = xamlContent.toString();
 
@@ -83,6 +84,7 @@ xamlFiles.forEach( function( file ) {
     haveIssues = true;
   }
 
+  // eslint-disable-next-line security/detect-object-injection
   results[ file ] = output;
 
 } );
@@ -93,6 +95,7 @@ if ( haveIssues ) {
 
   // Output the found issues.
   Object.keys( results ).forEach( function( file ) {
+    // eslint-disable-next-line security/detect-object-injection
     let output = results[ file ];
 
     // Are there any warnings?
