@@ -1,7 +1,7 @@
 # Flinders XAML Style Check
 This is a [Node.js][nodejs] app that is used to check our work against rules that have been agreed to by the RPA development team at [Flinders University][flinders].
 
-The app uses a static analysis to check the [XAML][xaml] files in our [UiPath][https://www.uipath.com/] projects.
+The app uses a static analysis to check the [XAML][xaml] files in our [UiPath][uipath] projects.
 
 ## Why use Node.js?
 The decision to use Node.js for this app was made for two main reasons:
@@ -58,4 +58,5 @@ $ npm run docs
 [mochajs]: https://mochajs.org/
 [nodejs]: https://nodejs.org/
 [stackoverflow]: https://insights.stackoverflow.com/survey/2019#technology-_-programming-scripting-and-markup-languages
+[uipath]: https://www.uipath.com/
 [xaml]: https://en.wikipedia.org/wiki/Extensible_Application_Markup_Language
