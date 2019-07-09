@@ -60,7 +60,7 @@ class StyleRuleFactory {
 
     // Filter the list of files to only XAML files.
     let xamlFiles = fileList.filter( function( element ) {
-      return path.extname( element ) === ".xaml";
+      return path.extname( element ) === ".xaml" && path.basename( element ).startsWith( "~" ) === false;
     } );
 
     return xamlFiles;
