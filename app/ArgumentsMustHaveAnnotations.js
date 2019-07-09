@@ -14,7 +14,7 @@ class ArgumentsMustHaveAnnotations {
    * @since 1.0.0
    */
   constructor( xpath ) {
-    if ( !xpath || !typeof xpath === "function" ) {
+    if ( !xpath || typeof xpath !== "function" ) {
       throw new TypeError( "xpath parameter is required and must be a function" );
     }
     this.xpath = xpath;
@@ -33,7 +33,8 @@ class ArgumentsMustHaveAnnotations {
    * @throws {TypeError} Parameter xaml is required and must be a string.
    */
   checkStyleRule( xaml ) {
-    if ( !xaml || !typeof xaml === "string" ) {
+
+    if ( !xaml || typeof xaml !== "string" ) {
       throw new TypeError( "xaml parameter is required and must be a string" );
     }
 

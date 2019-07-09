@@ -24,7 +24,33 @@ describe( "ArgumentsMustHaveAnnotations", function() {
 
     it( "should throw an error if the parameter is not a function", function() {
       assert.throws( function() {
-        StyleRuleFactory.getXamlFileList( new Object );
+        new ArgumentsMustHaveAnnotations( new Object() );
+      }, TypeError );
+    } );
+  } );
+
+  /**
+   * Test the checkStyle function.
+   */
+  describe( "#checkStyleRule", function() {
+    it( "should throw an error if the parameter is not supplied", function() {
+      assert.throws( function() {
+        let styleCheck = new ArgumentsMustHaveAnnotations(
+          StyleRuleFactory.getXpathProcessor()
+        );
+
+        styleCheck.checkStyleRule();
+
+      }, TypeError );
+    } );
+
+    it( "should throw an error if the parameter is not a function", function() {
+      assert.throws( function() {
+        let styleCheck = new ArgumentsMustHaveAnnotations(
+          StyleRuleFactory.getXpathProcessor()
+        );
+
+        styleCheck.checkStyleRule(  new Object() );
       }, TypeError );
     } );
   } );
