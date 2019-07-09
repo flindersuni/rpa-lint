@@ -57,8 +57,11 @@ log( "INFO: Found %d files in %s", xamlFiles.length, program.input );
 let results = {};
 let haveIssues = false;
 
+// Load classes that have implemented the style rules.
 const ArgumentsMustHaveAnnotations = require( "./app/ArgumentsMustHaveAnnotations.js" ).ArgumentsMustHaveAnnotations;
 const VariablesMustHaveAnnotations = require( "./app/VariablesMustHaveAnnotations.js" ).VariablesMustHaveAnnotations;
+const MainSequencesHaveAnnotations = require( "./app/MainSequencesMustHaveAnnotations.js" ).MainSequencesHaveAnnotations;
+const MainFlowchartsHaveAnnotations = require( "./app/MainFlowchartsMustHaveAnnotations.js" ).MainFlowchartsHaveAnnotations;
 
 // Process the files.
 xamlFiles.forEach( function( file ) {
@@ -71,6 +74,8 @@ xamlFiles.forEach( function( file ) {
   let xamlContent = fs.readFileSync( path.join( program.input, file ) );
   xamlContent = xamlContent.toString();
 
+  //TODO: Rework this code chunk to reduce copy and paste.
+
   // Check the arguments.
   let styleCheck = new ArgumentsMustHaveAnnotations(
     StyleRuleFactory.getXpathProcessor()
@@ -82,6 +87,26 @@ xamlFiles.forEach( function( file ) {
 
   // Check the variables.
   styleCheck = new VariablesMustHaveAnnotations(
+    StyleRuleFactory.getXpathProcessor()
+  );
+
+  styleCheck.checkStyleRule( xamlContent.toString() );
+
+  output.warnings = output.warnings.concat( styleCheck.getWarnings() );
+  output.errors = output.errors.concat( styleCheck.getErrors() );
+
+  // Check the main sequences.
+  styleCheck = new MainSequencesHaveAnnotations(
+    StyleRuleFactory.getXpathProcessor()
+  );
+
+  styleCheck.checkStyleRule( xamlContent.toString() );
+
+  output.warnings = output.warnings.concat( styleCheck.getWarnings() );
+  output.errors = output.errors.concat( styleCheck.getErrors() );
+
+  // Check the main flow charts.
+  styleCheck = new MainFlowchartsHaveAnnotations(
     StyleRuleFactory.getXpathProcessor()
   );
 
