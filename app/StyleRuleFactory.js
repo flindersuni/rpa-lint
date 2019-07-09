@@ -2,7 +2,6 @@
 const xpath = require( "xpath" );
 const path = require( "path" );
 const fs = require( "fs" );
-const appRoot = require( "app-root-path" );
 
 //const dom = require( "xmldom" );
 
@@ -51,17 +50,8 @@ class StyleRuleFactory {
    * @since 1.0.0
    */
   static getXamlFileList( targetPath ) {
-    if ( !targetPath || !typeof targetPath === "string" ) {
+    if ( !targetPath || typeof targetPath !== "string" ) {
       throw new TypeError( "rootPath parameter is required and must be a string" );
-    }
-
-    // Resolve a relative path if required.
-    if ( !path.isAbsolute( targetPath ) ) {
-      targetPath = path.resolve( appRoot.toString(), targetPath );
-    } else {
-
-      // Normalise the path for sanity.
-      targetPath = path.normalize( targetPath );
     }
 
     // Get a list of files in the target directory.
