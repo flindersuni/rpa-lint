@@ -14,6 +14,9 @@ class ArgumentsMustHaveAnnotations {
    * @since 1.0.0
    */
   constructor( xpath ) {
+    if ( !xpath || !typeof xpath === "function" ) {
+      throw new TypeError( "xpath parameter is required and must be a function" );
+    }
     this.xpath = xpath;
 
     this.xpathMatchAll = "//xaml:Activity/x:Members/x:Property";
@@ -43,7 +46,7 @@ class ArgumentsMustHaveAnnotations {
   }
 
   /**
-   * Returns an array of nodes that matched the lenient xpath expression.
+   * Return an array of nodes that matched the lenient xpath expression.
    *
    * @returns {Array} An array of nodes.
    * @since 1.0.0
@@ -53,13 +56,42 @@ class ArgumentsMustHaveAnnotations {
   }
 
   /**
-   * Returns an array of nodes that matched the specific xpath expression.
+   * Return an array of nodes that matched the specific xpath expression.
    *
    * @returns {Array} An array of nodes.
    * @since 1.0.0
    */
   getStrictMatches() {
     return this.strictMatches;
+  }
+
+  /**
+   * Return an array of warnings as a result of the style check.
+   *
+   * @returns {Array} An array of warning strings.
+   * @since 1.0.0
+   */
+  getWarnings() {
+    return [];
+  }
+
+  /**
+   * Return an array of errors as a result of the style check.
+   *
+   * @returns {Array} An array of error strings.
+   * @since 1.0.0
+   */
+  getErrors() {
+
+    // Check to see if errors have been detected.
+    if ( ( this.lenientMatches.length - this.strictMatches.length ) > 0 ) {
+      return [
+        "Arguments without annotations are not allowed."
+      ];
+    } else {
+      return [];
+    }
+
   }
 
 }
