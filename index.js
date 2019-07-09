@@ -57,7 +57,8 @@ log( "INFO: Found %d files in %s", xamlFiles.length, program.input );
 let results = {};
 let haveIssues = false;
 
-const ArgumentsMustHaveAnnotations = new require( "./app/ArgumentsMustHaveAnnotations.js" ).ArgumentsMustHaveAnnotations;
+const ArgumentsMustHaveAnnotations = require( "./app/ArgumentsMustHaveAnnotations.js" ).ArgumentsMustHaveAnnotations;
+const VariablesMustHaveAnnotations = require( "./app/VariablesMustHaveAnnotations.js" ).VariablesMustHaveAnnotations;
 
 // Process the files.
 xamlFiles.forEach( function( file ) {
@@ -74,6 +75,16 @@ xamlFiles.forEach( function( file ) {
   let styleCheck = new ArgumentsMustHaveAnnotations(
     StyleRuleFactory.getXpathProcessor()
   );
+  styleCheck.checkStyleRule( xamlContent.toString() );
+
+  output.warnings = output.warnings.concat( styleCheck.getWarnings() );
+  output.errors = output.errors.concat( styleCheck.getErrors() );
+
+  // Check the variables.
+  styleCheck = new VariablesMustHaveAnnotations(
+    StyleRuleFactory.getXpathProcessor()
+  );
+
   styleCheck.checkStyleRule( xamlContent.toString() );
 
   output.warnings = output.warnings.concat( styleCheck.getWarnings() );
@@ -108,7 +119,7 @@ if ( haveIssues ) {
 
     // Are there any errors?
     if ( output.errors.length > 0 ) {
-      log( error( "Error: " ) + "Warnings for " + file );
+      log( error( "ERROR: " ) + "Errors for " + file );
       output.errors.forEach( function( error ) {
         log( " - %s", error );
       } );
@@ -118,5 +129,5 @@ if ( haveIssues ) {
   // Exit with an error status code.
   process.exitCode = 1;
 } else {
-  log( success( "Sucess: " + "No code style issues were detected." ) );
+  log( success( "Sucess: " + "No XAML style issues were detected." ) );
 }
