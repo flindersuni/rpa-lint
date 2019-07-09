@@ -31,6 +31,13 @@
       "mocha/no-top-level-hooks": "error",
       "mocha/valid-suite-description": ["warn", "^[A-Z]|^#"],
       "mocha/valid-test-description": "warn",
-      "jsdoc/require-description-complete-sentence": "warn"
+      "jsdoc/require-description-complete-sentence": "warn",
+      "max-len": [
+        "error",
+        {
+          "ignoreStrings": true,
+          "ignoreComments": true
+        }
+      ]
   }
 }
