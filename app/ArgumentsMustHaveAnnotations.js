@@ -19,8 +19,8 @@ class ArgumentsMustHaveAnnotations {
     }
     this.xpath = xpath;
 
-    this.xpathMatchAll = "//xaml:Activity/x:Members/x:Property";
-    this.xpathMatchSpecific = "//xaml:Activity/x:Members/x:Property[@sap2010:Annotation.AnnotationText and string-length(@sap2010:Annotation.AnnotationText)!=0]";
+    this.xpathMatchAll = "/xaml:Activity/x:Members/x:Property";
+    this.xpathMatchSpecific = "/xaml:Activity/x:Members/x:Property[@sap2010:Annotation.AnnotationText and string-length(@sap2010:Annotation.AnnotationText)!=0]";
 
     this.lenientMatches = [];
     this.strictMatches = [];
