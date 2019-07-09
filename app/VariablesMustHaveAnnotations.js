@@ -31,6 +31,7 @@ class VariablesMustHaveAnnotations {
    *
    * @param {string} xaml The xml from a XAML file.
    * @throws {TypeError} Parameter xaml is required and must be a string.
+   * @since 1.0.0
    */
   checkStyleRule( xaml ) {
 
