@@ -65,4 +65,33 @@ describe( "StyleRuleFactory", function() {
        }, TypeError );
      } );
    } );
+
+   /**
+    * Test getting the UiPath project data.
+    */
+   describe( "#getUiPathProjectInfo", function() {
+    it( "should throw an error if the parameter is not supplied", function() {
+      assert.throws( function() {
+        StyleRuleFactory.getUiPathProjectInfo();
+      }, TypeError );
+    } );
+
+    it( "should throw an error if the parameter is not a string", function() {
+      assert.throws( function() {
+        StyleRuleFactory.getUiPathProjectInfo( new Object );
+      }, TypeError );
+    } );
+
+    it( "should return an object when a project.json file can be found in the given path", function() {
+      let projectInfo = StyleRuleFactory.getUiPathProjectInfo( "./test/artefacts" );
+      assert.equal( typeof projectInfo, "object" );
+    } );
+
+    it( "should throw an error if the project.json file cannot be read", function() {
+      assert.throws( function() {
+        StyleRuleFactory.getUiPathProjectInfo( "./test" );
+      }, Error );
+    } );
+
+   } );
 } );

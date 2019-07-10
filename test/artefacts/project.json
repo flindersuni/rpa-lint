@@ -1,0 +1,50 @@
+{
+  "name": "Flinders.Foundation",
+  "description": "The Flinders.Foundation library contains foundational workflows for use across all processes",
+  "main": "InvokeTestSuite.xaml",
+  "dependencies": {
+    "Flinders.Foundation.Testing": "1.0.1-alpha.5",
+    "UiPath.Credentials.Activities": "1.1.6479.13204",
+    "UiPath.Excel.Activities": "2.6.2",
+    "UiPath.Mail.Activities": "1.5.0",
+    "UiPath.System.Activities": "19.6.0",
+    "UiPath.UIAutomation.Activities": "19.6.0"
+  },
+  "schemaVersion": "3.2",
+  "studioVersion": "19.4.4.0",
+  "projectVersion": "2.0.0-alpha",
+  "runtimeOptions": {
+    "autoDispose": false,
+    "isPausable": true,
+    "excludedLoggedData": [
+      "Private:*",
+      "*password*"
+    ]
+  },
+  "projectType": "Library",
+  "libraryOptions": {
+    "includeOriginalXaml": false,
+    "privateWorkflows": [
+      "TestTemplates/InvokeTestSuiteTemplate.xaml",
+      "TestTemplates/TestCaseTemplate.xaml",
+      "TestCases/TestDetectEnvironmentDevelopment.xaml",
+      "TestCases/TestDetectEnvironmentProduction.xaml",
+      "TestCases/TestDetectEnvironmentTest.xaml",
+      "TestFramework/BlankTestCase.xaml",
+      "TestFramework/InvokeTestCase.xaml",
+      "TestFramework/InvokeTestCategoryTestCases.xaml",
+      "TestFramework/TestRunner.xaml",
+      "InvokeTestSuite.xaml",
+      "TestCases/TestThrowNotImplementedException.xaml",
+      "TestCases/TestThrowConfigurationException.xaml",
+      "TestCases/TestThrowBusinessRuleException.xaml",
+      "TestCases/TestTakeAndSaveScreenshot.xaml",
+      "TestCases/TestLoginToOktaDashboardValidCredential.xaml",
+      "TestCases/TestLoginToOktaDashboardInvalidUserDetails.xaml",
+      "TestCases/TestLoginToOktaDashboardInvalidEnvironment.xaml",
+      "TestCases/TestLoginToOktaDashboardInvalidCredential.xaml",
+      "TestCases/TestThrowBusinessRuleExceptionWithScreenshot.xaml"
+    ]
+  },
+  "webServices": []
+}
