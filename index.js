@@ -63,6 +63,14 @@ const VariablesMustHaveAnnotations = require( "./app/VariablesMustHaveAnnotation
 const MainSequencesHaveAnnotations = require( "./app/MainSequencesMustHaveAnnotations.js" ).MainSequencesHaveAnnotations;
 const MainFlowchartsHaveAnnotations = require( "./app/MainFlowchartsMustHaveAnnotations.js" ).MainFlowchartsHaveAnnotations;
 
+// Build a list of style rules.
+let styleRules = [
+  new ArgumentsMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
+  new VariablesMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
+  new MainSequencesHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
+  new MainFlowchartsHaveAnnotations( StyleRuleFactory.getXpathProcessor() )
+];
+
 // Process the files.
 xamlFiles.forEach( function( file ) {
   let output = {
@@ -74,46 +82,13 @@ xamlFiles.forEach( function( file ) {
   let xamlContent = fs.readFileSync( path.join( program.input, file ) );
   xamlContent = xamlContent.toString();
 
-  //TODO: Rework this code chunk to reduce copy and paste.
+  // Apply the style rules to the XAML file.
+  styleRules.forEach( function( styleRule ) {
+    styleRule.checkStyleRule( xamlContent );
 
-  // Check the arguments.
-  let styleCheck = new ArgumentsMustHaveAnnotations(
-    StyleRuleFactory.getXpathProcessor()
-  );
-  styleCheck.checkStyleRule( xamlContent.toString() );
-
-  output.warnings = output.warnings.concat( styleCheck.getWarnings() );
-  output.errors = output.errors.concat( styleCheck.getErrors() );
-
-  // Check the variables.
-  styleCheck = new VariablesMustHaveAnnotations(
-    StyleRuleFactory.getXpathProcessor()
-  );
-
-  styleCheck.checkStyleRule( xamlContent.toString() );
-
-  output.warnings = output.warnings.concat( styleCheck.getWarnings() );
-  output.errors = output.errors.concat( styleCheck.getErrors() );
-
-  // Check the main sequences.
-  styleCheck = new MainSequencesHaveAnnotations(
-    StyleRuleFactory.getXpathProcessor()
-  );
-
-  styleCheck.checkStyleRule( xamlContent.toString() );
-
-  output.warnings = output.warnings.concat( styleCheck.getWarnings() );
-  output.errors = output.errors.concat( styleCheck.getErrors() );
-
-  // Check the main flow charts.
-  styleCheck = new MainFlowchartsHaveAnnotations(
-    StyleRuleFactory.getXpathProcessor()
-  );
-
-  styleCheck.checkStyleRule( xamlContent.toString() );
-
-  output.warnings = output.warnings.concat( styleCheck.getWarnings() );
-  output.errors = output.errors.concat( styleCheck.getErrors() );
+    output.warnings = output.warnings.concat( styleRule.getWarnings() );
+    output.errors = output.errors.concat( styleRule.getErrors() );
+  } );
 
   // Were any issues found?
   if ( output.warnings.length > 0 || output.errors.length > 0 ) {
