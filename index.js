@@ -58,10 +58,10 @@ let results = {};
 let haveIssues = false;
 
 // Load classes that have implemented the style rules.
-const ArgumentsMustHaveAnnotations = require( "./app/ArgumentsMustHaveAnnotations.js" ).ArgumentsMustHaveAnnotations;
-const VariablesMustHaveAnnotations = require( "./app/VariablesMustHaveAnnotations.js" ).VariablesMustHaveAnnotations;
-const MainSequencesHaveAnnotations = require( "./app/MainSequencesMustHaveAnnotations.js" ).MainSequencesHaveAnnotations;
-const MainFlowchartsHaveAnnotations = require( "./app/MainFlowchartsMustHaveAnnotations.js" ).MainFlowchartsHaveAnnotations;
+const ArgumentsMustHaveAnnotations = require( "./app/rules/ArgumentsMustHaveAnnotations.js" ).ArgumentsMustHaveAnnotations;
+const VariablesMustHaveAnnotations = require( "./app/rules/VariablesMustHaveAnnotations.js" ).VariablesMustHaveAnnotations;
+const MainSequencesHaveAnnotations = require( "./app/rules/MainSequencesMustHaveAnnotations.js" ).MainSequencesHaveAnnotations;
+const MainFlowchartsHaveAnnotations = require( "./app/rules/MainFlowchartsMustHaveAnnotations.js" ).MainFlowchartsHaveAnnotations;
 
 // Build a list of style rules.
 let styleRules = [

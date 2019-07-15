@@ -1,7 +1,7 @@
 const StyleRuleFactory = require( "../app/StyleRuleFactory.js" ).StyleRuleFactory;
 
 const ArgumentsMustHaveAnnotations = require(
-  "../app/ArgumentsMustHaveAnnotations.js"
+  "../app/rules/ArgumentsMustHaveAnnotations.js"
 ).ArgumentsMustHaveAnnotations;
 
 const assert = require( "assert" );

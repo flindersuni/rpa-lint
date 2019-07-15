@@ -1,7 +1,7 @@
 const StyleRuleFactory = require( "../app/StyleRuleFactory.js" ).StyleRuleFactory;
 
 const MainFlowchartsHaveAnnotations = require(
-  "../app/MainFlowchartsMustHaveAnnotations.js"
+  "../app/rules/MainFlowchartsMustHaveAnnotations.js"
 ).MainFlowchartsHaveAnnotations;
 
 const assert = require( "assert" );
