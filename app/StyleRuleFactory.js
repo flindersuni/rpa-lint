@@ -65,25 +65,6 @@ class StyleRuleFactory {
 
     return xamlFiles;
   }
-
-  /**
-   * Parse and return the project.json file that contains information about the UiPath project.
-   *
-   * @param {string} projectPath Path to the root directory of the UiPath project.
-   * @returns {object} The object represented in the project.json file.
-   * @throws {TypeError} Parameter projectPath is required and must be a string.
-   * @throws {Error} Reading or parsing the project.json file fails.
-   * @since 1.0.0
-   */
-  static getUiPathProjectInfo( projectPath ) {
-    if ( !projectPath || typeof projectPath !== "string" ) {
-      throw new TypeError( "projectPath parameter is required and must be a string" );
-    }
-
-    // eslint-disable-next-line security/detect-non-literal-fs-filename
-    const fileContents = fs.readFileSync( path.join( projectPath, "project.json" ) );
-    return JSON.parse( fileContents );
-  }
 }
 
 exports.StyleRuleFactory = StyleRuleFactory;
