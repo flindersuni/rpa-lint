@@ -124,4 +124,45 @@ describe( "UiPathProject", function() {
       assert.equal( projectInfo.isLibrary(), false );
     } );
   } );
+
+  /**
+   * Test getting a list of private workflows.
+   */
+  describe( "#getPrivateWorkflows", function() {
+    it( "should return an array", function() {
+      let projectInfo = new UiPathProject( "./test/artefacts" );
+      assert.ok( Array.isArray( projectInfo.getPrivateWorkflows() ) );
+    } );
+
+    it( "should return an array of 19 elements", function() {
+      let projectInfo = new UiPathProject( "./test/artefacts" );
+      assert.ok( Array.isArray( projectInfo.getPrivateWorkflows() ) );
+      assert.equal( projectInfo.getPrivateWorkflows().length, 19 );
+    } );
+
+    it( "should return an empty array if the element in the JSON file is empty", function() {
+      let projectInfo = new UiPathProject( "./test/artefacts" );
+      projectInfo.fileContents.libraryOptions.privateWorkflows = [];
+      assert.ok( Array.isArray( projectInfo.getPrivateWorkflows() ) );
+      assert.equal( projectInfo.getPrivateWorkflows().length, 0 );
+    } );
+
+    it( "should return an empty array if the element in the JSON file is not an array", function() {
+      let projectInfo = new UiPathProject( "./test/artefacts" );
+      projectInfo.fileContents.libraryOptions.privateWorkflows = {};
+      assert.ok( Array.isArray( projectInfo.getPrivateWorkflows() ) );
+      assert.equal( projectInfo.getPrivateWorkflows().length, 0 );
+    } );
+
+    it( "should return an empty array if the element is missing", function() {
+      let projectInfo = new UiPathProject( "./test/artefacts" );
+      delete projectInfo.fileContents.libraryOptions.privateWorkflows;
+      assert.ok( Array.isArray( projectInfo.getPrivateWorkflows() ) );
+      assert.equal( projectInfo.getPrivateWorkflows().length, 0 );
+
+      delete projectInfo.fileContents.libraryOptions;
+      assert.ok( Array.isArray( projectInfo.getPrivateWorkflows() ) );
+      assert.equal( projectInfo.getPrivateWorkflows().length, 0 );
+    } );
+  } );
 } );

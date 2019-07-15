@@ -28,6 +28,7 @@ class UiPathProject {
      * Return the name property of the UiPath project object.
      *
      * @returns {string} The Name of the UiPath project or an empty string if it is not found.
+     * @since 1.0.0
      */
     getName() {
       if ( typeof( this.fileContents.name ) === "undefined" ) {
@@ -41,6 +42,7 @@ class UiPathProject {
    * Return the description property of the UiPath project object.
    *
    * @returns {string} The description of the UiPath project or an empty string if it is not found.
+   * @since 1.0.0
    */
   getDescription() {
     if ( typeof( this.fileContents.description ) === "undefined" ) {
@@ -54,6 +56,7 @@ class UiPathProject {
    * Return the project version property of the UiPath project object.
    *
    * @returns {string} The project version of the UiPath project or an empty string if it is not found.
+   * @since 1.0.0
    */
   getVersion() {
     if ( typeof( this.fileContents.projectVersion ) === "undefined" ) {
@@ -67,6 +70,7 @@ class UiPathProject {
    * Return a flag indicating if this project is a library or not.
    *
    * @returns {boolean} True if the project is a library, false if it is not.
+   * @since 1.0.0
    */
   isLibrary() {
     if ( typeof( this.fileContents.projectType ) === "undefined" ) {
@@ -75,6 +79,25 @@ class UiPathProject {
       return true;
     } else {
       return false;
+    }
+  }
+
+  /**
+   * Return an array of workflows that have been marked as private.
+   * These workflows are not exposed by a library.
+   *
+   * @returns {Array} An array of workflow file names.
+   * @since 1.0.0
+   */
+  getPrivateWorkflows() {
+    if ( typeof( this.fileContents.libraryOptions ) === "undefined" ) {
+      return [];
+    } else if (  typeof( this.fileContents.libraryOptions.privateWorkflows ) === "undefined" ) {
+      return [];
+    } else if ( !Array.isArray( this.fileContents.libraryOptions.privateWorkflows ) ) { // eslint-disable-line max-len
+      return [];
+    } else {
+      return this.fileContents.libraryOptions.privateWorkflows;
     }
   }
 }
