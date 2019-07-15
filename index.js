@@ -8,6 +8,7 @@ const fs = require( "fs" );
 const package = require( "./package.json" );
 
 const StyleRuleFactory = require( "./app/StyleRuleFactory.js" ).StyleRuleFactory;
+const UiPathProject = require( "./app/UiPathProject.js" ).UiPathProject;
 
 const program = new commander.Command();
 const log = console.log;
@@ -49,6 +50,12 @@ if ( xamlFiles.length === 0 ) {
   log( error( "ERROR: " ) + "No XAML files found!" );
   process.exitCode = 1;
 }
+
+// Get some information about the project.
+const projectInfo = new UiPathProject( program.input );
+
+log( "INFO: Project name: %s", projectInfo.getName() );
+log( "Info: Project version: %s", projectInfo.getVersion() );
 
 // Output some additional information.
 log( "INFO: Found %d files in %s", xamlFiles.length, program.input );
