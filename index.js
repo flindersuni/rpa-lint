@@ -60,7 +60,7 @@ log( "INFO: Project version: %s", projectInfo.getVersion() );
 log( "INFO: Found %d files in %s", xamlFiles.length, program.input );
 
 // Prepare to process the files.
-let results = {};
+let results = new Map;
 let haveIssues = false;
 let haveErrors = false;
 
@@ -136,8 +136,7 @@ xamlFiles.forEach( function( file ) {
     haveErrors = true;
   }
 
-  // eslint-disable-next-line security/detect-object-injection
-  results[ file ] = output;
+  results.set( file, output );
 
 } );
 
@@ -146,9 +145,7 @@ if ( haveIssues ) {
   log( "INFO: Found XAML files that do not pass validation." );
 
   // Output the found issues.
-  Object.keys( results ).forEach( function( file ) {
-    // eslint-disable-next-line security/detect-object-injection
-    let output = results[ file ];
+ results.forEach( function( output, file ) {
 
     // Are there any warnings?
     if ( output.warnings.length > 0 ) {
