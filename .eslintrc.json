@@ -35,6 +35,8 @@
       "max-len": [
         "error",
         {
+          "code": 90,
+          "tabWidth": 2,
           "ignoreStrings": true,
           "ignoreComments": true
         }
