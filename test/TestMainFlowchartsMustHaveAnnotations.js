@@ -8,7 +8,7 @@ const assert = require( "assert" );
 const fs = require( "fs" );
 
 /**
- * Test the class that checks the style rule requiring all main sequences to have annotations.
+ * Test the class that checks the style rule requiring all main flow charts to have annotations.
  */
 describe( "MainFlowchartsHaveAnnotations", function() {
 

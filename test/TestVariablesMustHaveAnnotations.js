@@ -8,7 +8,7 @@ const assert = require( "assert" );
 const fs = require( "fs" );
 
 /**
- * Test the class that checks the style rule requiring all arguments to have annotations.
+ * Test the class that checks the style rule requiring all variables to have annotations.
  */
 describe( "VariablesMustHaveAnnotations", function() {
 

@@ -3,8 +3,6 @@ const xpath = require( "xpath" );
 const path = require( "path" );
 const fs = require( "fs" );
 
-//const dom = require( "xmldom" );
-
 /**
  * Factory class to expose utility functions.
  *

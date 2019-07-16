@@ -2,7 +2,7 @@
 const dom = require( "xmldom" ).DOMParser;
 
 /**
- * Class to implement the rule that requires all variables to have annotations.
+ * Class to implement the rule that requires all public workflows to have annotations.
  *
  */
 class PublicWorkflowsMustHaveAnnotations {
