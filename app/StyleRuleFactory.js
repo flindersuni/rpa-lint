@@ -50,7 +50,7 @@ class StyleRuleFactory {
    * @since 1.0.0
    */
   static getXamlFileList( targetPath ) {
-    if ( !targetPath || typeof targetPath !== "string" ) {
+    if ( !targetPath || typeof( targetPath ) !== "string" ) {
       throw new TypeError( "targetPath parameter is required and must be a string" );
     }
 
@@ -64,6 +64,39 @@ class StyleRuleFactory {
     } );
 
     return xamlFiles;
+  }
+
+  /**
+   * Filter the list of XAML files and only return those that are public.
+   *
+   * @param {Array} xamlFiles An array of XAML files.
+   * @param {object} projectInfo An instance of the UiPathProject object.
+   * @returns {Array} An array of XAML files which are public.
+   * @throws {TypeError} Parameter targetPath is required and must be a string.
+   * @since 1.0.0
+   */
+  static filterPublicWorkflows( xamlFiles, projectInfo ) {
+    if ( !Array.isArray( xamlFiles ) ) {
+      throw new TypeError( "xamlFiles parameter is required and must be an Array" );
+    }
+
+    if ( !projectInfo || typeof( projectInfo ) !== "object" ) {
+      throw new TypeError( "projectInfo parameter is required and must be an Array" );
+    }
+
+    let privateWorkflows = projectInfo.getPrivateWorkflows();
+
+    if ( privateWorkflows.length === 0 ) {
+      return xamlFiles;
+    }
+
+    // If the xaml file name does not exist in the list of private workflows it is public.
+    let publicWorkflows = xamlFiles.filter( function( element ) {
+      return !privateWorkflows.includes( element );
+    } );
+
+    return publicWorkflows;
+
   }
 }
 
