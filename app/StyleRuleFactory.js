@@ -25,7 +25,8 @@ class StyleRuleFactory {
     return {
       "xaml": "http://schemas.microsoft.com/netfx/2009/xaml/activities",
       "x": "http://schemas.microsoft.com/winfx/2006/xaml",
-      "sap2010": "http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+      "sap2010": "http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation",
+      "ui": "http://schemas.uipath.com/workflow/activities"
     };
   }
 

@@ -1,5 +1,4 @@
 // Application dependencies.
-
 const commander = require( "commander" );
 const chalk = require( "chalk" );
 const path = require( "path" );
@@ -55,7 +54,7 @@ if ( xamlFiles.length === 0 ) {
 const projectInfo = new UiPathProject( program.input );
 
 log( "INFO: Project name: %s", projectInfo.getName() );
-log( "Info: Project version: %s", projectInfo.getVersion() );
+log( "INFO: Project version: %s", projectInfo.getVersion() );
 
 // Output some additional information.
 log( "INFO: Found %d files in %s", xamlFiles.length, program.input );
@@ -63,19 +62,22 @@ log( "INFO: Found %d files in %s", xamlFiles.length, program.input );
 // Prepare to process the files.
 let results = {};
 let haveIssues = false;
+let haveErrors = false;
 
 // Load classes that have implemented the style rules.
 const ArgumentsMustHaveAnnotations = require( "./app/rules/ArgumentsMustHaveAnnotations.js" ).ArgumentsMustHaveAnnotations;
 const VariablesMustHaveAnnotations = require( "./app/rules/VariablesMustHaveAnnotations.js" ).VariablesMustHaveAnnotations;
 const MainSequencesHaveAnnotations = require( "./app/rules/MainSequencesMustHaveAnnotations.js" ).MainSequencesHaveAnnotations;
 const MainFlowchartsHaveAnnotations = require( "./app/rules/MainFlowchartsMustHaveAnnotations.js" ).MainFlowchartsHaveAnnotations;
+const WorkflowsShouldNotContainCodeActivities = require( "./app/rules/WorkflowsShouldNotContainCodeActivities.js" ).WorkflowsShouldNotContainCodeActivities;
 
 // Build a list of style rules.
 let styleRules = [
   new ArgumentsMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
   new VariablesMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
   new MainSequencesHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
-  new MainFlowchartsHaveAnnotations( StyleRuleFactory.getXpathProcessor() )
+  new MainFlowchartsHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
+  new WorkflowsShouldNotContainCodeActivities(  StyleRuleFactory.getXpathProcessor() )
 ];
 
 let libraryStyleRules = [];
@@ -129,6 +131,11 @@ xamlFiles.forEach( function( file ) {
     haveIssues = true;
   }
 
+  // Were any errors found?
+  if ( output.errors.length > 0 ) {
+    haveErrors = true;
+  }
+
   // eslint-disable-next-line security/detect-object-injection
   results[ file ] = output;
 
@@ -160,8 +167,10 @@ if ( haveIssues ) {
     }
   } );
 
-  // Exit with an error status code.
-  process.exitCode = 1;
+  // Exit with an error status code for errors only, not warnings.
+  if ( haveErrors ) {
+    process.exitCode = 1;
+  }
 } else {
   log( success( "Sucess: " + "No XAML style issues were detected." ) );
 }
