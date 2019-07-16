@@ -78,6 +78,23 @@ let styleRules = [
   new MainFlowchartsHaveAnnotations( StyleRuleFactory.getXpathProcessor() )
 ];
 
+let libraryStyleRules = [];
+let libraryPublicWorkflows = [];
+
+// Build a list of library specific style rules if required.
+if ( projectInfo.isLibrary() ) {
+  const PublicWorkflowsMustHaveAnnotations = require( "./app/rules/PublicWorkflowsMustHaveAnnotations.js" ).PublicWorkflowsMustHaveAnnotations;
+
+  libraryStyleRules = [
+    new PublicWorkflowsMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() )
+  ];
+
+  libraryPublicWorkflows = StyleRuleFactory.filterPublicWorkflows(
+    xamlFiles,
+    projectInfo
+  );
+}
+
 // Process the files.
 xamlFiles.forEach( function( file ) {
   let output = {
@@ -96,6 +113,16 @@ xamlFiles.forEach( function( file ) {
     output.warnings = output.warnings.concat( styleRule.getWarnings() );
     output.errors = output.errors.concat( styleRule.getErrors() );
   } );
+
+  // Apply library specific style rules.
+  if ( libraryPublicWorkflows.includes( file ) ) {
+    libraryStyleRules.forEach( function( libraryStyleRule ) {
+      libraryStyleRule.checkStyleRule( xamlContent );
+
+      output.warnings = output.warnings.concat( libraryStyleRule.getWarnings() );
+      output.errors = output.errors.concat( libraryStyleRule.getErrors() );
+    } );
+  }
 
   // Were any issues found?
   if ( output.warnings.length > 0 || output.errors.length > 0 ) {
