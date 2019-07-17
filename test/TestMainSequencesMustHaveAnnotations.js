@@ -1,6 +1,6 @@
 import { StyleRuleFactory } from "../app/StyleRuleFactory.js";
 
-import { MainSequencesHaveAnnotations } from "../app/rules/MainSequencesMustHaveAnnotations.js";
+import { MainSequencesMustHaveAnnotations } from "../app/rules/MainSequencesMustHaveAnnotations.js";
 
 import * as assert from "assert";
 import * as fs from "fs";
@@ -8,7 +8,7 @@ import * as fs from "fs";
 /**
  * Test the class that checks the style rule requiring all main sequences to have annotations.
  */
-describe( "MainSequencesHaveAnnotations", function() {
+describe( "MainSequencesMustHaveAnnotations", function() {
 
   /**
    * Test the constructor.
@@ -16,13 +16,13 @@ describe( "MainSequencesHaveAnnotations", function() {
   describe( "#constructor", function() {
     it( "should throw an error if the parameter is not supplied", function() {
       assert.throws( function() {
-        new MainSequencesHaveAnnotations();
+        new MainSequencesMustHaveAnnotations();
       }, TypeError );
     } );
 
     it( "should throw an error if the parameter is not a function", function() {
       assert.throws( function() {
-        new MainSequencesHaveAnnotations( new Object() );
+        new MainSequencesMustHaveAnnotations( new Object() );
       }, TypeError );
     } );
   } );
@@ -33,7 +33,7 @@ describe( "MainSequencesHaveAnnotations", function() {
   describe( "#checkStyleRule", function() {
     it( "should throw an error if the parameter is not supplied", function() {
       assert.throws( function() {
-        let styleCheck = new MainSequencesHaveAnnotations(
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -44,7 +44,7 @@ describe( "MainSequencesHaveAnnotations", function() {
 
     it( "should throw an error if the parameter is not a function", function() {
       assert.throws( function() {
-        let styleCheck = new MainSequencesHaveAnnotations(
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -60,7 +60,7 @@ describe( "MainSequencesHaveAnnotations", function() {
 
     context( "With no XAML processed", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new MainSequencesHaveAnnotations(
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -74,7 +74,7 @@ describe( "MainSequencesHaveAnnotations", function() {
 
     context( "With valid XAML to process", function() {
       it( "should return an array with one matching nodes", function() {
-        let styleCheck = new MainSequencesHaveAnnotations(
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -93,7 +93,7 @@ describe( "MainSequencesHaveAnnotations", function() {
 
     context( "With invalid XAML to process", function() {
       it( "should return an array with one matching nodes", function() {
-        let styleCheck = new MainSequencesHaveAnnotations(
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -118,7 +118,7 @@ describe( "MainSequencesHaveAnnotations", function() {
 
     context( "With no XAML processed", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new MainSequencesHaveAnnotations(
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -132,7 +132,7 @@ describe( "MainSequencesHaveAnnotations", function() {
 
     context( "With valid XAML to process", function() {
       it( "should return an array with one matching nodes", function() {
-        let styleCheck = new MainSequencesHaveAnnotations(
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -151,7 +151,7 @@ describe( "MainSequencesHaveAnnotations", function() {
 
     context( "With invalid XAML to process", function() {
       it( "should return an array with zero matching nodes", function() {
-        let styleCheck = new MainSequencesHaveAnnotations(
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -176,7 +176,7 @@ describe( "MainSequencesHaveAnnotations", function() {
 
     context( "With no XAML processed", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new MainSequencesHaveAnnotations(
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -189,7 +189,7 @@ describe( "MainSequencesHaveAnnotations", function() {
 
     context( "With valid XAML to process", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new MainSequencesHaveAnnotations(
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -206,7 +206,7 @@ describe( "MainSequencesHaveAnnotations", function() {
 
     context( "With invalid XAML to process", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new MainSequencesHaveAnnotations(
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -229,7 +229,7 @@ describe( "MainSequencesHaveAnnotations", function() {
 
     context( "With no XAML processed", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new MainSequencesHaveAnnotations(
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -242,7 +242,7 @@ describe( "MainSequencesHaveAnnotations", function() {
 
     context( "With valid XAML to process", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new MainSequencesHaveAnnotations(
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -259,7 +259,7 @@ describe( "MainSequencesHaveAnnotations", function() {
 
     context( "With invvalid XAML to process", function() {
       it( "should return an array with one element", function() {
-        let styleCheck = new MainSequencesHaveAnnotations(
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 

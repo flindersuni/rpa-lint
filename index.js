@@ -73,7 +73,7 @@ let haveErrors = false;
 // Load classes that have implemented the style rules.
 const ArgumentsMustHaveAnnotations = require( "./app/rules/ArgumentsMustHaveAnnotations.js" ).ArgumentsMustHaveAnnotations;
 const VariablesMustHaveAnnotations = require( "./app/rules/VariablesMustHaveAnnotations.js" ).VariablesMustHaveAnnotations;
-const MainSequencesHaveAnnotations = require( "./app/rules/MainSequencesMustHaveAnnotations.js" ).MainSequencesHaveAnnotations;
+const MainSequencesMustHaveAnnotations = require( "./app/rules/MainSequencesMustHaveAnnotations.js" ).MainSequencesMustHaveAnnotations;
 const MainFlowchartsHaveAnnotations = require( "./app/rules/MainFlowchartsMustHaveAnnotations.js" ).MainFlowchartsHaveAnnotations;
 const WorkflowsShouldNotContainCodeActivities = require( "./app/rules/WorkflowsShouldNotContainCodeActivities.js" ).WorkflowsShouldNotContainCodeActivities;
 
@@ -81,7 +81,7 @@ const WorkflowsShouldNotContainCodeActivities = require( "./app/rules/WorkflowsS
 let styleRules = [
   new ArgumentsMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
   new VariablesMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
-  new MainSequencesHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
+  new MainSequencesMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
   new MainFlowchartsHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
   new WorkflowsShouldNotContainCodeActivities(  StyleRuleFactory.getXpathProcessor() )
 ];

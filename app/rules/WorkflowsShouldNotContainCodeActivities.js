@@ -1,11 +1,13 @@
 // Required modules.
+import { BaseStyleRule } from "./BaseStyleRule.js";
+
 import { DOMParser as dom } from "xmldom";
 import * as util from "util";
 
 /**
  * Class to implement the rule that workflows should not contain code related activities.
  */
-export class WorkflowsShouldNotContainCodeActivities {
+export class WorkflowsShouldNotContainCodeActivities extends BaseStyleRule {
 
   /**
    * Construct a new VariablesMustHaveAnnotations object.
@@ -14,10 +16,7 @@ export class WorkflowsShouldNotContainCodeActivities {
    * @since 1.0.0
    */
   constructor( xpath ) {
-    if ( !xpath || typeof( xpath ) !== "function" ) {
-      throw new TypeError( "xpath parameter is required and must be a function" );
-    }
-    this.xpath = xpath;
+    super( xpath );
 
     this.xpathMatchesSpecific = new Map(
       [
@@ -27,10 +26,6 @@ export class WorkflowsShouldNotContainCodeActivities {
         [ "InvokePowerShell", "/xaml:Activity//ui:InvokePowerShell" ]
       ]
     );
-
-    this.strictMatches = [];
-
-    this.warnings = [];
   }
 
   /**
@@ -72,26 +67,6 @@ export class WorkflowsShouldNotContainCodeActivities {
   }
 
   /**
-   * Return an array of nodes that matched the lenient xpath expression.
-   *
-   * @returns {Array} An array of nodes.
-   * @since 1.0.0
-   */
-  getLenientMatches() {
-    return [];
-  }
-
-  /**
-   * Return an array of nodes that matched the specific xpath expression.
-   *
-   * @returns {Array} An array of nodes.
-   * @since 1.0.0
-   */
-  getStrictMatches() {
-    return this.strictMatches;
-  }
-
-  /**
    * Return an array of warnings as a result of the style check.
    *
    * @returns {Array} An array of warning strings.
@@ -100,15 +75,4 @@ export class WorkflowsShouldNotContainCodeActivities {
   getWarnings() {
     return this.warnings;
   }
-
-  /**
-   * Return an array of errors as a result of the style check.
-   *
-   * @returns {Array} An array of error strings.
-   * @since 1.0.0
-   */
-  getErrors() {
-    return [];
-  }
-
 }
