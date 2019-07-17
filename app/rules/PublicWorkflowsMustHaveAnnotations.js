@@ -85,7 +85,7 @@ class PublicWorkflowsMustHaveAnnotations {
     // Check to see if errors have been detected.
     if ( this.strictMatches.length === 0 ) {
       return [
-        "Public workflows in libraries without annotations is not allowed."
+        "Public workflows in libraries without annotations are not allowed."
       ];
     } else {
       return [];
