@@ -24,9 +24,10 @@ program.version( package.version, "-v, --version" )
 // Parse the command line parameters.
 program.parse( process.argv );
 
-// Check for required arguments, if missing show help.
+// Check for required input path option.
+// If missing assume current working directory.
 if ( typeof program.input === "undefined" ) {
-  program.help();
+  program.input = process.cwd();
 }
 
 // Output some useful information.
