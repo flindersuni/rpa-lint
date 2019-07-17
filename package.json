@@ -6,7 +6,7 @@
     "test": "mocha --require esm",
     "lint": "eslint .",
     "docs": "jsdoc -c .jsdocrc.json",
-    "coverage": "nyc --reporter=text mocha"
+    "coverage": "cross-env NODE_ENV=test nyc mocha"
   },
   "bin": {
     "xaml-stylecheck": "bin/xaml-stylecheck"
@@ -14,6 +14,11 @@
   "author": "Corey Wallis <corey.wallis@flinders.edu.au>",
   "license": "BSD-3-Clause",
   "devDependencies": {
+    "@babel/core": "^7.5.4",
+    "@babel/preset-env": "^7.5.4",
+    "@babel/register": "^7.4.4",
+    "babel-plugin-istanbul": "^5.1.4",
+    "cross-env": "^5.2.0",
     "escape-regex-string": "^1.0.6",
     "eslint": "^6.0.1",
     "eslint-config-jquery": "^2.0.0",
@@ -35,5 +40,15 @@
   "directories": {
     "test": "test",
     "doc": "doc"
+  },
+  "nyc": {
+    "require": [
+      "@babel/register"
+    ],
+    "reporter": [
+      "text"
+    ],
+    "sourceMap": false,
+    "instrument": false
   }
 }
