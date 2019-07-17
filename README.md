@@ -1,59 +1,76 @@
-# Flinders XAML Style Check
-This is a [Node.js][nodejs] app that is used to check our work against rules that have been agreed to by the RPA development team at [Flinders University][flinders].
+<!-- markdownlint-disable no-trailing-punctuation -->
+# Flinders XAML Style Check #
 
-The app uses a static analysis to check the [XAML][xaml] files in our [UiPath][uipath] projects.
+This app is used by the Robotic Process Automation (RPA) team at [Flinders University][flinders]to check our work against an agreed set of styles. We apply these style rules so that our automations are consistent.
 
-## Why use Node.js?
-The decision to use Node.js for this app was made for two main reasons:
+We use [UiPath][uipath] to develop and manage our automations. The source code for our automations produced by UiPath Studio is a series of [XAML][xaml] files.
 
-1. The app needed to be cross platform. So that it can be run during development of workflows using UiPath on Windows, and on common continuous integration infrastructure.
-2. JavaScript continues to be one of the [most popular][stackoverflow] development languages.
+This app, developed using [Node.js][nodejs] uses static analysis techniques to check the XAML code against our agreed style rules.
 
-## Installation
+## Installation ##
+
 To install the app:
 
 1. Download and install Node.js onto your computer
 2. Clone this repository
-3. Install the project dependencies using a command like:
+3. Install the app dependencies using the following command:
 
-    ```
-    $ npm install
+    ```shell
+    npm install
     ````
 
-## Unit Tests
-We use the [Mocha][mochajs] framework for unit tests. To run the tests:
+## License ##
 
-```
-$ npm run test
-```
+The app is licensed using the [BSD 3-Clause License](LICENSE). Contributions, such as suggestions for new rules or new features are welcome.
 
-## Test Coverage
-We use the [Istanbul][instanbuljs] framework to generate a test coverage report. To generate the report:
+## Frequently Asked Questions ##
 
-```
-$ npm run coverage
-```
+### Why use Node.js? ###
 
-## JavaScript Linting
-We use the [ESLint][eslint] utility to lint the JavaScript code. To lint the code:
+This is a good question. Using [Invoke Code][invokecode] activities we could have implemented this type of analysis using UiPath. There are three main reasons for the decision to use Node.js.
 
-```
-$ npm run lint
-```
+1. Our aim is to have as little code as possible in our automations. This makes them easier to develop and maintain. It also makes it easier for less experienced users to work with us on developing automations.
+2. The app needed to be cross platform. The app needs to be able to be run locally while developing an automation on Windows. The app also needs to be able to be run on common continuous integration infrastructure. So that code can be automatically checked.
+3. JavaScript continues to be one of the [most popular][stackoverflow] development languages. Making it easier for developers to contribute and help maintain the app.
 
-Take a look at the `eslintrc.json` file to see which rules we apply.
+### How do I run the unit tests? ###
 
-## Documenting the Code
-We use [JSDoc][jsdoc] to generate internal API documentation. To generate the documentation:
+We use the popular [Mocha][mochajs] framework to develop and manage unit tests for the app. To run the tests, use the following command:
 
-```
-$ npm run docs
+```shell
+npm run test
 ```
 
+### How much of the app does the unit tests cover? ###
+
+We use the popular [Istanbul][instanbuljs] test coverage tool to monitor the test coverage. To generate a report, use the following command:
+
+```shell
+npm run coverage
+```
+
+### Do you have a style for the JavaScript code? ###
+
+We use the [ESLint][eslint] utility to lint our JavaScript code. To lint the code, use the following command:
+
+```shell
+npm run lint
+```
+
+Take a look at the `.eslintrc.json` file to see which rules we apply.
+
+### Is the JavaScript code documented? ###
+
+We use [JSDoc][jsdoc] syntax and the related tool to generation internal documentation for the app. To generate the documentation using the latest version of the code, use the following command:
+
+```shell
+npm run docs
+```
 
 [eslint]: https://eslint.org/
 [flinders]: https://www.flinders.edu.au/
 [instanbuljs]: https://istanbul.js.org/
+[invokecode]: https://activities.uipath.com/docs/invoke-code
 [jsdoc]: https://jsdoc.app/
 [mochajs]: https://mochajs.org/
 [nodejs]: https://nodejs.org/
