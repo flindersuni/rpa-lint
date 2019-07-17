@@ -19,14 +19,15 @@ const success = chalk.bold.green;
 // Define basic program metadata.
 program.version( package.version, "-v, --version" )
   .description( "Check XAML files using rules developed by the Flinders RPA team" )
-  .option( "-i, --input <required>", "Path to project directory" );
+  .option( "-i, --input <required>", "Path to project directory" )
+  .option( "-q, --quiet", "Suppress warnings" );
 
 // Parse the command line parameters.
 program.parse( process.argv );
 
 // Check for required input path option.
 // If missing assume current working directory.
-if ( typeof program.input === "undefined" ) {
+if ( typeof( program.input ) === "undefined" ) {
   program.input = process.cwd();
 }
 
@@ -59,6 +60,10 @@ log( "INFO: Project version: %s", projectInfo.getVersion() );
 
 // Output some additional information.
 log( "INFO: Found %d files in %s", xamlFiles.length, program.input );
+
+if ( program.quiet === true ) {
+  log( "INFO: Warning messages are being suppressed" );
+}
 
 // Prepare to process the files.
 let results = new Map;
@@ -141,6 +146,18 @@ xamlFiles.forEach( function( file ) {
 
 } );
 
+// Suppress warnings if required.
+if ( program.quiet === true ) {
+
+  // Check to see if only warnings have been found.
+  if ( haveErrors === false && haveIssues === true ) {
+
+    // Reset the flag as only warnings have been found.
+    haveIssues = false;
+  }
+}
+
+
 // Were any issues found?
 if ( haveIssues ) {
   log( "INFO: Found XAML files that do not pass validation." );
@@ -149,7 +166,7 @@ if ( haveIssues ) {
  results.forEach( function( output, file ) {
 
     // Are there any warnings?
-    if ( output.warnings.length > 0 ) {
+    if ( output.warnings.length > 0 && program.quiet !== true ) {
       log( warn( "WARN: " ) + "Warnings for " + file );
       output.warnings.forEach( function( warning ) {
         log( " - %s", warning );
