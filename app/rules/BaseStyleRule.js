@@ -45,7 +45,7 @@ import { DOMParser as dom } from "xmldom";
     const doc = new dom().parseFromString( xaml );
 
     // Execute the XPath query.
-    if ( this.xpathMathAll !== null ) {
+    if ( this.xpathMatchAll !== null ) {
       this.lenientMatches = this.xpath( this.xpathMatchAll, doc );
     }
     if ( this.xpathMatchSpecific !== null ) {
