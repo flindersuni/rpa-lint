@@ -19,7 +19,7 @@ const success = chalk.bold.green;
 // Define basic program metadata.
 program.version( package.version, "-v, --version" )
   .description( "Check XAML files using rules developed by the Flinders RPA team" )
-  .option( "-i, --input <required>", "Path to project directory" )
+  .option( "-i, --input <required>", "Path to UiPath project directory" )
   .option( "-q, --quiet", "Suppress warnings" );
 
 // Parse the command line parameters.
@@ -62,7 +62,7 @@ log( "INFO: Project version: %s", projectInfo.getVersion() );
 log( "INFO: Found %d files in %s", xamlFiles.length, program.input );
 
 if ( program.quiet === true ) {
-  log( "INFO: Warning messages are being suppressed" );
+  log( warn( "WARN:" ) + " Warning messages are being suppressed" );
 }
 
 // Prepare to process the files.
