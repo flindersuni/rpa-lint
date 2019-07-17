@@ -1,11 +1,11 @@
 // Required modules.
-const path = require( "path" );
-const fs = require( "fs" );
+import * as path from "path";
+import * as fs from "fs";
 
 /**
  * Class to make it easier to get UiPath project information.
  */
-class UiPathProject {
+export class UiPathProject {
 
   /**
    * Parse the project.json file that contains information about the UiPath project.
@@ -101,5 +101,3 @@ class UiPathProject {
     }
   }
 }
-
-exports.UiPathProject = UiPathProject;

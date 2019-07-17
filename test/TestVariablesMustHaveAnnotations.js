@@ -1,11 +1,9 @@
-const StyleRuleFactory = require( "../app/StyleRuleFactory.js" ).StyleRuleFactory;
+import { StyleRuleFactory } from "../app/StyleRuleFactory.js";
 
-const VariablesMustHaveAnnotations = require(
-  "../app/rules/VariablesMustHaveAnnotations.js"
-).VariablesMustHaveAnnotations;
+import { VariablesMustHaveAnnotations } from "../app/rules/VariablesMustHaveAnnotations.js";
 
-const assert = require( "assert" );
-const fs = require( "fs" );
+import * as assert from "assert";
+import * as fs from "fs";
 
 /**
  * Test the class that checks the style rule requiring all variables to have annotations.
@@ -69,7 +67,7 @@ describe( "VariablesMustHaveAnnotations", function() {
         let matches = styleCheck.getLenientMatches();
 
         assert.ok( Array.isArray( matches ) );
-        assert.equal( matches.length, 0 );
+        assert.strictEqual( matches.length, 0 );
 
       } );
     } );
@@ -88,7 +86,7 @@ describe( "VariablesMustHaveAnnotations", function() {
         let lenientMatches = styleCheck.getLenientMatches();
 
         assert.ok( Array.isArray( lenientMatches ) );
-        assert.equal( lenientMatches.length, 4 );
+        assert.strictEqual( lenientMatches.length, 4 );
 
       } );
     } );
@@ -107,7 +105,7 @@ describe( "VariablesMustHaveAnnotations", function() {
         let lenientMatches = styleCheck.getLenientMatches();
 
         assert.ok( Array.isArray( lenientMatches ) );
-        assert.equal( lenientMatches.length, 4 );
+        assert.strictEqual( lenientMatches.length, 4 );
 
       } );
     } );
@@ -126,7 +124,7 @@ describe( "VariablesMustHaveAnnotations", function() {
         let lenientMatches = styleCheck.getLenientMatches();
 
         assert.ok( Array.isArray( lenientMatches ) );
-        assert.equal( lenientMatches.length, 4 );
+        assert.strictEqual( lenientMatches.length, 4 );
 
       } );
     } );
@@ -146,7 +144,7 @@ describe( "VariablesMustHaveAnnotations", function() {
         let matches = styleCheck.getStrictMatches();
 
         assert.ok( Array.isArray( matches ) );
-        assert.equal( matches.length, 0 );
+        assert.strictEqual( matches.length, 0 );
 
       } );
     } );
@@ -165,7 +163,7 @@ describe( "VariablesMustHaveAnnotations", function() {
         let strictMatches = styleCheck.getStrictMatches();
 
         assert.ok( Array.isArray( strictMatches ) );
-        assert.equal( strictMatches.length, 4 );
+        assert.strictEqual( strictMatches.length, 4 );
 
       } );
     } );
@@ -184,7 +182,7 @@ describe( "VariablesMustHaveAnnotations", function() {
         let strictMatches = styleCheck.getStrictMatches();
 
         assert.ok( Array.isArray( strictMatches ) );
-        assert.equal( strictMatches.length, 0 );
+        assert.strictEqual( strictMatches.length, 0 );
 
       } );
     } );
@@ -203,7 +201,7 @@ describe( "VariablesMustHaveAnnotations", function() {
         let strictMatches = styleCheck.getStrictMatches();
 
         assert.ok( Array.isArray( strictMatches ) );
-        assert.equal( strictMatches.length, 1 );
+        assert.strictEqual( strictMatches.length, 1 );
 
       } );
     } );
@@ -223,7 +221,7 @@ describe( "VariablesMustHaveAnnotations", function() {
         let warnings = styleCheck.getWarnings();
 
         assert.ok( Array.isArray( warnings ) );
-        assert.equal( warnings.length, 0 );
+        assert.strictEqual( warnings.length, 0 );
       } );
     } );
 
@@ -239,7 +237,7 @@ describe( "VariablesMustHaveAnnotations", function() {
         let warnings = styleCheck.getWarnings();
 
         assert.ok( Array.isArray( warnings ) );
-        assert.equal( warnings.length, 0 );
+        assert.strictEqual( warnings.length, 0 );
 
       } );
     } );
@@ -256,7 +254,7 @@ describe( "VariablesMustHaveAnnotations", function() {
         let warnings = styleCheck.getWarnings();
 
         assert.ok( Array.isArray( warnings ) );
-        assert.equal( warnings.length, 0 );
+        assert.strictEqual( warnings.length, 0 );
 
       } );
     } );
@@ -273,7 +271,7 @@ describe( "VariablesMustHaveAnnotations", function() {
         let warnings = styleCheck.getWarnings();
 
         assert.ok( Array.isArray( warnings ) );
-        assert.equal( warnings.length, 0 );
+        assert.strictEqual( warnings.length, 0 );
 
       } );
     } );
@@ -293,7 +291,7 @@ describe( "VariablesMustHaveAnnotations", function() {
         let errors = styleCheck.getErrors();
 
         assert.ok( Array.isArray( errors ) );
-        assert.equal( errors.length, 0 );
+        assert.strictEqual( errors.length, 0 );
       } );
     } );
 
@@ -309,7 +307,7 @@ describe( "VariablesMustHaveAnnotations", function() {
         let errors = styleCheck.getErrors();
 
         assert.ok( Array.isArray( errors ) );
-        assert.equal( errors.length, 0 );
+        assert.strictEqual( errors.length, 0 );
 
       } );
     } );
@@ -326,7 +324,7 @@ describe( "VariablesMustHaveAnnotations", function() {
         let errors = styleCheck.getErrors();
 
         assert.ok( Array.isArray( errors ) );
-        assert.equal( errors.length, 1 );
+        assert.strictEqual( errors.length, 1 );
 
       } );
     } );
@@ -343,7 +341,7 @@ describe( "VariablesMustHaveAnnotations", function() {
         let errors = styleCheck.getErrors();
 
         assert.ok( Array.isArray( errors ) );
-        assert.equal( errors.length, 1 );
+        assert.strictEqual( errors.length, 1 );
 
       } );
     } );

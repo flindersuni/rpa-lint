@@ -1,14 +1,14 @@
-// Required modules.
-const xpath = require( "xpath" );
-const path = require( "path" );
-const fs = require( "fs" );
+
+import * as xpath from "xpath";
+import * as path from "path";
+import * as fs from "fs";
 
 /**
  * Factory class to expose utility functions.
  *
  * @hideconstructor
  */
-class StyleRuleFactory {
+export class StyleRuleFactory {
 
   /**
    * Return an object that lists supported XML namespaces.
@@ -98,5 +98,3 @@ class StyleRuleFactory {
 
   }
 }
-
-exports.StyleRuleFactory = StyleRuleFactory;

@@ -1,11 +1,11 @@
 // Required modules.
-const dom = require( "xmldom" ).DOMParser;
+import { DOMParser as dom } from "xmldom";
 
 /**
  * Class to implement the rule that requires all public workflows to have annotations.
  *
  */
-class PublicWorkflowsMustHaveAnnotations {
+export class PublicWorkflowsMustHaveAnnotations {
 
   /**
    * Construct a new VariablesMustHaveAnnotations object.
@@ -92,5 +92,3 @@ class PublicWorkflowsMustHaveAnnotations {
     }
   }
 }
-
-exports.PublicWorkflowsMustHaveAnnotations = PublicWorkflowsMustHaveAnnotations;

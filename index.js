@@ -1,13 +1,13 @@
 // Application dependencies.
-const commander = require( "commander" );
-const chalk = require( "chalk" );
-const path = require( "path" );
-const fs = require( "fs" );
+import * as commander from "commander";
+import * as chalk from "chalk";
+import * as path from "path";
+import * as fs from "fs";
 
-const package = require( "./package.json" );
+import { StyleRuleFactory } from "./app/StyleRuleFactory.js";
+import { UiPathProject } from "./app/UiPathProject.js";
 
-const StyleRuleFactory = require( "./app/StyleRuleFactory.js" ).StyleRuleFactory;
-const UiPathProject = require( "./app/UiPathProject.js" ).UiPathProject;
+const appPackage = require( "./package.json" );
 
 const program = new commander.Command();
 const log = console.log;
@@ -17,7 +17,7 @@ const warn = chalk.bold.yellow;
 const success = chalk.bold.green;
 
 // Define basic program metadata.
-program.version( package.version, "-v, --version" )
+program.version( appPackage.version, "-v, --version" )
   .description( "Check XAML files using rules developed by the Flinders RPA team" )
   .option( "-i, --input <required>", "Path to UiPath project directory" )
   .option( "-q, --quiet", "Suppress warnings" );
@@ -32,7 +32,7 @@ if ( typeof( program.input ) === "undefined" ) {
 }
 
 // Output some useful information.
-log( chalk.bold( "Flinders XAML Style Check - " + package.version ) );
+log( chalk.bold( "Flinders XAML Style Check - " + appPackage.version ) );
 
 // Resolve a relative path if required.
 if ( !path.isAbsolute( program.input ) ) {
@@ -49,7 +49,7 @@ const xamlFiles = StyleRuleFactory.getXamlFileList( program.input );
 // Check to make sure XAML files were found.
 if ( xamlFiles.length === 0 ) {
   log( error( "ERROR: " ) + "No XAML files found!" );
-  process.exitCode = 1;
+  process.exit( 1 );
 }
 
 // Get some information about the project.
@@ -184,7 +184,7 @@ if ( haveIssues ) {
 
   // Exit with an error status code for errors only, not warnings.
   if ( haveErrors ) {
-    process.exitCode = 1;
+    process.exit( 1 );
   }
 } else {
   log( success( "Sucess: " + "No XAML style issues were detected." ) );

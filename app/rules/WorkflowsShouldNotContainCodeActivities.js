@@ -1,11 +1,11 @@
 // Required modules.
-const dom = require( "xmldom" ).DOMParser;
-const util = require( "util" );
+import { DOMParser as dom } from "xmldom";
+import * as util from "util";
 
 /**
  * Class to implement the rule that workflows should not contain code related activities.
  */
-class WorkflowsShouldNotContainCodeActivities {
+export class WorkflowsShouldNotContainCodeActivities {
 
   /**
    * Construct a new VariablesMustHaveAnnotations object.
@@ -112,5 +112,3 @@ class WorkflowsShouldNotContainCodeActivities {
   }
 
 }
-
-exports.WorkflowsShouldNotContainCodeActivities = WorkflowsShouldNotContainCodeActivities;

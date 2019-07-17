@@ -1,11 +1,11 @@
 // Required modules.
-const dom = require( "xmldom" ).DOMParser;
+import { DOMParser as dom } from "xmldom";
 
 /**
  * Class to implement the rule that requires all variables to have annotations.
  *
  */
-class VariablesMustHaveAnnotations {
+export class VariablesMustHaveAnnotations {
 
   /**
    * Construct a new VariablesMustHaveAnnotations object.
@@ -97,5 +97,3 @@ class VariablesMustHaveAnnotations {
   }
 
 }
-
-exports.VariablesMustHaveAnnotations = VariablesMustHaveAnnotations;

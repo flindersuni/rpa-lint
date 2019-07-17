@@ -1,6 +1,6 @@
-const StyleRuleFactory = require( "../app/StyleRuleFactory.js" ).StyleRuleFactory;
-const UiPathProject = require( "../app/UiPathProject.js" ).UiPathProject;
-const assert = require( "assert" );
+import { StyleRuleFactory } from "../app/StyleRuleFactory.js";
+import { UiPathProject } from "../app/UiPathProject.js";
+import * as assert from "assert";
 
 // Use a constant to make updating this value during development / test cycles easier.
 const expectedNamespaceCount = 4;
@@ -15,12 +15,12 @@ describe( "StyleRuleFactory", function() {
    */
   describe( "#getXamlNamespaces()", function() {
     it( "should return an object", function() {
-      assert.equal( typeof StyleRuleFactory.getXamlNamespaces(), "object" );
+      assert.strictEqual( typeof StyleRuleFactory.getXamlNamespaces(), "object" );
     } );
 
     it( "should return a object with 4 properties", function() {
       let obj = StyleRuleFactory.getXamlNamespaces();
-      assert.equal( Object.keys( obj ).length, expectedNamespaceCount );
+      assert.strictEqual( Object.keys( obj ).length, expectedNamespaceCount );
     } );
 
     it( "should return an object that contains a xaml property", function() {
@@ -30,7 +30,7 @@ describe( "StyleRuleFactory", function() {
 
     it( "should return an object that has a xaml property with the correct URI", function() {
       let obj = StyleRuleFactory.getXamlNamespaces();
-      assert.equal( obj.xaml, "http://schemas.microsoft.com/netfx/2009/xaml/activities" );
+      assert.strictEqual( obj.xaml, "http://schemas.microsoft.com/netfx/2009/xaml/activities" );
     } );
   } );
 
@@ -39,7 +39,7 @@ describe( "StyleRuleFactory", function() {
    */
   describe( "#getXpathProcessor()", function() {
     it( "should return a function", function() {
-      assert.equal( typeof StyleRuleFactory.getXpathProcessor(), "function" );
+      assert.strictEqual( typeof StyleRuleFactory.getXpathProcessor(), "function" );
     } );
   } );
 
@@ -51,7 +51,7 @@ describe( "StyleRuleFactory", function() {
        let files = StyleRuleFactory.getXamlFileList( "./test/artefacts" );
 
        assert.ok( Array.isArray( files ) );
-       assert.equal( files.length, 4 );
+       assert.strictEqual( files.length, 4 );
      } );
 
      it( "should throw an error if the parameter is not supplied", function() {

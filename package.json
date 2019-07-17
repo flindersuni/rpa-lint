@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A CLI app to check XAML files using rules developed by the Flinders RPA team",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --require esm",
     "lint": "eslint .",
     "docs": "jsdoc -c .jsdocrc.json",
     "coverage": "nyc --reporter=text mocha"
@@ -17,6 +17,7 @@
     "escape-regex-string": "^1.0.6",
     "eslint": "^6.0.1",
     "eslint-config-jquery": "^2.0.0",
+    "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-jsdoc": "^15.5.2",
     "eslint-plugin-mocha": "^5.3.0",
     "eslint-plugin-security": "^1.4.0",
@@ -27,6 +28,7 @@
   "dependencies": {
     "chalk": "^2.4.2",
     "commander": "^2.20.0",
+    "esm": "^3.2.25",
     "xmldom": "^0.1.27",
     "xpath": "0.0.27"
   },

@@ -1,11 +1,13 @@
 {
   "parserOptions": {
-    "ecmaVersion": 6
+    "ecmaVersion": 6,
+    "sourceType": "module"
   },
   "plugins":[
     "jsdoc",
     "mocha",
-    "security"
+    "security",
+    "import"
   ],
   "env": {
     "es6": true,
@@ -16,7 +18,9 @@
     "eslint:recommended",
     "jquery",
     "plugin:jsdoc/recommended",
-    "plugin:security/recommended"
+    "plugin:security/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings"
   ],
   "rules":{
       "mocha/no-exclusive-tests": "error",

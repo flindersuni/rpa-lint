@@ -1,11 +1,11 @@
 // Required modules.
-const dom = require( "xmldom" ).DOMParser;
+import { DOMParser as dom } from "xmldom";
 
 /**
  * Class to implement the rule that requires all main sequences to have annotations.
  *
  */
-class MainSequencesHaveAnnotations {
+export class MainSequencesHaveAnnotations {
 
   /**
    * Construct a new MainSequencesHaveAnnotations object.
@@ -97,5 +97,3 @@ class MainSequencesHaveAnnotations {
   }
 
 }
-
-exports.MainSequencesHaveAnnotations = MainSequencesHaveAnnotations;

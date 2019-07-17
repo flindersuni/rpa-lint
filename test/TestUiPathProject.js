@@ -1,6 +1,6 @@
-const UiPathProject = require( "../app/UiPathProject.js" ).UiPathProject;
+import { UiPathProject } from "../app/UiPathProject.js";
 
-const assert = require( "assert" );
+import * as assert from "assert";
 
 /**
  * Test the class that makes it easier to get information about a UiPath project.
@@ -25,7 +25,7 @@ describe( "UiPathProject", function() {
 
   it( "should return an object when a project.json file can be found in the given path", function() {
     let projectInfo = new UiPathProject( "./test/artefacts" );
-    assert.equal( typeof( projectInfo ), "object" );
+    assert.strictEqual( typeof( projectInfo ), "object" );
   } );
 
   it( "should throw an error if the project.json file cannot be read", function() {
@@ -41,18 +41,18 @@ describe( "UiPathProject", function() {
   describe( "#getName", function() {
     it( "should return a string", function() {
       let projectInfo = new UiPathProject( "./test/artefacts" );
-      assert.equal( typeof( projectInfo.getName() ), "string" );
+      assert.strictEqual( typeof( projectInfo.getName() ), "string" );
     } );
 
     it( "should return a name that matches what is in the JSON file", function() {
       let projectInfo = new UiPathProject( "./test/artefacts" );
-      assert.equal( projectInfo.getName(), "Flinders.Foundation" );
+      assert.strictEqual( projectInfo.getName(), "Flinders.Foundation" );
     } );
 
     it( "should return an empty string when name property is missing", function() {
       let projectInfo = new UiPathProject( "./test/artefacts" );
       projectInfo.fileContents = {};
-      assert.equal( projectInfo.getName(), "" );
+      assert.strictEqual( projectInfo.getName(), "" );
     } );
   } );
 
@@ -62,18 +62,18 @@ describe( "UiPathProject", function() {
   describe( "#getDescription", function() {
     it( "should return a string", function() {
       let projectInfo = new UiPathProject( "./test/artefacts" );
-      assert.equal( typeof( projectInfo.getDescription() ), "string" );
+      assert.strictEqual( typeof( projectInfo.getDescription() ), "string" );
     } );
 
     it( "should return a description that matches what is in the JSON file", function() {
       let projectInfo = new UiPathProject( "./test/artefacts" );
-      assert.equal( projectInfo.getDescription(), "The Flinders.Foundation library contains foundational workflows for use across all processes" );
+      assert.strictEqual( projectInfo.getDescription(), "The Flinders.Foundation library contains foundational workflows for use across all processes" );
     } );
 
     it( "should return an empty string when description property is missing", function() {
       let projectInfo = new UiPathProject( "./test/artefacts" );
       projectInfo.fileContents = {};
-      assert.equal( projectInfo.getDescription(), "" );
+      assert.strictEqual( projectInfo.getDescription(), "" );
     } );
   } );
 
@@ -83,18 +83,18 @@ describe( "UiPathProject", function() {
   describe( "#getVersion", function() {
     it( "should return a string", function() {
       let projectInfo = new UiPathProject( "./test/artefacts" );
-      assert.equal( typeof( projectInfo.getVersion() ), "string" );
+      assert.strictEqual( typeof( projectInfo.getVersion() ), "string" );
     } );
 
     it( "should return a version that matches what is in the JSON file", function() {
       let projectInfo = new UiPathProject( "./test/artefacts" );
-      assert.equal( projectInfo.getVersion(), "2.0.0-alpha" );
+      assert.strictEqual( projectInfo.getVersion(), "2.0.0-alpha" );
     } );
 
     it( "should return an empty string when projectVersion property is missing", function() {
       let projectInfo = new UiPathProject( "./test/artefacts" );
       projectInfo.fileContents = {};
-      assert.equal( projectInfo.getVersion(), "" );
+      assert.strictEqual( projectInfo.getVersion(), "" );
     } );
   } );
 
@@ -104,24 +104,24 @@ describe( "UiPathProject", function() {
   describe( "#isLibrary", function() {
     it( "should return a boolean", function() {
       let projectInfo = new UiPathProject( "./test/artefacts" );
-      assert.equal( typeof( projectInfo.isLibrary() ), "boolean" );
+      assert.strictEqual( typeof( projectInfo.isLibrary() ), "boolean" );
     } );
 
     it( "should return true if this is a library project", function() {
       let projectInfo = new UiPathProject( "./test/artefacts" );
-      assert.equal(  projectInfo.isLibrary(), true );
+      assert.strictEqual(  projectInfo.isLibrary(), true );
     } );
 
     it( "should return false if this is not a library project", function() {
       let projectInfo = new UiPathProject( "./test/artefacts" );
       projectInfo.fileContents.projectType = "Workflow";
-      assert.equal( projectInfo.isLibrary(), false );
+      assert.strictEqual( projectInfo.isLibrary(), false );
     } );
 
     it( "should return false if the projectType property is missing", function() {
       let projectInfo = new UiPathProject( "./test/artefacts" );
       projectInfo.fileContents = {};
-      assert.equal( projectInfo.isLibrary(), false );
+      assert.strictEqual( projectInfo.isLibrary(), false );
     } );
   } );
 
@@ -137,32 +137,32 @@ describe( "UiPathProject", function() {
     it( "should return an array of 19 elements", function() {
       let projectInfo = new UiPathProject( "./test/artefacts" );
       assert.ok( Array.isArray( projectInfo.getPrivateWorkflows() ) );
-      assert.equal( projectInfo.getPrivateWorkflows().length, 19 );
+      assert.strictEqual( projectInfo.getPrivateWorkflows().length, 19 );
     } );
 
     it( "should return an empty array if the element in the JSON file is empty", function() {
       let projectInfo = new UiPathProject( "./test/artefacts" );
       projectInfo.fileContents.libraryOptions.privateWorkflows = [];
       assert.ok( Array.isArray( projectInfo.getPrivateWorkflows() ) );
-      assert.equal( projectInfo.getPrivateWorkflows().length, 0 );
+      assert.strictEqual( projectInfo.getPrivateWorkflows().length, 0 );
     } );
 
     it( "should return an empty array if the element in the JSON file is not an array", function() {
       let projectInfo = new UiPathProject( "./test/artefacts" );
       projectInfo.fileContents.libraryOptions.privateWorkflows = {};
       assert.ok( Array.isArray( projectInfo.getPrivateWorkflows() ) );
-      assert.equal( projectInfo.getPrivateWorkflows().length, 0 );
+      assert.strictEqual( projectInfo.getPrivateWorkflows().length, 0 );
     } );
 
     it( "should return an empty array if the element is missing", function() {
       let projectInfo = new UiPathProject( "./test/artefacts" );
       delete projectInfo.fileContents.libraryOptions.privateWorkflows;
       assert.ok( Array.isArray( projectInfo.getPrivateWorkflows() ) );
-      assert.equal( projectInfo.getPrivateWorkflows().length, 0 );
+      assert.strictEqual( projectInfo.getPrivateWorkflows().length, 0 );
 
       delete projectInfo.fileContents.libraryOptions;
       assert.ok( Array.isArray( projectInfo.getPrivateWorkflows() ) );
-      assert.equal( projectInfo.getPrivateWorkflows().length, 0 );
+      assert.strictEqual( projectInfo.getPrivateWorkflows().length, 0 );
     } );
   } );
 } );

@@ -1,11 +1,10 @@
-// Required modules.
-const dom = require( "xmldom" ).DOMParser;
+import { DOMParser as dom } from "xmldom";
 
 /**
  * Class to implement the rule that requires all arguments to have annotations.
  *
  */
-class ArgumentsMustHaveAnnotations {
+export class ArgumentsMustHaveAnnotations {
 
   /**
    * Construct a new ArgumentsMustHaveAnnotations object.
@@ -97,5 +96,3 @@ class ArgumentsMustHaveAnnotations {
   }
 
 }
-
-exports.ArgumentsMustHaveAnnotations = ArgumentsMustHaveAnnotations;

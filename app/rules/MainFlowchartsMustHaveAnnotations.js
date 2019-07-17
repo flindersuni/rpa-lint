@@ -1,11 +1,11 @@
 // Required modules.
-const dom = require( "xmldom" ).DOMParser;
+import { DOMParser as dom } from "xmldom";
 
 /**
  * Class to implement the rule that requires all main flow charts to have annotations.
  *
  */
-class MainFlowchartsHaveAnnotations {
+export class MainFlowchartsHaveAnnotations {
 
   /**
    * Construct a new MainFlowchartsHaveAnnotations object.
@@ -97,5 +97,3 @@ class MainFlowchartsHaveAnnotations {
   }
 
 }
-
-exports.MainFlowchartsHaveAnnotations = MainFlowchartsHaveAnnotations;

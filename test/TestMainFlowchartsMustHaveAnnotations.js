@@ -1,11 +1,9 @@
-const StyleRuleFactory = require( "../app/StyleRuleFactory.js" ).StyleRuleFactory;
+import { StyleRuleFactory } from "../app/StyleRuleFactory.js";
 
-const MainFlowchartsHaveAnnotations = require(
-  "../app/rules/MainFlowchartsMustHaveAnnotations.js"
-).MainFlowchartsHaveAnnotations;
+import { MainFlowchartsHaveAnnotations } from "../app/rules/MainFlowchartsMustHaveAnnotations.js";
 
-const assert = require( "assert" );
-const fs = require( "fs" );
+import * as assert from "assert";
+import * as fs from "fs";
 
 /**
  * Test the class that checks the style rule requiring all main flow charts to have annotations.
@@ -69,7 +67,7 @@ describe( "MainFlowchartsHaveAnnotations", function() {
         let matches = styleCheck.getLenientMatches();
 
         assert.ok( Array.isArray( matches ) );
-        assert.equal( matches.length, 0 );
+        assert.strictEqual( matches.length, 0 );
 
       } );
     } );
@@ -88,7 +86,7 @@ describe( "MainFlowchartsHaveAnnotations", function() {
         let lenientMatches = styleCheck.getLenientMatches();
 
         assert.ok( Array.isArray( lenientMatches ) );
-        assert.equal( lenientMatches.length, 1 );
+        assert.strictEqual( lenientMatches.length, 1 );
 
       } );
     } );
@@ -107,7 +105,7 @@ describe( "MainFlowchartsHaveAnnotations", function() {
         let lenientMatches = styleCheck.getLenientMatches();
 
         assert.ok( Array.isArray( lenientMatches ) );
-        assert.equal( lenientMatches.length, 1 );
+        assert.strictEqual( lenientMatches.length, 1 );
 
       } );
     } );
@@ -127,7 +125,7 @@ describe( "MainFlowchartsHaveAnnotations", function() {
         let matches = styleCheck.getStrictMatches();
 
         assert.ok( Array.isArray( matches ) );
-        assert.equal( matches.length, 0 );
+        assert.strictEqual( matches.length, 0 );
 
       } );
     } );
@@ -146,7 +144,7 @@ describe( "MainFlowchartsHaveAnnotations", function() {
         let strictMatches = styleCheck.getStrictMatches();
 
         assert.ok( Array.isArray( strictMatches ) );
-        assert.equal( strictMatches.length, 1 );
+        assert.strictEqual( strictMatches.length, 1 );
 
       } );
     } );
@@ -165,7 +163,7 @@ describe( "MainFlowchartsHaveAnnotations", function() {
         let strictMatches = styleCheck.getStrictMatches();
 
         assert.ok( Array.isArray( strictMatches ) );
-        assert.equal( strictMatches.length, 0 );
+        assert.strictEqual( strictMatches.length, 0 );
 
       } );
     } );
@@ -185,7 +183,7 @@ describe( "MainFlowchartsHaveAnnotations", function() {
         let warnings = styleCheck.getWarnings();
 
         assert.ok( Array.isArray( warnings ) );
-        assert.equal( warnings.length, 0 );
+        assert.strictEqual( warnings.length, 0 );
       } );
     } );
 
@@ -201,7 +199,7 @@ describe( "MainFlowchartsHaveAnnotations", function() {
         let warnings = styleCheck.getWarnings();
 
         assert.ok( Array.isArray( warnings ) );
-        assert.equal( warnings.length, 0 );
+        assert.strictEqual( warnings.length, 0 );
 
       } );
     } );
@@ -218,7 +216,7 @@ describe( "MainFlowchartsHaveAnnotations", function() {
         let warnings = styleCheck.getWarnings();
 
         assert.ok( Array.isArray( warnings ) );
-        assert.equal( warnings.length, 0 );
+        assert.strictEqual( warnings.length, 0 );
 
       } );
     } );
@@ -238,7 +236,7 @@ describe( "MainFlowchartsHaveAnnotations", function() {
         let errors = styleCheck.getErrors();
 
         assert.ok( Array.isArray( errors ) );
-        assert.equal( errors.length, 0 );
+        assert.strictEqual( errors.length, 0 );
       } );
     } );
 
@@ -254,7 +252,7 @@ describe( "MainFlowchartsHaveAnnotations", function() {
         let errors = styleCheck.getErrors();
 
         assert.ok( Array.isArray( errors ) );
-        assert.equal( errors.length, 0 );
+        assert.strictEqual( errors.length, 0 );
 
       } );
     } );
@@ -271,7 +269,7 @@ describe( "MainFlowchartsHaveAnnotations", function() {
         let errors = styleCheck.getErrors();
 
         assert.ok( Array.isArray( errors ) );
-        assert.equal( errors.length, 1 );
+        assert.strictEqual( errors.length, 1 );
 
       } );
     } );
