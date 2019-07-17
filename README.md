@@ -19,6 +19,41 @@ To install the app:
     npm install
     ````
 
+4. Link to the package so it can be run from anywhere using the following command:
+
+    ```shell
+    npm link
+    ```
+
+## Use the App ##
+
+After the app has been linked you can use the app in one of two ways.
+
+### Specify the Path to the UiPath Project ###
+
+You can run the app by specifying the path to the UiPath project folder using the `-i` option. For example:
+
+```shell
+xaml-stylecheck -i U:\MyWork\UiPath\Flinders.Foundation\
+```
+
+### Automatically use the Current Working Directory ###
+
+Alternatively, if the `-i` option is not set the current working directory is used. For example:
+
+```shell
+cd MyWork\UiPath\Flinders.Foundation\
+xaml-stylecheck
+```
+
+### Command Line Options ###
+
+To see a list of possible command line options, use the `-h` or `--help` option. For example:
+
+```shell
+xaml-stylecheck --help
+```
+
 ## License ##
 
 The app is licensed using the [BSD 3-Clause License](LICENSE). Contributions, such as suggestions for new rules or new features are welcome.
