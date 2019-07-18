@@ -72,6 +72,7 @@ let haveErrors = false;
 
 // Load classes that have implemented the style rules.
 const ArgumentsMustHaveAnnotations = require( "./app/rules/ArgumentsMustHaveAnnotations.js" ).ArgumentsMustHaveAnnotations;
+const ArgumentsMustStartUpperCase = require( "./app/rules/ArgumentsMustStartUpperCase.js" ).ArgumentsMustStartUpperCase;
 const MainSequencesMustHaveAnnotations = require( "./app/rules/MainSequencesMustHaveAnnotations.js" ).MainSequencesMustHaveAnnotations;
 const MainFlowchartsHaveAnnotations = require( "./app/rules/MainFlowchartsMustHaveAnnotations.js" ).MainFlowchartsHaveAnnotations;
 const VariablesMustHaveAnnotations = require( "./app/rules/VariablesMustHaveAnnotations.js" ).VariablesMustHaveAnnotations;
@@ -81,6 +82,7 @@ const WorkflowsShouldNotContainCodeActivities = require( "./app/rules/WorkflowsS
 // Build a list of style rules.
 let styleRules = [
   new ArgumentsMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
+  new ArgumentsMustStartUpperCase( StyleRuleFactory.getXpathProcessor() ),
   new MainSequencesMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
   new MainFlowchartsHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
   new VariablesMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
