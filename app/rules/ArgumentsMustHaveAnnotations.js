@@ -1,4 +1,5 @@
 import { BaseStyleRule } from "./BaseStyleRule.js";
+import * as util from "util";
 
 /**
  * Class to implement the rule that requires all arguments to have annotations.
@@ -27,14 +28,23 @@ export class ArgumentsMustHaveAnnotations extends BaseStyleRule {
    */
   getErrors() {
 
+    let errors = [];
+
     // Check to see if errors have been detected.
     if ( ( this.lenientMatches.length - this.strictMatches.length ) > 0 ) {
-      return [
-        "Arguments without annotations are not allowed."
-      ];
-    } else {
-      return [];
+      let lenientArguments = this.getAttributeValues( "Name", this.lenientMatches );
+      let strictArguments = this.getAttributeValues( "Name", this.strictMatches );
+
+      let errorArguments = this.filterArray( lenientArguments, strictArguments );
+
+      errorArguments.forEach( function( name ) {
+        errors.push(
+          util.format( "The argument with name '%s' must have an annotation.", name )
+        );
+      } );
     }
+
+    return errors;
 
   }
 

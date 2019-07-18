@@ -312,8 +312,8 @@ describe( "ArgumentsMustHaveAnnotations", function() {
       } );
     } );
 
-    context( "With invvalid XAML to process", function() {
-      it( "should return an array with one element", function() {
+    context( "With invalid XAML to process", function() {
+      it( "should return an array with four elements", function() {
         let styleCheck = new ArgumentsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
@@ -324,7 +324,14 @@ describe( "ArgumentsMustHaveAnnotations", function() {
         let errors = styleCheck.getErrors();
 
         assert.ok( Array.isArray( errors ) );
-        assert.strictEqual( errors.length, 1 );
+        assert.strictEqual( errors.length, 4 );
+
+        errors = errors.join();
+
+        assert.ok( errors.includes( "ichi" ) );
+        assert.ok( errors.includes( "ni" ) );
+        assert.ok( errors.includes( "san" ) );
+        assert.ok( errors.includes( "shi" ) );
 
       } );
     } );
@@ -342,6 +349,8 @@ describe( "ArgumentsMustHaveAnnotations", function() {
 
         assert.ok( Array.isArray( errors ) );
         assert.strictEqual( errors.length, 1 );
+
+        assert.ok( errors[ 0 ].includes( "shi" ) );
 
       } );
     } );
