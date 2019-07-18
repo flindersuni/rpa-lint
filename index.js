@@ -187,5 +187,5 @@ if ( haveIssues ) {
     process.exit( 1 );
   }
 } else {
-  log( success( "Sucess: " + "No XAML style issues were detected." ) );
+  log( success( "Success: " + "No XAML style issues were detected." ) );
 }

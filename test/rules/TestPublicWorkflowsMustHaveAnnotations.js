@@ -257,7 +257,7 @@ describe( "PublicWorkflowsMustHaveAnnotations", function() {
       } );
     } );
 
-    context( "With invvalid XAML to process", function() {
+    context( "With invalid XAML to process", function() {
       it( "should return an array with one element", function() {
         let styleCheck = new PublicWorkflowsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()

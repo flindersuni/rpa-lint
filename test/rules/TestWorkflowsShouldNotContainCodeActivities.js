@@ -257,7 +257,7 @@ describe( "WorkflowsShouldNotContainCodeActivities", function() {
       } );
     } );
 
-    context( "With invvalid XAML to process", function() {
+    context( "With invalid XAML to process", function() {
       it( "should return an empty array", function() {
         let styleCheck = new WorkflowsShouldNotContainCodeActivities(
           StyleRuleFactory.getXpathProcessor()
