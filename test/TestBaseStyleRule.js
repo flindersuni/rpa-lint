@@ -7,7 +7,7 @@ import * as fs from "fs";
 /**
  * Test the base style rule class that all other style rules extend.
  */
-describe( "MainFlowchartsHaveAnnotations", function() {
+describe( "BaseStyleRule", function() {
 
   /**
    * Test the constructor.
@@ -148,6 +148,145 @@ describe( "MainFlowchartsHaveAnnotations", function() {
 
         assert.ok( Array.isArray( errors ) );
         assert.strictEqual( errors.length, 0 );
+      } );
+    } );
+  } );
+
+  // Test getting attribute values.
+  describe( "#getAttributeValues", function() {
+    context( "With invalid parameters", function() {
+      it( "should throw a TypeError", function() {
+        let styleCheck = new BaseStyleRule(
+          StyleRuleFactory.getXpathProcessor()
+        );
+
+        assert.throws( function() {
+          styleCheck.getAttributeValues();
+        },  TypeError );
+
+        assert.throws( function() {
+          styleCheck.getAttributeValues( new Object() );
+        },  TypeError );
+
+
+        assert.throws( function() {
+          styleCheck.getAttributeValues( new Object(), [] );
+        },  TypeError );
+
+        assert.throws( function() {
+          styleCheck.getAttributeValues( " " );
+        },  TypeError );
+
+        assert.throws( function() {
+          styleCheck.getAttributeValues( " ", new Object() );
+        },  TypeError );
+
+      } );
+    } );
+
+    context( "With valid parameters and nodes with matching attributes", function() {
+      it( "should return an array of attribute values", function() {
+        let styleCheck = new BaseStyleRule(
+          StyleRuleFactory.getXpathProcessor()
+        );
+
+        styleCheck.xpathMatchAll = "//xaml:Variable";
+
+        let xamlContent = fs.readFileSync( "./test/artefacts/dos.xaml" );
+        styleCheck.checkStyleRule( xamlContent.toString() );
+
+        let attributes = styleCheck.getAttributeValues( "Name", styleCheck.lenientMatches );
+
+        assert.ok( Array.isArray( attributes ) );
+        assert.strictEqual( attributes.length, 4 );
+
+        attributes = attributes.join();
+
+        assert.ok( attributes.includes( "Eins" ) );
+        assert.ok( attributes.includes( "Zwei" ) );
+        assert.ok( attributes.includes( "Drei" ) );
+        assert.ok( attributes.includes( "Vier" ) );
+
+      } );
+
+      context( "With valid parameters and nodes without matching attributes", function() {
+        it( "should return an empty array", function() {
+          let styleCheck = new BaseStyleRule(
+            StyleRuleFactory.getXpathProcessor()
+          );
+
+          styleCheck.xpathMatchAll = "//xaml:Variable";
+
+          let xamlContent = fs.readFileSync( "./test/artefacts/dos.xaml" );
+          styleCheck.checkStyleRule( xamlContent.toString() );
+
+          let attributes = styleCheck.getAttributeValues( "NoNames", styleCheck.lenientMatches );
+
+          assert.ok( Array.isArray( attributes ) );
+          assert.strictEqual( attributes.length, 0 );
+        } );
+      } );
+    } );
+  } );
+
+  /**
+   * Test filtering an array.
+   */
+  describe( "#filterArray", function() {
+    context( "With invalid parameters", function() {
+      it( "should throw a TypeError", function() {
+        let styleCheck = new BaseStyleRule(
+          StyleRuleFactory.getXpathProcessor()
+        );
+
+        assert.throws( function() {
+          styleCheck.filterArray();
+        },  TypeError );
+
+        assert.throws( function() {
+          styleCheck.filterArray( [] );
+        },  TypeError );
+
+        assert.throws( function() {
+          styleCheck.filterArray( [], "" );
+        },  TypeError );
+
+        assert.throws( function() {
+          styleCheck.filterArray( "", [] );
+        },  TypeError );
+      } );
+    } );
+
+    context( "With a search and criteria array", function() {
+      it( "should return an array containing elements in both arrays", function() {
+        let searchArray = [
+          "un",
+          "deux",
+          "trois",
+          "quatre",
+          "cinq"
+        ];
+
+        let criteriaArray = [
+          "un",
+          "deux",
+          "trois",
+          "quatre"
+        ];
+
+        let expectedArray = [
+          "cinq"
+        ];
+
+        let styleCheck = new BaseStyleRule(
+          StyleRuleFactory.getXpathProcessor()
+        );
+
+        let resultsArray = styleCheck.filterArray( searchArray, criteriaArray );
+
+        assert.ok( Array.isArray( resultsArray ) );
+        assert.strictEqual( resultsArray.length, 1 );
+        assert.deepStrictEqual( resultsArray, expectedArray );
       } );
     } );
   } );

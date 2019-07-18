@@ -37,7 +37,7 @@ import { DOMParser as dom } from "xmldom";
    */
   checkStyleRule( xaml ) {
 
-    if ( !xaml || typeof xaml !== "string" ) {
+    if ( !xaml || typeof( xaml ) !== "string" ) {
       throw new TypeError( "xaml parameter is required and must be a string" );
     }
 
@@ -91,6 +91,67 @@ import { DOMParser as dom } from "xmldom";
    */
   getErrors() {
     return this.errors;
+  }
+
+  /**
+   * Given a list of Elements find and return the value of the named attribute.
+   *
+   * @param {string} attributeName The name of attribute to search for.
+   * @param {Array} elements The list of attributes to search.
+   * @returns {Array} An array of values for the matching attributes.
+   * @throws {TypeError} Parameter attributeName is required and must be a string.
+   * @throws {TypeError} Parameter elements is required and must be an array.
+   * @since 1.0.0
+   */
+  getAttributeValues( attributeName, elements ) {
+
+    if ( !attributeName || typeof( attributeName ) !== "string" ) {
+      throw new TypeError( "attributeName parameter is required and must be a string" );
+    }
+
+    if ( !elements || Array.isArray( elements ) === false ) {
+      throw new TypeError( "elements parameter is required and must be an array" );
+    }
+
+    let values = [];
+
+    elements.forEach( function( element ) {
+      if ( element.hasAttribute( attributeName ) === true ) {
+        values.push( element.getAttribute( attributeName ) );
+      }
+    } );
+
+    return values;
+  }
+
+  /**
+   * Return the list of elements in the search array that do not appear in the criteria array.
+   *
+   * @param {Array} source An array of elements to search.
+   * @param {Array} criteria An array of elements to search for.
+   * @returns {Array} An array of values in the search array that are also in the criteria array.
+   * @throws {TypeError} Parameter source is required and must be a string.
+   * @throws {TypeError} Parameter criteria is required and must be an array.
+   * @since 1.0.0
+   */
+  filterArray( source, criteria ) {
+
+    if ( !source || Array.isArray( source ) === false ) {
+      throw new TypeError( "source parameter is required and must be an array" );
+    }
+
+    if ( !criteria || Array.isArray( criteria ) === false ) {
+      throw new TypeError( "criteria parameter is required and must be an array" );
+    }
+
+    // If the criteria array is empty, return the source array un touched.
+    if ( criteria.length === 0 ) {
+      return source;
+    }
+
+    return source.filter( function( item ) {
+      return !criteria.includes( item );
+    } );
   }
 
  }
