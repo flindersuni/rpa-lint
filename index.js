@@ -72,17 +72,19 @@ let haveErrors = false;
 
 // Load classes that have implemented the style rules.
 const ArgumentsMustHaveAnnotations = require( "./app/rules/ArgumentsMustHaveAnnotations.js" ).ArgumentsMustHaveAnnotations;
-const VariablesMustHaveAnnotations = require( "./app/rules/VariablesMustHaveAnnotations.js" ).VariablesMustHaveAnnotations;
 const MainSequencesMustHaveAnnotations = require( "./app/rules/MainSequencesMustHaveAnnotations.js" ).MainSequencesMustHaveAnnotations;
 const MainFlowchartsHaveAnnotations = require( "./app/rules/MainFlowchartsMustHaveAnnotations.js" ).MainFlowchartsHaveAnnotations;
+const VariablesMustHaveAnnotations = require( "./app/rules/VariablesMustHaveAnnotations.js" ).VariablesMustHaveAnnotations;
+const VariablesMustStartLowerCase = require( "./app/rules/VariablesMustStartLowerCase.js" ).VariablesMustStartLowerCase;
 const WorkflowsShouldNotContainCodeActivities = require( "./app/rules/WorkflowsShouldNotContainCodeActivities.js" ).WorkflowsShouldNotContainCodeActivities;
 
 // Build a list of style rules.
 let styleRules = [
   new ArgumentsMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
-  new VariablesMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
   new MainSequencesMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
   new MainFlowchartsHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
+  new VariablesMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
+  new VariablesMustStartLowerCase(  StyleRuleFactory.getXpathProcessor() ),
   new WorkflowsShouldNotContainCodeActivities(  StyleRuleFactory.getXpathProcessor() )
 ];
 

@@ -58,8 +58,8 @@
   </TextExpression.ReferencesForImplementation>
   <Sequence sap2010:Annotation.AnnotationText="This test XAML file is used as an artefact for the majority of unit tests" DisplayName="uno" sap:VirtualizedContainerService.HintSize="222,371" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="This is the first variable" Name="Eins" />
-      <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="This is the second variable" Name="Zwei" />
+      <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="This is the first variable" Name="eins" />
+      <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="This is the second variable" Name="zwei" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -69,7 +69,7 @@
     </sap:WorkflowViewStateService.ViewState>
     <Sequence sap:VirtualizedContainerService.HintSize="200,99" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <Sequence.Variables>
-        <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="This is the fourth variable" Name="Vier" />
+        <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="This is the fourth variable" Name="vier" />
       </Sequence.Variables>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -79,7 +79,7 @@
     </Sequence>
     <Flowchart sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="Flowchart_1">
       <Flowchart.Variables>
-        <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="This is the third variable" Name="Drei" />
+        <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="This is the third variable" Name="drei" />
       </Flowchart.Variables>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">

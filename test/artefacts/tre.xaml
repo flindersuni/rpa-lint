@@ -57,7 +57,7 @@
   </TextExpression.ReferencesForImplementation>
   <Flowchart DisplayName="tres" sap:VirtualizedContainerService.HintSize="614,636" sap2010:WorkflowViewState.IdRef="Flowchart_2">
     <Flowchart.Variables>
-      <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="This is the first variable" Name="Eins" />
+      <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="This is the first variable" Name="eins" />
       <Variable x:TypeArguments="x:String" Name="Zwei" />
     </Flowchart.Variables>
     <sap:WorkflowViewStateService.ViewState>
