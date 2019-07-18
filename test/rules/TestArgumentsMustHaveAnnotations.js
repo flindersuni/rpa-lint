@@ -1,14 +1,14 @@
-import { StyleRuleFactory } from "../app/StyleRuleFactory.js";
+import { StyleRuleFactory } from "../../app/StyleRuleFactory.js";
 
-import { WorkflowsShouldNotContainCodeActivities } from "../app/rules/WorkflowsShouldNotContainCodeActivities.js";
+import { ArgumentsMustHaveAnnotations } from "../../app/rules/ArgumentsMustHaveAnnotations.js";
 
 import * as assert from "assert";
 import * as fs from "fs";
 
 /**
- * Test the class that checks the style rule warning of code based activities.
+ * Test the class that checks the style rule requiring all arguments to have annotations.
  */
-describe( "WorkflowsShouldNotContainCodeActivities", function() {
+describe( "ArgumentsMustHaveAnnotations", function() {
 
   /**
    * Test the constructor.
@@ -16,13 +16,13 @@ describe( "WorkflowsShouldNotContainCodeActivities", function() {
   describe( "#constructor", function() {
     it( "should throw an error if the parameter is not supplied", function() {
       assert.throws( function() {
-        new WorkflowsShouldNotContainCodeActivities();
+        new ArgumentsMustHaveAnnotations();
       }, TypeError );
     } );
 
     it( "should throw an error if the parameter is not a function", function() {
       assert.throws( function() {
-        new WorkflowsShouldNotContainCodeActivities( new Object() );
+        new ArgumentsMustHaveAnnotations( new Object() );
       }, TypeError );
     } );
   } );
@@ -33,7 +33,7 @@ describe( "WorkflowsShouldNotContainCodeActivities", function() {
   describe( "#checkStyleRule", function() {
     it( "should throw an error if the parameter is not supplied", function() {
       assert.throws( function() {
-        let styleCheck = new WorkflowsShouldNotContainCodeActivities(
+        let styleCheck = new ArgumentsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -44,7 +44,7 @@ describe( "WorkflowsShouldNotContainCodeActivities", function() {
 
     it( "should throw an error if the parameter is not a function", function() {
       assert.throws( function() {
-        let styleCheck = new WorkflowsShouldNotContainCodeActivities(
+        let styleCheck = new ArgumentsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -60,7 +60,7 @@ describe( "WorkflowsShouldNotContainCodeActivities", function() {
 
     context( "With no XAML processed", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new WorkflowsShouldNotContainCodeActivities(
+        let styleCheck = new ArgumentsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -73,8 +73,8 @@ describe( "WorkflowsShouldNotContainCodeActivities", function() {
     } );
 
     context( "With valid XAML to process", function() {
-      it( "should return an array with zero matching nodes", function() {
-        let styleCheck = new WorkflowsShouldNotContainCodeActivities(
+      it( "should return an array with four matching nodes", function() {
+        let styleCheck = new ArgumentsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -86,14 +86,14 @@ describe( "WorkflowsShouldNotContainCodeActivities", function() {
         let lenientMatches = styleCheck.getLenientMatches();
 
         assert.ok( Array.isArray( lenientMatches ) );
-        assert.strictEqual( lenientMatches.length, 0 );
+        assert.strictEqual( lenientMatches.length, 4 );
 
       } );
     } );
 
     context( "With invalid XAML to process", function() {
-      it( "should return an array with zero matching nodes", function() {
-        let styleCheck = new WorkflowsShouldNotContainCodeActivities(
+      it( "should return an array with four matching nodes", function() {
+        let styleCheck = new ArgumentsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -105,7 +105,26 @@ describe( "WorkflowsShouldNotContainCodeActivities", function() {
         let lenientMatches = styleCheck.getLenientMatches();
 
         assert.ok( Array.isArray( lenientMatches ) );
-        assert.strictEqual( lenientMatches.length, 0 );
+        assert.strictEqual( lenientMatches.length, 4 );
+
+      } );
+    } );
+
+    context( "With partially valid XAML to process", function() {
+      it( "should return an array with four matching nodes", function() {
+        let styleCheck = new ArgumentsMustHaveAnnotations(
+          StyleRuleFactory.getXpathProcessor()
+        );
+
+        assert.ok( Array.isArray( styleCheck.getLenientMatches() ) );
+
+        let xamlContent = fs.readFileSync( "./test/artefacts/tre.xaml" );
+        styleCheck.checkStyleRule( xamlContent.toString() );
+
+        let lenientMatches = styleCheck.getLenientMatches();
+
+        assert.ok( Array.isArray( lenientMatches ) );
+        assert.strictEqual( lenientMatches.length, 4 );
 
       } );
     } );
@@ -118,7 +137,7 @@ describe( "WorkflowsShouldNotContainCodeActivities", function() {
 
     context( "With no XAML processed", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new WorkflowsShouldNotContainCodeActivities(
+        let styleCheck = new ArgumentsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -131,8 +150,8 @@ describe( "WorkflowsShouldNotContainCodeActivities", function() {
     } );
 
     context( "With valid XAML to process", function() {
-      it( "should return an array with zero matching nodes", function() {
-        let styleCheck = new WorkflowsShouldNotContainCodeActivities(
+      it( "should return an array with four matching nodes", function() {
+        let styleCheck = new ArgumentsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -144,14 +163,14 @@ describe( "WorkflowsShouldNotContainCodeActivities", function() {
         let strictMatches = styleCheck.getStrictMatches();
 
         assert.ok( Array.isArray( strictMatches ) );
-        assert.strictEqual( strictMatches.length, 0 );
+        assert.strictEqual( strictMatches.length, 4 );
 
       } );
     } );
 
     context( "With invalid XAML to process", function() {
-      it( "should return an array with four matching nodes", function() {
-        let styleCheck = new WorkflowsShouldNotContainCodeActivities(
+      it( "should return an array with zero matching nodes", function() {
+        let styleCheck = new ArgumentsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -163,7 +182,26 @@ describe( "WorkflowsShouldNotContainCodeActivities", function() {
         let strictMatches = styleCheck.getStrictMatches();
 
         assert.ok( Array.isArray( strictMatches ) );
-        assert.strictEqual( strictMatches.length, 4 );
+        assert.strictEqual( strictMatches.length, 0 );
+
+      } );
+    } );
+
+    context( "With partially valid XAML to process", function() {
+      it( "should return an array with three matching nodes", function() {
+        let styleCheck = new ArgumentsMustHaveAnnotations(
+          StyleRuleFactory.getXpathProcessor()
+        );
+
+        assert.ok( Array.isArray( styleCheck.getStrictMatches() ) );
+
+        let xamlContent = fs.readFileSync( "./test/artefacts/tre.xaml" );
+        styleCheck.checkStyleRule( xamlContent.toString() );
+
+        let strictMatches = styleCheck.getStrictMatches();
+
+        assert.ok( Array.isArray( strictMatches ) );
+        assert.strictEqual( strictMatches.length, 3 );
 
       } );
     } );
@@ -176,7 +214,7 @@ describe( "WorkflowsShouldNotContainCodeActivities", function() {
 
     context( "With no XAML processed", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new WorkflowsShouldNotContainCodeActivities(
+        let styleCheck = new ArgumentsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -189,7 +227,7 @@ describe( "WorkflowsShouldNotContainCodeActivities", function() {
 
     context( "With valid XAML to process", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new WorkflowsShouldNotContainCodeActivities(
+        let styleCheck = new ArgumentsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -205,8 +243,8 @@ describe( "WorkflowsShouldNotContainCodeActivities", function() {
     } );
 
     context( "With invalid XAML to process", function() {
-      it( "should return an array with four elements", function() {
-        let styleCheck = new WorkflowsShouldNotContainCodeActivities(
+      it( "should return an empty array", function() {
+        let styleCheck = new ArgumentsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -216,7 +254,24 @@ describe( "WorkflowsShouldNotContainCodeActivities", function() {
         let warnings = styleCheck.getWarnings();
 
         assert.ok( Array.isArray( warnings ) );
-        assert.strictEqual( warnings.length, 4 );
+        assert.strictEqual( warnings.length, 0 );
+
+      } );
+    } );
+
+    context( "With partially valid XAML to process", function() {
+      it( "should return an empty array", function() {
+        let styleCheck = new ArgumentsMustHaveAnnotations(
+          StyleRuleFactory.getXpathProcessor()
+        );
+
+        let xamlContent = fs.readFileSync( "./test/artefacts/tre.xaml" );
+        styleCheck.checkStyleRule( xamlContent.toString() );
+
+        let warnings = styleCheck.getWarnings();
+
+        assert.ok( Array.isArray( warnings ) );
+        assert.strictEqual( warnings.length, 0 );
 
       } );
     } );
@@ -229,7 +284,7 @@ describe( "WorkflowsShouldNotContainCodeActivities", function() {
 
     context( "With no XAML processed", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new WorkflowsShouldNotContainCodeActivities(
+        let styleCheck = new ArgumentsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -242,7 +297,7 @@ describe( "WorkflowsShouldNotContainCodeActivities", function() {
 
     context( "With valid XAML to process", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new WorkflowsShouldNotContainCodeActivities(
+        let styleCheck = new ArgumentsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -257,9 +312,9 @@ describe( "WorkflowsShouldNotContainCodeActivities", function() {
       } );
     } );
 
-    context( "With invvalid XAML to process", function() {
-      it( "should return an empty array", function() {
-        let styleCheck = new WorkflowsShouldNotContainCodeActivities(
+    context( "With invalid XAML to process", function() {
+      it( "should return an array with four elements", function() {
+        let styleCheck = new ArgumentsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -269,7 +324,33 @@ describe( "WorkflowsShouldNotContainCodeActivities", function() {
         let errors = styleCheck.getErrors();
 
         assert.ok( Array.isArray( errors ) );
-        assert.strictEqual( errors.length, 0 );
+        assert.strictEqual( errors.length, 4 );
+
+        errors = errors.join();
+
+        assert.ok( errors.includes( "ichi" ) );
+        assert.ok( errors.includes( "ni" ) );
+        assert.ok( errors.includes( "san" ) );
+        assert.ok( errors.includes( "shi" ) );
+
+      } );
+    } );
+
+    context( "With partially valid XAML to process", function() {
+      it( "should return an array with one element", function() {
+        let styleCheck = new ArgumentsMustHaveAnnotations(
+          StyleRuleFactory.getXpathProcessor()
+        );
+
+        let xamlContent = fs.readFileSync( "./test/artefacts/tre.xaml" );
+        styleCheck.checkStyleRule( xamlContent.toString() );
+
+        let errors = styleCheck.getErrors();
+
+        assert.ok( Array.isArray( errors ) );
+        assert.strictEqual( errors.length, 1 );
+
+        assert.ok( errors[ 0 ].includes( "shi" ) );
 
       } );
     } );

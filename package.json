@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "A CLI app to check XAML files using rules developed by the Flinders RPA team",
   "scripts": {
-    "test": "mocha --require esm",
+    "test": "mocha --require esm --recursive",
     "lint": "eslint .",
     "docs": "jsdoc -c .jsdocrc.json",
-    "coverage": "cross-env NODE_ENV=test nyc mocha"
+    "coverage": "cross-env NODE_ENV=test nyc mocha --recursive"
   },
   "bin": {
     "xaml-stylecheck": "bin/xaml-stylecheck"

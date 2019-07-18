@@ -1,14 +1,14 @@
-import { StyleRuleFactory } from "../app/StyleRuleFactory.js";
+import { StyleRuleFactory } from "../../app/StyleRuleFactory.js";
 
-import { ArgumentsMustHaveAnnotations } from "../app/rules/ArgumentsMustHaveAnnotations.js";
+import { MainSequencesMustHaveAnnotations } from "../../app/rules/MainSequencesMustHaveAnnotations.js";
 
 import * as assert from "assert";
 import * as fs from "fs";
 
 /**
- * Test the class that checks the style rule requiring all arguments to have annotations.
+ * Test the class that checks the style rule requiring all main sequences to have annotations.
  */
-describe( "ArgumentsMustHaveAnnotations", function() {
+describe( "MainSequencesMustHaveAnnotations", function() {
 
   /**
    * Test the constructor.
@@ -16,13 +16,13 @@ describe( "ArgumentsMustHaveAnnotations", function() {
   describe( "#constructor", function() {
     it( "should throw an error if the parameter is not supplied", function() {
       assert.throws( function() {
-        new ArgumentsMustHaveAnnotations();
+        new MainSequencesMustHaveAnnotations();
       }, TypeError );
     } );
 
     it( "should throw an error if the parameter is not a function", function() {
       assert.throws( function() {
-        new ArgumentsMustHaveAnnotations( new Object() );
+        new MainSequencesMustHaveAnnotations( new Object() );
       }, TypeError );
     } );
   } );
@@ -33,7 +33,7 @@ describe( "ArgumentsMustHaveAnnotations", function() {
   describe( "#checkStyleRule", function() {
     it( "should throw an error if the parameter is not supplied", function() {
       assert.throws( function() {
-        let styleCheck = new ArgumentsMustHaveAnnotations(
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -44,7 +44,7 @@ describe( "ArgumentsMustHaveAnnotations", function() {
 
     it( "should throw an error if the parameter is not a function", function() {
       assert.throws( function() {
-        let styleCheck = new ArgumentsMustHaveAnnotations(
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -60,7 +60,7 @@ describe( "ArgumentsMustHaveAnnotations", function() {
 
     context( "With no XAML processed", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new ArgumentsMustHaveAnnotations(
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -73,8 +73,8 @@ describe( "ArgumentsMustHaveAnnotations", function() {
     } );
 
     context( "With valid XAML to process", function() {
-      it( "should return an array with four matching nodes", function() {
-        let styleCheck = new ArgumentsMustHaveAnnotations(
+      it( "should return an array with one matching nodes", function() {
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -86,14 +86,14 @@ describe( "ArgumentsMustHaveAnnotations", function() {
         let lenientMatches = styleCheck.getLenientMatches();
 
         assert.ok( Array.isArray( lenientMatches ) );
-        assert.strictEqual( lenientMatches.length, 4 );
+        assert.strictEqual( lenientMatches.length, 1 );
 
       } );
     } );
 
     context( "With invalid XAML to process", function() {
-      it( "should return an array with four matching nodes", function() {
-        let styleCheck = new ArgumentsMustHaveAnnotations(
+      it( "should return an array with one matching nodes", function() {
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -105,26 +105,7 @@ describe( "ArgumentsMustHaveAnnotations", function() {
         let lenientMatches = styleCheck.getLenientMatches();
 
         assert.ok( Array.isArray( lenientMatches ) );
-        assert.strictEqual( lenientMatches.length, 4 );
-
-      } );
-    } );
-
-    context( "With partially valid XAML to process", function() {
-      it( "should return an array with four matching nodes", function() {
-        let styleCheck = new ArgumentsMustHaveAnnotations(
-          StyleRuleFactory.getXpathProcessor()
-        );
-
-        assert.ok( Array.isArray( styleCheck.getLenientMatches() ) );
-
-        let xamlContent = fs.readFileSync( "./test/artefacts/tre.xaml" );
-        styleCheck.checkStyleRule( xamlContent.toString() );
-
-        let lenientMatches = styleCheck.getLenientMatches();
-
-        assert.ok( Array.isArray( lenientMatches ) );
-        assert.strictEqual( lenientMatches.length, 4 );
+        assert.strictEqual( lenientMatches.length, 1 );
 
       } );
     } );
@@ -137,7 +118,7 @@ describe( "ArgumentsMustHaveAnnotations", function() {
 
     context( "With no XAML processed", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new ArgumentsMustHaveAnnotations(
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -150,8 +131,8 @@ describe( "ArgumentsMustHaveAnnotations", function() {
     } );
 
     context( "With valid XAML to process", function() {
-      it( "should return an array with four matching nodes", function() {
-        let styleCheck = new ArgumentsMustHaveAnnotations(
+      it( "should return an array with one matching nodes", function() {
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -163,14 +144,14 @@ describe( "ArgumentsMustHaveAnnotations", function() {
         let strictMatches = styleCheck.getStrictMatches();
 
         assert.ok( Array.isArray( strictMatches ) );
-        assert.strictEqual( strictMatches.length, 4 );
+        assert.strictEqual( strictMatches.length, 1 );
 
       } );
     } );
 
     context( "With invalid XAML to process", function() {
       it( "should return an array with zero matching nodes", function() {
-        let styleCheck = new ArgumentsMustHaveAnnotations(
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -186,25 +167,6 @@ describe( "ArgumentsMustHaveAnnotations", function() {
 
       } );
     } );
-
-    context( "With partially valid XAML to process", function() {
-      it( "should return an array with three matching nodes", function() {
-        let styleCheck = new ArgumentsMustHaveAnnotations(
-          StyleRuleFactory.getXpathProcessor()
-        );
-
-        assert.ok( Array.isArray( styleCheck.getStrictMatches() ) );
-
-        let xamlContent = fs.readFileSync( "./test/artefacts/tre.xaml" );
-        styleCheck.checkStyleRule( xamlContent.toString() );
-
-        let strictMatches = styleCheck.getStrictMatches();
-
-        assert.ok( Array.isArray( strictMatches ) );
-        assert.strictEqual( strictMatches.length, 3 );
-
-      } );
-    } );
   } );
 
   /**
@@ -214,7 +176,7 @@ describe( "ArgumentsMustHaveAnnotations", function() {
 
     context( "With no XAML processed", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new ArgumentsMustHaveAnnotations(
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -227,7 +189,7 @@ describe( "ArgumentsMustHaveAnnotations", function() {
 
     context( "With valid XAML to process", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new ArgumentsMustHaveAnnotations(
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -244,28 +206,11 @@ describe( "ArgumentsMustHaveAnnotations", function() {
 
     context( "With invalid XAML to process", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new ArgumentsMustHaveAnnotations(
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
         let xamlContent = fs.readFileSync( "./test/artefacts/dos.xaml" );
-        styleCheck.checkStyleRule( xamlContent.toString() );
-
-        let warnings = styleCheck.getWarnings();
-
-        assert.ok( Array.isArray( warnings ) );
-        assert.strictEqual( warnings.length, 0 );
-
-      } );
-    } );
-
-    context( "With partially valid XAML to process", function() {
-      it( "should return an empty array", function() {
-        let styleCheck = new ArgumentsMustHaveAnnotations(
-          StyleRuleFactory.getXpathProcessor()
-        );
-
-        let xamlContent = fs.readFileSync( "./test/artefacts/tre.xaml" );
         styleCheck.checkStyleRule( xamlContent.toString() );
 
         let warnings = styleCheck.getWarnings();
@@ -284,7 +229,7 @@ describe( "ArgumentsMustHaveAnnotations", function() {
 
     context( "With no XAML processed", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new ArgumentsMustHaveAnnotations(
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -297,7 +242,7 @@ describe( "ArgumentsMustHaveAnnotations", function() {
 
     context( "With valid XAML to process", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new ArgumentsMustHaveAnnotations(
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -312,9 +257,9 @@ describe( "ArgumentsMustHaveAnnotations", function() {
       } );
     } );
 
-    context( "With invalid XAML to process", function() {
-      it( "should return an array with four elements", function() {
-        let styleCheck = new ArgumentsMustHaveAnnotations(
+    context( "With invvalid XAML to process", function() {
+      it( "should return an array with one element", function() {
+        let styleCheck = new MainSequencesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -324,33 +269,7 @@ describe( "ArgumentsMustHaveAnnotations", function() {
         let errors = styleCheck.getErrors();
 
         assert.ok( Array.isArray( errors ) );
-        assert.strictEqual( errors.length, 4 );
-
-        errors = errors.join();
-
-        assert.ok( errors.includes( "ichi" ) );
-        assert.ok( errors.includes( "ni" ) );
-        assert.ok( errors.includes( "san" ) );
-        assert.ok( errors.includes( "shi" ) );
-
-      } );
-    } );
-
-    context( "With partially valid XAML to process", function() {
-      it( "should return an array with one element", function() {
-        let styleCheck = new ArgumentsMustHaveAnnotations(
-          StyleRuleFactory.getXpathProcessor()
-        );
-
-        let xamlContent = fs.readFileSync( "./test/artefacts/tre.xaml" );
-        styleCheck.checkStyleRule( xamlContent.toString() );
-
-        let errors = styleCheck.getErrors();
-
-        assert.ok( Array.isArray( errors ) );
         assert.strictEqual( errors.length, 1 );
-
-        assert.ok( errors[ 0 ].includes( "shi" ) );
 
       } );
     } );

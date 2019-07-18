@@ -1,5 +1,5 @@
-import { BaseStyleRule } from "../app/rules/BaseStyleRule.js";
-import { StyleRuleFactory } from "../app/StyleRuleFactory.js";
+import { BaseStyleRule } from "../../app/rules/BaseStyleRule.js";
+import { StyleRuleFactory } from "../../app/StyleRuleFactory.js";
 
 import * as assert from "assert";
 import * as fs from "fs";

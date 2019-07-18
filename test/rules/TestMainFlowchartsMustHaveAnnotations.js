@@ -1,14 +1,14 @@
-import { StyleRuleFactory } from "../app/StyleRuleFactory.js";
+import { StyleRuleFactory } from "../../app/StyleRuleFactory.js";
 
-import { MainSequencesMustHaveAnnotations } from "../app/rules/MainSequencesMustHaveAnnotations.js";
+import { MainFlowchartsHaveAnnotations } from "../../app/rules/MainFlowchartsMustHaveAnnotations.js";
 
 import * as assert from "assert";
 import * as fs from "fs";
 
 /**
- * Test the class that checks the style rule requiring all main sequences to have annotations.
+ * Test the class that checks the style rule requiring all main flow charts to have annotations.
  */
-describe( "MainSequencesMustHaveAnnotations", function() {
+describe( "MainFlowchartsHaveAnnotations", function() {
 
   /**
    * Test the constructor.
@@ -16,13 +16,13 @@ describe( "MainSequencesMustHaveAnnotations", function() {
   describe( "#constructor", function() {
     it( "should throw an error if the parameter is not supplied", function() {
       assert.throws( function() {
-        new MainSequencesMustHaveAnnotations();
+        new MainFlowchartsHaveAnnotations();
       }, TypeError );
     } );
 
     it( "should throw an error if the parameter is not a function", function() {
       assert.throws( function() {
-        new MainSequencesMustHaveAnnotations( new Object() );
+        new MainFlowchartsHaveAnnotations( new Object() );
       }, TypeError );
     } );
   } );
@@ -33,7 +33,7 @@ describe( "MainSequencesMustHaveAnnotations", function() {
   describe( "#checkStyleRule", function() {
     it( "should throw an error if the parameter is not supplied", function() {
       assert.throws( function() {
-        let styleCheck = new MainSequencesMustHaveAnnotations(
+        let styleCheck = new MainFlowchartsHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -44,7 +44,7 @@ describe( "MainSequencesMustHaveAnnotations", function() {
 
     it( "should throw an error if the parameter is not a function", function() {
       assert.throws( function() {
-        let styleCheck = new MainSequencesMustHaveAnnotations(
+        let styleCheck = new MainFlowchartsHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -60,7 +60,7 @@ describe( "MainSequencesMustHaveAnnotations", function() {
 
     context( "With no XAML processed", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new MainSequencesMustHaveAnnotations(
+        let styleCheck = new MainFlowchartsHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -74,13 +74,13 @@ describe( "MainSequencesMustHaveAnnotations", function() {
 
     context( "With valid XAML to process", function() {
       it( "should return an array with one matching nodes", function() {
-        let styleCheck = new MainSequencesMustHaveAnnotations(
+        let styleCheck = new MainFlowchartsHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
         assert.ok( Array.isArray( styleCheck.getLenientMatches() ) );
 
-        let xamlContent = fs.readFileSync( "./test/artefacts/uno.xaml" );
+        let xamlContent = fs.readFileSync( "./test/artefacts/cuatro.xaml" );
         styleCheck.checkStyleRule( xamlContent.toString() );
 
         let lenientMatches = styleCheck.getLenientMatches();
@@ -93,13 +93,13 @@ describe( "MainSequencesMustHaveAnnotations", function() {
 
     context( "With invalid XAML to process", function() {
       it( "should return an array with one matching nodes", function() {
-        let styleCheck = new MainSequencesMustHaveAnnotations(
+        let styleCheck = new MainFlowchartsHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
         assert.ok( Array.isArray( styleCheck.getLenientMatches() ) );
 
-        let xamlContent = fs.readFileSync( "./test/artefacts/dos.xaml" );
+        let xamlContent = fs.readFileSync( "./test/artefacts/tre.xaml" );
         styleCheck.checkStyleRule( xamlContent.toString() );
 
         let lenientMatches = styleCheck.getLenientMatches();
@@ -118,7 +118,7 @@ describe( "MainSequencesMustHaveAnnotations", function() {
 
     context( "With no XAML processed", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new MainSequencesMustHaveAnnotations(
+        let styleCheck = new MainFlowchartsHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -132,13 +132,13 @@ describe( "MainSequencesMustHaveAnnotations", function() {
 
     context( "With valid XAML to process", function() {
       it( "should return an array with one matching nodes", function() {
-        let styleCheck = new MainSequencesMustHaveAnnotations(
+        let styleCheck = new MainFlowchartsHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
         assert.ok( Array.isArray( styleCheck.getStrictMatches() ) );
 
-        let xamlContent = fs.readFileSync( "./test/artefacts/uno.xaml" );
+        let xamlContent = fs.readFileSync( "./test/artefacts/cuatro.xaml" );
         styleCheck.checkStyleRule( xamlContent.toString() );
 
         let strictMatches = styleCheck.getStrictMatches();
@@ -151,13 +151,13 @@ describe( "MainSequencesMustHaveAnnotations", function() {
 
     context( "With invalid XAML to process", function() {
       it( "should return an array with zero matching nodes", function() {
-        let styleCheck = new MainSequencesMustHaveAnnotations(
+        let styleCheck = new MainFlowchartsHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
         assert.ok( Array.isArray( styleCheck.getStrictMatches() ) );
 
-        let xamlContent = fs.readFileSync( "./test/artefacts/dos.xaml" );
+        let xamlContent = fs.readFileSync( "./test/artefacts/tre.xaml" );
         styleCheck.checkStyleRule( xamlContent.toString() );
 
         let strictMatches = styleCheck.getStrictMatches();
@@ -176,7 +176,7 @@ describe( "MainSequencesMustHaveAnnotations", function() {
 
     context( "With no XAML processed", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new MainSequencesMustHaveAnnotations(
+        let styleCheck = new MainFlowchartsHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -189,11 +189,11 @@ describe( "MainSequencesMustHaveAnnotations", function() {
 
     context( "With valid XAML to process", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new MainSequencesMustHaveAnnotations(
+        let styleCheck = new MainFlowchartsHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
-        let xamlContent = fs.readFileSync( "./test/artefacts/uno.xaml" );
+        let xamlContent = fs.readFileSync( "./test/artefacts/cuatro.xaml" );
         styleCheck.checkStyleRule( xamlContent.toString() );
 
         let warnings = styleCheck.getWarnings();
@@ -206,11 +206,11 @@ describe( "MainSequencesMustHaveAnnotations", function() {
 
     context( "With invalid XAML to process", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new MainSequencesMustHaveAnnotations(
+        let styleCheck = new MainFlowchartsHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
-        let xamlContent = fs.readFileSync( "./test/artefacts/dos.xaml" );
+        let xamlContent = fs.readFileSync( "./test/artefacts/tre.xaml" );
         styleCheck.checkStyleRule( xamlContent.toString() );
 
         let warnings = styleCheck.getWarnings();
@@ -229,7 +229,7 @@ describe( "MainSequencesMustHaveAnnotations", function() {
 
     context( "With no XAML processed", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new MainSequencesMustHaveAnnotations(
+        let styleCheck = new MainFlowchartsHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -242,11 +242,11 @@ describe( "MainSequencesMustHaveAnnotations", function() {
 
     context( "With valid XAML to process", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new MainSequencesMustHaveAnnotations(
+        let styleCheck = new MainFlowchartsHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
-        let xamlContent = fs.readFileSync( "./test/artefacts/uno.xaml" );
+        let xamlContent = fs.readFileSync( "./test/artefacts/cuatro.xaml" );
         styleCheck.checkStyleRule( xamlContent.toString() );
 
         let errors = styleCheck.getErrors();
@@ -259,11 +259,11 @@ describe( "MainSequencesMustHaveAnnotations", function() {
 
     context( "With invvalid XAML to process", function() {
       it( "should return an array with one element", function() {
-        let styleCheck = new MainSequencesMustHaveAnnotations(
+        let styleCheck = new MainFlowchartsHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
-        let xamlContent = fs.readFileSync( "./test/artefacts/dos.xaml" );
+        let xamlContent = fs.readFileSync( "./test/artefacts/tre.xaml" );
         styleCheck.checkStyleRule( xamlContent.toString() );
 
         let errors = styleCheck.getErrors();

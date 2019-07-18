@@ -1,6 +1,6 @@
-import { StyleRuleFactory } from "../app/StyleRuleFactory.js";
+import { StyleRuleFactory } from "../../app/StyleRuleFactory.js";
 
-import { VariablesMustHaveAnnotations } from "../app/rules/VariablesMustHaveAnnotations.js";
+import { VariablesMustHaveAnnotations } from "../../app/rules/VariablesMustHaveAnnotations.js";
 
 import * as assert from "assert";
 import * as fs from "fs";

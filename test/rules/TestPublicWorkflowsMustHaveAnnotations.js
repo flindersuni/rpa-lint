@@ -1,14 +1,14 @@
-import { StyleRuleFactory } from "../app/StyleRuleFactory.js";
+import { StyleRuleFactory } from "../../app/StyleRuleFactory.js";
 
-import { MainFlowchartsHaveAnnotations } from "../app/rules/MainFlowchartsMustHaveAnnotations.js";
+import { PublicWorkflowsMustHaveAnnotations } from "../../app/rules/PublicWorkflowsMustHaveAnnotations.js";
 
 import * as assert from "assert";
 import * as fs from "fs";
 
 /**
- * Test the class that checks the style rule requiring all main flow charts to have annotations.
+ * Test the class that requires public workflows to have annotations.
  */
-describe( "MainFlowchartsHaveAnnotations", function() {
+describe( "PublicWorkflowsMustHaveAnnotations", function() {
 
   /**
    * Test the constructor.
@@ -16,13 +16,13 @@ describe( "MainFlowchartsHaveAnnotations", function() {
   describe( "#constructor", function() {
     it( "should throw an error if the parameter is not supplied", function() {
       assert.throws( function() {
-        new MainFlowchartsHaveAnnotations();
+        new PublicWorkflowsMustHaveAnnotations();
       }, TypeError );
     } );
 
     it( "should throw an error if the parameter is not a function", function() {
       assert.throws( function() {
-        new MainFlowchartsHaveAnnotations( new Object() );
+        new PublicWorkflowsMustHaveAnnotations( new Object() );
       }, TypeError );
     } );
   } );
@@ -33,7 +33,7 @@ describe( "MainFlowchartsHaveAnnotations", function() {
   describe( "#checkStyleRule", function() {
     it( "should throw an error if the parameter is not supplied", function() {
       assert.throws( function() {
-        let styleCheck = new MainFlowchartsHaveAnnotations(
+        let styleCheck = new PublicWorkflowsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -44,7 +44,7 @@ describe( "MainFlowchartsHaveAnnotations", function() {
 
     it( "should throw an error if the parameter is not a function", function() {
       assert.throws( function() {
-        let styleCheck = new MainFlowchartsHaveAnnotations(
+        let styleCheck = new PublicWorkflowsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -60,7 +60,7 @@ describe( "MainFlowchartsHaveAnnotations", function() {
 
     context( "With no XAML processed", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new MainFlowchartsHaveAnnotations(
+        let styleCheck = new PublicWorkflowsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -73,39 +73,39 @@ describe( "MainFlowchartsHaveAnnotations", function() {
     } );
 
     context( "With valid XAML to process", function() {
-      it( "should return an array with one matching nodes", function() {
-        let styleCheck = new MainFlowchartsHaveAnnotations(
+      it( "should return an empty array", function() {
+        let styleCheck = new PublicWorkflowsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
         assert.ok( Array.isArray( styleCheck.getLenientMatches() ) );
 
-        let xamlContent = fs.readFileSync( "./test/artefacts/cuatro.xaml" );
+        let xamlContent = fs.readFileSync( "./test/artefacts/uno.xaml" );
         styleCheck.checkStyleRule( xamlContent.toString() );
 
         let lenientMatches = styleCheck.getLenientMatches();
 
         assert.ok( Array.isArray( lenientMatches ) );
-        assert.strictEqual( lenientMatches.length, 1 );
+        assert.strictEqual( lenientMatches.length, 0 );
 
       } );
     } );
 
     context( "With invalid XAML to process", function() {
-      it( "should return an array with one matching nodes", function() {
-        let styleCheck = new MainFlowchartsHaveAnnotations(
+      it( "should return an empty array", function() {
+        let styleCheck = new PublicWorkflowsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
         assert.ok( Array.isArray( styleCheck.getLenientMatches() ) );
 
-        let xamlContent = fs.readFileSync( "./test/artefacts/tre.xaml" );
+        let xamlContent = fs.readFileSync( "./test/artefacts/dos.xaml" );
         styleCheck.checkStyleRule( xamlContent.toString() );
 
         let lenientMatches = styleCheck.getLenientMatches();
 
         assert.ok( Array.isArray( lenientMatches ) );
-        assert.strictEqual( lenientMatches.length, 1 );
+        assert.strictEqual( lenientMatches.length, 0 );
 
       } );
     } );
@@ -118,7 +118,7 @@ describe( "MainFlowchartsHaveAnnotations", function() {
 
     context( "With no XAML processed", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new MainFlowchartsHaveAnnotations(
+        let styleCheck = new PublicWorkflowsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -131,14 +131,14 @@ describe( "MainFlowchartsHaveAnnotations", function() {
     } );
 
     context( "With valid XAML to process", function() {
-      it( "should return an array with one matching nodes", function() {
-        let styleCheck = new MainFlowchartsHaveAnnotations(
+      it( "should return an array with one matching node", function() {
+        let styleCheck = new PublicWorkflowsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
         assert.ok( Array.isArray( styleCheck.getStrictMatches() ) );
 
-        let xamlContent = fs.readFileSync( "./test/artefacts/cuatro.xaml" );
+        let xamlContent = fs.readFileSync( "./test/artefacts/uno.xaml" );
         styleCheck.checkStyleRule( xamlContent.toString() );
 
         let strictMatches = styleCheck.getStrictMatches();
@@ -151,13 +151,13 @@ describe( "MainFlowchartsHaveAnnotations", function() {
 
     context( "With invalid XAML to process", function() {
       it( "should return an array with zero matching nodes", function() {
-        let styleCheck = new MainFlowchartsHaveAnnotations(
+        let styleCheck = new PublicWorkflowsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
         assert.ok( Array.isArray( styleCheck.getStrictMatches() ) );
 
-        let xamlContent = fs.readFileSync( "./test/artefacts/tre.xaml" );
+        let xamlContent = fs.readFileSync( "./test/artefacts/dos.xaml" );
         styleCheck.checkStyleRule( xamlContent.toString() );
 
         let strictMatches = styleCheck.getStrictMatches();
@@ -176,7 +176,7 @@ describe( "MainFlowchartsHaveAnnotations", function() {
 
     context( "With no XAML processed", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new MainFlowchartsHaveAnnotations(
+        let styleCheck = new PublicWorkflowsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -189,11 +189,11 @@ describe( "MainFlowchartsHaveAnnotations", function() {
 
     context( "With valid XAML to process", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new MainFlowchartsHaveAnnotations(
+        let styleCheck = new PublicWorkflowsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
-        let xamlContent = fs.readFileSync( "./test/artefacts/cuatro.xaml" );
+        let xamlContent = fs.readFileSync( "./test/artefacts/uno.xaml" );
         styleCheck.checkStyleRule( xamlContent.toString() );
 
         let warnings = styleCheck.getWarnings();
@@ -206,11 +206,11 @@ describe( "MainFlowchartsHaveAnnotations", function() {
 
     context( "With invalid XAML to process", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new MainFlowchartsHaveAnnotations(
+        let styleCheck = new PublicWorkflowsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
-        let xamlContent = fs.readFileSync( "./test/artefacts/tre.xaml" );
+        let xamlContent = fs.readFileSync( "./test/artefacts/dos.xaml" );
         styleCheck.checkStyleRule( xamlContent.toString() );
 
         let warnings = styleCheck.getWarnings();
@@ -223,30 +223,30 @@ describe( "MainFlowchartsHaveAnnotations", function() {
   } );
 
   /**
-   *  Test getting an array of warnings.
+   *  Test getting an array of errors.
    */
   describe( "#getErrors", function() {
 
     context( "With no XAML processed", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new MainFlowchartsHaveAnnotations(
+        let styleCheck = new PublicWorkflowsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
         let errors = styleCheck.getErrors();
 
         assert.ok( Array.isArray( errors ) );
-        assert.strictEqual( errors.length, 0 );
+        assert.strictEqual( errors.length, 1 );
       } );
     } );
 
     context( "With valid XAML to process", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new MainFlowchartsHaveAnnotations(
+        let styleCheck = new PublicWorkflowsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
-        let xamlContent = fs.readFileSync( "./test/artefacts/cuatro.xaml" );
+        let xamlContent = fs.readFileSync( "./test/artefacts/uno.xaml" );
         styleCheck.checkStyleRule( xamlContent.toString() );
 
         let errors = styleCheck.getErrors();
@@ -259,11 +259,11 @@ describe( "MainFlowchartsHaveAnnotations", function() {
 
     context( "With invvalid XAML to process", function() {
       it( "should return an array with one element", function() {
-        let styleCheck = new MainFlowchartsHaveAnnotations(
+        let styleCheck = new PublicWorkflowsMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
 
-        let xamlContent = fs.readFileSync( "./test/artefacts/tre.xaml" );
+        let xamlContent = fs.readFileSync( "./test/artefacts/dos.xaml" );
         styleCheck.checkStyleRule( xamlContent.toString() );
 
         let errors = styleCheck.getErrors();
