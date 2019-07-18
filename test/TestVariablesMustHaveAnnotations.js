@@ -312,8 +312,8 @@ describe( "VariablesMustHaveAnnotations", function() {
       } );
     } );
 
-    context( "With invvalid XAML to process", function() {
-      it( "should return an array with one element", function() {
+    context( "With invalid XAML to process", function() {
+      it( "should return an array with four elements", function() {
         let styleCheck = new VariablesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
@@ -324,13 +324,20 @@ describe( "VariablesMustHaveAnnotations", function() {
         let errors = styleCheck.getErrors();
 
         assert.ok( Array.isArray( errors ) );
-        assert.strictEqual( errors.length, 1 );
+        assert.strictEqual( errors.length, 4 );
+
+        errors = errors.join();
+
+        assert.ok( errors.includes( "Eins" ) );
+        assert.ok( errors.includes( "Zwei" ) );
+        assert.ok( errors.includes( "Drei" ) );
+        assert.ok( errors.includes( "Vier" ) );
 
       } );
     } );
 
     context( "With partially valid XAML to process", function() {
-      it( "should return an array with one element", function() {
+      it( "should return an array with three elements", function() {
         let styleCheck = new VariablesMustHaveAnnotations(
           StyleRuleFactory.getXpathProcessor()
         );
@@ -341,7 +348,13 @@ describe( "VariablesMustHaveAnnotations", function() {
         let errors = styleCheck.getErrors();
 
         assert.ok( Array.isArray( errors ) );
-        assert.strictEqual( errors.length, 1 );
+        assert.strictEqual( errors.length, 3 );
+
+        errors = errors.join();
+
+        assert.ok( errors.includes( "Zwei" ) );
+        assert.ok( errors.includes( "Drei" ) );
+        assert.ok( errors.includes( "Vier" ) );
 
       } );
     } );
