@@ -1,4 +1,5 @@
-// Application dependencies.
+const startTime = process.hrtime.bigint();
+
 import commander from "commander";
 import chalk from "chalk";
 import path from "path";
@@ -185,11 +186,16 @@ if ( haveIssues ) {
       } );
     }
   } );
+}
 
-  // Exit with an error status code for errors only, not warnings.
-  if ( haveErrors ) {
+const endTime = process.hrtime.bigint();
+const totalTime = Number( endTime - startTime ) * 1e-6;
+
+log( "INFO: Process took: %sms.", totalTime.toFixed( 2 ) );
+
+// Exit with an error status code for errors only, not warnings.
+if ( haveErrors ) {
     process.exit( 1 );
-  }
 } else {
   log( success( "Success: " + "No XAML style issues were detected." ) );
 }
