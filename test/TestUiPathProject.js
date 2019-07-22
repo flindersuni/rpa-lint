@@ -165,4 +165,50 @@ describe( "UiPathProject", function() {
       assert.strictEqual( projectInfo.getPrivateWorkflows().length, 0 );
     } );
   } );
+
+  /**
+   *  Test getting a list of NuGet dependencies.
+   */
+  describe( "#getDependencies", function() {
+    it( "should return a Map object", function() {
+      let projectInfo = new UiPathProject( "./test/artefacts" );
+      assert.ok( projectInfo.getDependencies() instanceof Map );
+    } );
+
+    it( "should return a Map with five entries", function() {
+      let projectInfo = new UiPathProject( "./test/artefacts" );
+      assert.strictEqual( projectInfo.getDependencies().size, 6 );
+    } );
+
+    it( "should contain the expected list of dependencies", function() {
+      const expected = [
+        "Flinders.Foundation.Testing",
+        "UiPath.Credentials.Activities",
+        "UiPath.Excel.Activities",
+        "UiPath.Mail.Activities",
+        "UiPath.System.Activities",
+        "UiPath.UIAutomation.Activities"
+      ];
+
+      const versions = [
+        "1.0.1-alpha.5",
+        "1.1.6479.13204",
+        "2.6.2",
+        "1.5.0",
+        "19.6.0",
+        "19.6.0"
+      ];
+
+      let projectInfo = new UiPathProject( "./test/artefacts" );
+      let actual = projectInfo.getDependencies();
+
+      expected.forEach( function( value, index ) {
+
+        assert.ok( actual.has( value ) );
+        // eslint-disable-next-line security/detect-object-injection
+        assert.ok( actual.get( value ) === versions[ index ] );
+
+      } );
+    } );
+  } );
 } );

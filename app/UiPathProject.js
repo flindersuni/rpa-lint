@@ -100,4 +100,14 @@ export class UiPathProject {
       return this.fileContents.libraryOptions.privateWorkflows;
     }
   }
+
+  /**
+   * Return a map of NuGet packages that are dependencies for the UiPath project.
+   *
+   * @returns {Map} A map of project dependencies.
+   * @since 1.0.0
+   */
+  getDependencies() {
+    return new Map( Object.entries( this.fileContents.dependencies ) );
+  }
 }
