@@ -33,7 +33,9 @@
   "dependencies": {
     "chalk": "^2.4.2",
     "commander": "^2.20.0",
+    "compare-versions": "^3.5.0",
     "esm": "^3.2.25",
+    "sync-request": "^6.1.0",
     "xmldom": "^0.1.27",
     "xpath": "0.0.27"
   },

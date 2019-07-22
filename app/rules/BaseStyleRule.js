@@ -7,7 +7,7 @@ import { DOMParser as dom } from "xmldom";
  export class BaseStyleRule {
 
   /**
-   * Construct a new ArgumentsMustHaveAnnotations object.
+   * Construct a new BaseStyleRule object.
    *
    * @param {Function} xpath An XPath object with the required namespaces defined.
    * @since 1.0.0
