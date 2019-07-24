@@ -6,7 +6,7 @@
     "test": "mocha --require esm --recursive",
     "lint": "eslint .",
     "docs": "jsdoc -c .jsdocrc.json",
-    "coverage": "cross-env NODE_ENV=test nyc mocha --recursive"
+    "coverage": "cross-env NODE_ENV=test nyc mocha --recursive --timeout 10000"
   },
   "bin": {
     "xaml-stylecheck": "bin/xaml-stylecheck"
@@ -28,7 +28,8 @@
     "eslint-plugin-security": "^1.4.0",
     "jsdoc": "^3.6.3",
     "mocha": "^6.1.4",
-    "nyc": "^14.1.1"
+    "nyc": "^14.1.1",
+    "sinon": "^7.3.2"
   },
   "dependencies": {
     "chalk": "^2.4.2",
@@ -48,7 +49,8 @@
       "@babel/register"
     ],
     "reporter": [
-      "text"
+      "text",
+      "html"
     ],
     "sourceMap": false,
     "instrument": false

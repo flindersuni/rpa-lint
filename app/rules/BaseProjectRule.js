@@ -9,6 +9,7 @@ import { UiPathProject } from "../UiPathProject.js";
    * Construct a new BaseProjectRule object.
    *
    * @param {object} project An instantiated UiPathProject object.
+   * @throws {TypeError} When the project parameter is missing or the incorrect type.
    * @since 1.0.0
    */
   constructor( project ) {
@@ -28,6 +29,7 @@ import { UiPathProject } from "../UiPathProject.js";
    * @since 1.0.0
    */
   checkStyleRule() {
+    throw new Error( "Function 'checkStyleRule' is no implemented in base class." );
   }
 
   /**

@@ -1,17 +1,10 @@
 import { NoOutdatedProjectDependencies } from "../../app/rules/NoOutdatedProjectDependencies.js";
 import { UiPathProject } from "../../app/UiPathProject.js";
+import { MyGetApiMock } from "../../app/mocks/MyGetApiMock.js";
 
 import * as assert from "assert";
-
-// Use shorter lists of dependencies for checking style rules.
-const oneDependency = {
-  "Flinders.Foundation.Testing": "1.0.1-alpha.5"
-};
-
-const twoDependencies = {
-  "Flinders.Foundation.Testing": "1.0.1-alpha.5",
-  "UiPath.UIAutomation.Activities": "19.6.0"
-};
+import sinon from "sinon";
+import * as request from "sync-request";
 
 /**
  * Test the base project rule class that all other project based style rules extend.
@@ -81,14 +74,20 @@ describe( "NoOutdatedProjectDependencies", function() {
       it( "should complete with no errors", function() {
         let projectInfo = new UiPathProject( "./test/artefacts" );
 
-        // Adjust the list of dependencies to increase test performance.
-        projectInfo.fileContents.dependencies = oneDependency;
+        // Replace the real sync-request with a mock function.
+        // NOTE: This does not work when generating test coverage using nyc.
+        sinon.stub( request, "default" ).callsFake( function( verb, url ) {
+          return new MyGetApiMock( verb, url );
+        } );
 
         let styleCheck = new NoOutdatedProjectDependencies( projectInfo );
 
         assert.doesNotThrow( function() {
           styleCheck.checkStyleRule();
         }, Error );
+
+        // Restore the proper sync-request.
+        request.default.restore();
 
       } );
     } );
@@ -114,19 +113,24 @@ describe( "NoOutdatedProjectDependencies", function() {
 
     context( "After applying the style rule", function() {
       it( "should return a non empty array", function() {
-        this.timeout( 5000 );
         let projectInfo = new UiPathProject( "./test/artefacts" );
 
-        // Adjust the list of dependencies to increase test performance.
-        projectInfo.fileContents.dependencies = twoDependencies;
-
         let styleCheck = new NoOutdatedProjectDependencies( projectInfo );
+
+        // Replace the real sync-request with a mock function.
+        // NOTE: This does not work when generating test coverage using nyc.
+        sinon.stub( request, "default" ).callsFake( function( verb, url ) {
+          return new MyGetApiMock( verb, url );
+        } );
 
         styleCheck.checkStyleRule();
 
         let errors = styleCheck.getErrors();
         assert.ok( Array.isArray( errors ) );
-        assert.strictEqual( errors.length, 1 );
+        assert.strictEqual( errors.length, 3 );
+
+        // Restore the proper sync-request.
+        request.default.restore();
       } );
     } );
   } );

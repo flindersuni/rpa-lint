@@ -83,6 +83,10 @@ describe( "BaseProjectRule", function() {
 
         assert.ok( typeof( styleCheck.checkStyleRule ) === "function" );
 
+        assert.throws( function() {
+          styleCheck.checkStyleRule();
+        }, Error );
+
       } );
     } );
   } );
