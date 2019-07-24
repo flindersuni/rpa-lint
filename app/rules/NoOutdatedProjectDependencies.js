@@ -48,7 +48,11 @@ export class NoOutdatedProjectDependencies extends BaseProjectRule {
       let pkgJson = JSON.parse( result.getBody( "utf8" ) );
 
       // Compare version numbers.
-      if ( !compareVersions.compare( pkgVersion, pkgJson.data[ 0 ].version, "=" ) ) {
+      if ( !Array.isArray( pkgJson.data ) || pkgJson.data[ 0 ] === undefined ) {
+        self.errors.push(
+          util.format( "Unable to lookup package details for %s", pkgName )
+        );
+      } else if ( !compareVersions.compare( pkgVersion, pkgJson.data[ 0 ].version, "=" ) ) {
         self.errors.push(
           util.format(
             "The '%s' package with version %s is outdated by version %s.",

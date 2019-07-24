@@ -21,6 +21,7 @@ const success = chalk.bold.green;
 program.version( appPackage.version, "-v, --version" )
   .description( "Check XAML files using rules developed by the Flinders RPA team" )
   .option( "-i, --input <required>", "Path to UiPath project directory" )
+  .option( "--dep-check", "Check for outdated project dependencies" )
   .option( "-q, --quiet", "Suppress warnings" );
 
 // Parse the command line parameters.
@@ -186,6 +187,27 @@ if ( haveIssues ) {
       } );
     }
   } );
+}
+
+
+// Check the UiPath project dependencies if required.
+if ( program.depCheck ) {
+  console.log( "INFO: Checking UiPath project dependencies. This will take some time..." );
+
+  const NoOutdatedProjectDependencies = require( "./app/rules/NoOutdatedProjectDependencies.js" ).NoOutdatedProjectDependencies;
+
+  let depCheck = new NoOutdatedProjectDependencies( projectInfo );
+  depCheck.checkStyleRule();
+
+  let depErrors = depCheck.getErrors();
+
+  depErrors.forEach( function( errorMsg ) {
+    console.log( error( "ERROR: " ) + errorMsg );
+  } );
+
+  if ( depErrors.length > 0 ) {
+    haveErrors = true;
+  }
 }
 
 const endTime = process.hrtime.bigint();
