@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "A CLI app to check XAML files using rules developed by the Flinders RPA team",
   "scripts": {
-    "test": "mocha --require esm --recursive",
+    "test": "mocha",
     "lint": "eslint .",
     "docs": "jsdoc -c .jsdocrc.json",
-    "coverage": "cross-env NODE_ENV=test nyc mocha --recursive --timeout 10000"
+    "coverage": "c8 mocha"
   },
   "bin": {
     "xaml-stylecheck": "bin/xaml-stylecheck"
@@ -14,12 +14,7 @@
   "author": "Corey Wallis <corey.wallis@flinders.edu.au>",
   "license": "BSD-3-Clause",
   "devDependencies": {
-    "@babel/core": "^7.5.4",
-    "@babel/preset-env": "^7.5.4",
-    "@babel/register": "^7.4.4",
-    "babel-plugin-istanbul": "^5.1.4",
-    "cross-env": "^5.2.0",
-    "escape-regex-string": "^1.0.6",
+    "c8": "^5.0.1",
     "eslint": "^6.0.1",
     "eslint-config-jquery": "^2.0.0",
     "eslint-plugin-import": "^2.18.0",
@@ -28,7 +23,6 @@
     "eslint-plugin-security": "^1.4.0",
     "jsdoc": "^3.6.3",
     "mocha": "^6.1.4",
-    "nyc": "^14.1.1",
     "sinon": "^7.3.2"
   },
   "dependencies": {
@@ -44,15 +38,13 @@
     "test": "test",
     "doc": "doc"
   },
-  "nyc": {
+  "esm": {
+    "cjs": true
+  },
+  "mocha": {
     "require": [
-      "@babel/register"
+      "esm"
     ],
-    "reporter": [
-      "text",
-      "html"
-    ],
-    "sourceMap": false,
-    "instrument": false
+    "recursive": true
   }
 }
