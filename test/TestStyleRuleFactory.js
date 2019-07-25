@@ -11,6 +11,17 @@ const expectedNamespaceCount = 4;
 describe( "StyleRuleFactory", function() {
 
   /**
+   * Test constructing a new instance of the class.
+   */
+  describe( "#constructor", function() {
+    it( "should not throw any errors", function() {
+      assert.doesNotThrow( function() {
+        new StyleRuleFactory();
+      }, Error );
+    } );
+  } );
+
+  /**
    * Test getting the list of supported XML namespaces.
    */
   describe( "#getXamlNamespaces()", function() {
