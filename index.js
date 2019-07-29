@@ -217,7 +217,10 @@ log( "INFO: Process took: %sms.", totalTime.toFixed( 2 ) );
 
 // Exit with an error status code for errors only, not warnings.
 if ( haveErrors ) {
-    process.exit( 1 );
+  log( error( "ERROR: " ) + "The identified errors must be addressed." );
+  process.exit( 1 );
+} if ( haveIssues ) {
+  log( warn( "WARN: " ) + "The identified warnings should be addressed." );
 } else {
-  log( success( "Success: " + "No XAML style issues were detected." ) );
+  log( success( "Success: " ) + "No issues were detected." );
 }
