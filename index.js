@@ -19,7 +19,7 @@ const success = chalk.bold.green;
 
 // Define basic program metadata.
 program.version( appPackage.version, "-v, --version" )
-  .description( "Check XAML files using rules developed by the Flinders RPA team" )
+  .description( "Lint UiPath projects against rules developed by the Flinders RPA team" )
   .option( "-i, --input <required>", "Path to UiPath project directory" )
   .option( "--dep-check", "Check for outdated project dependencies" )
   .option( "-q, --quiet", "Suppress warnings" );
@@ -34,7 +34,7 @@ if ( typeof( program.input ) === "undefined" ) {
 }
 
 // Output some useful information.
-log( chalk.bold( "Flinders XAML Style Check - " + appPackage.version ) );
+log( chalk.bold( "RPA Lint - " + appPackage.version ) );
 
 // Resolve a relative path if required.
 if ( !path.isAbsolute( program.input ) ) {

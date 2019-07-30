@@ -1,7 +1,7 @@
 {
-  "name": "flinders-xaml-stylecheck",
+  "name": "rpa-lint",
   "version": "1.0.0",
-  "description": "A CLI app to check XAML files using rules developed by the Flinders RPA team",
+  "description": "A CLI app to lint UiPath projects against rules developed by the Flinders RPA team",
   "scripts": {
     "test": "mocha",
     "lint": "eslint .",
@@ -9,7 +9,7 @@
     "coverage": "c8 mocha"
   },
   "bin": {
-    "xaml-stylecheck": "bin/xaml-stylecheck"
+    "rpa-lint": "bin/rpa-lint"
   },
   "author": "Corey Wallis <corey.wallis@flinders.edu.au>",
   "license": "BSD-3-Clause",

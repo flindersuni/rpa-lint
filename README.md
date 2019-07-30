@@ -1,11 +1,11 @@
 <!-- markdownlint-disable no-trailing-punctuation -->
-# Flinders XAML Style Check #
+# RPA Lint #
 
-This app is used by the Robotic Process Automation (RPA) team at [Flinders University][flinders]to check our work against an agreed set of styles. We apply these style rules so that our automations are consistent.
+This app is used by the Robotic Process Automation (RPA) team at [Flinders University][flinders] to lint our RPA projects against an agreed set of rules. We apply these style rules so that our automations are consistent.
 
-We use [UiPath][uipath] to develop and manage our automations. The source code for our automations produced by UiPath Studio is a series of [XAML][xaml] files.
+We use [UiPath][uipath] to develop and manage our automations.
 
-This app, developed using [Node.js][nodejs] uses static analysis techniques to check the XAML code against our agreed style rules.
+This app, developed using [Node.js][nodejs], uses static analysis techniques to check the [XAML][xaml] code and project settings against our agreed rules.
 
 ## Installation ##
 
@@ -34,7 +34,7 @@ After the app has been linked you can use the app in one of two ways.
 You can run the app by specifying the path to the UiPath project folder using the `-i` option. For example:
 
 ```shell
-xaml-stylecheck -i U:\MyWork\UiPath\Flinders.Foundation\
+rpa-lint -i U:\MyWork\UiPath\Flinders.Foundation\
 ```
 
 ### Automatically use the Current Working Directory ###
@@ -43,7 +43,7 @@ Alternatively, if the `-i` option is not set the current working directory is us
 
 ```shell
 cd MyWork\UiPath\Flinders.Foundation\
-xaml-stylecheck
+rpa-lint
 ```
 
 ### Command Line Options ###
@@ -51,7 +51,16 @@ xaml-stylecheck
 To see a list of possible command line options, use the `-h` or `--help` option. For example:
 
 ```shell
-xaml-stylecheck --help
+rpa-lint --help
+```
+
+## Project Dependency Checking ###
+
+To check the project for outdated dependencies use the `--dep-check` option. For example:
+
+```shell
+cd MyWork\UiPath\Flinders.Foundation\
+rpa-lint --dep-check
 ```
 
 ## License ##
