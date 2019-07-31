@@ -2,7 +2,12 @@ import { BaseStyleRule } from "./BaseStyleRule.js";
 import * as util from "util";
 
 /**
- * A class to implement the rule that variable names must start with a lower case letter.
+ * Implement the rule that all variable names must start with a lower case letter.
+ *
+ * This is important as it makes it easier for others to differentiate between arguments and variables.
+ * Especially when used in complex expressions.
+ *
+ * Extends [BaseStyleRule]{@link BaseStyleRule}.
  */
 export class VariablesMustStartLowerCase extends BaseStyleRule {
 

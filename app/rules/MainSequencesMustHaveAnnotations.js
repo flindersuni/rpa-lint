@@ -1,8 +1,11 @@
 import { BaseStyleRule } from "./BaseStyleRule.js";
 
 /**
- * Class to implement the rule that requires all main sequences to have annotations.
+ * Implement the rule that the main sequence of a workflow must have an annotation.
  *
+ * This is important as it documents the workflow, making it easier for others to use.
+ *
+ * Extends [BaseStyleRule]{@link BaseStyleRule}.
  */
 export class MainSequencesMustHaveAnnotations extends BaseStyleRule {
 

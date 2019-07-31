@@ -4,16 +4,16 @@ import * as path from "path";
 import * as fs from "fs";
 
 /**
- * Factory class to expose utility functions.
+ * Contains a number of static utility functions that are used throughout the app.
  *
  * @hideconstructor
  */
 export class StyleRuleFactory {
 
   /**
-   * Return an object that lists supported XML namespaces.
+   * Return an object that lists all of the supported XML namespaces.
    *
-   * Each property is the namespace prefix.
+   * Each property name is the namespace prefix.
    * Each property value is the namespace URI.
    *
    * @returns {object} An object listing supported namespaces.
@@ -30,6 +30,7 @@ export class StyleRuleFactory {
 
   /**
    * Get a new XPath processor object.
+   * [xpath package]{@link https://www.npmjs.com/package/xpath} documentation.
    *
    * @returns {xpath} A newly instantiates xpath object.
    * @since 1.0.0

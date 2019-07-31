@@ -3,7 +3,8 @@ import * as path from "path";
 import * as fs from "fs";
 
 /**
- * Class to make it easier to get UiPath project information.
+ * Represents the information contained in the UiPath project.json file.
+ * [UiPath documentation]{@link https://studio.uipath.com/docs/about-the-projectjson-file} on this file.
  */
 export class UiPathProject {
 
@@ -25,7 +26,7 @@ export class UiPathProject {
   }
 
     /**
-     * Return the name property of the UiPath project object.
+     * Return the name of the UiPath project.
      *
      * @returns {string} The Name of the UiPath project or an empty string if it is not found.
      * @since 1.0.0
@@ -39,7 +40,7 @@ export class UiPathProject {
     }
 
   /**
-   * Return the description property of the UiPath project object.
+   * Return the description of the UiPath project.
    *
    * @returns {string} The description of the UiPath project or an empty string if it is not found.
    * @since 1.0.0
@@ -53,7 +54,7 @@ export class UiPathProject {
   }
 
   /**
-   * Return the project version property of the UiPath project object.
+   * Return the project version of the UiPath project.
    *
    * @returns {string} The project version of the UiPath project or an empty string if it is not found.
    * @since 1.0.0

@@ -1,13 +1,16 @@
 import { BaseStyleRule } from "./BaseStyleRule.js";
 
 /**
- * Class to implement the rule that requires all public workflows to have annotations.
+ * Implement the rule that public workflows must have an annotation.
  *
+ * This is important as the annotation forms the basis for the tooltip displayed in UiPath studio.
+ *
+ * Extends [BaseStyleRule]{@link BaseStyleRule}.
  */
 export class PublicWorkflowsMustHaveAnnotations extends BaseStyleRule {
 
   /**
-   * Construct a new VariablesMustHaveAnnotations object.
+   * Construct a new PublicWorkflowsMustHaveAnnotations object.
    *
    * @param {Function} xpath An XPath object with the required namespaces defined.
    * @since 1.0.0

@@ -1,7 +1,14 @@
 import * as util from "util";
 
 /**
- * A class that provides mock sync-request functionality for the MyGet NuGet API.
+ * The rpa-lint app uses the [sync-request](https://www.npmjs.com/package/sync-request) package to retrieve NuGet package
+ * information form the official package feed. This is not desirable when running unit tests for three main reasons.
+ *
+ * 1. The synchronous API requests have a negative impact on the speed of the unit tests.
+ * 2. The tests are no longer deterministic as the package information changes.
+ * 3. It's not fair to repeatedly call a public API just for testing purposes.
+ *
+ * This class is used in the unit tests to dynamically replace the real sync-request functionality with a mock object.
  */
 export class MyGetApiMock {
 

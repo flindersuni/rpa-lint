@@ -3,11 +3,10 @@ import { DOMParser as dom } from "xmldom";
 /**
  * Base class for all style rules.
  */
-
  export class BaseStyleRule {
 
   /**
-   * Construct a new BaseStyleRule object.
+   * Construct a new object.
    *
    * @param {Function} xpath An XPath object with the required namespaces defined.
    * @since 1.0.0

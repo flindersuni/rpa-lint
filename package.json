@@ -1,7 +1,24 @@
 {
   "name": "rpa-lint",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A CLI app to lint UiPath projects against rules developed by the Flinders RPA team",
+  "homepage": "https://github.com/flindersuni/rpa-lint/#readme",
+  "bugs": {
+    "url": "https://github.com/flindersuni/rpa-lint/issues",
+    "email": "corey.wallis@flinders.edu.au"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flindersuni/rpa-lint.git"
+  },
+  "private": true,
+  "keywords": [
+    "rpa",
+    "robotic-process-automation",
+    "uipath",
+    "university",
+    "academic"
+  ],
   "scripts": {
     "test": "mocha",
     "lint": "eslint .",

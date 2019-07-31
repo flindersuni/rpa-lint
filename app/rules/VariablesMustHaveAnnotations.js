@@ -2,8 +2,12 @@ import { BaseStyleRule } from "./BaseStyleRule.js";
 import * as util from "util";
 
 /**
- * Class to implement the rule that requires all variables to have annotations.
+ * Implement the rule that all variables must have annotations.
  *
+ * This is important as it makes it easier for others to tell what a variable is used for.
+ * Without needing to take a deep dive into the code.
+ *
+ * Extends [BaseStyleRule]{@link BaseStyleRule}.
  */
 export class VariablesMustHaveAnnotations extends BaseStyleRule {
 

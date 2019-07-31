@@ -5,8 +5,9 @@ import request from "sync-request";
 import * as util from "util";
 
 /**
- * Class to implement the rule that there are to be no outdated UiPath project dependencies.
+ * Implement the rule that a UiPath project must not have any outdated dependencies.
  *
+ * Extends [BaseProjectRule]{@link BaseProjectRule}.
  */
 export class NoOutdatedProjectDependencies extends BaseProjectRule {
 
