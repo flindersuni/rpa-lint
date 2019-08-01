@@ -3,7 +3,7 @@ import { UiPathProject } from "../app/UiPathProject.js";
 import * as assert from "assert";
 
 /**
- * Test the class that makes it easier to get information about a UiPath project.
+ * Test the UiPathProject object.
  */
 describe( "UiPathProject", function() {
 

@@ -9,7 +9,9 @@ import * as fs from "fs";
 export class UiPathProject {
 
   /**
-   * Parse the project.json file that contains information about the UiPath project.
+   * Construct a new object.
+   *
+   * Parse the project.json file that contains information about the UiPath project. To be exposed by the methods of this class.
    *
    * @param {string} projectPath Path to the root directory of the UiPath project.
    * @throws {TypeError} Parameter projectPath is required and must be a string.

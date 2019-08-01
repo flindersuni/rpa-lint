@@ -13,7 +13,7 @@ import * as util from "util";
 export class MyGetApiMock {
 
   /**
-   * Construct a new MyGetApiMock object.
+   * Construct a new object.
    *
    * @param {string} verb The HTTP verb used when calling the API endpoint.
    * @param {string} apiUrl The URL to the MyGet API endpoint.

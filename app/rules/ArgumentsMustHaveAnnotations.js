@@ -12,7 +12,7 @@ import * as util from "util";
 export class ArgumentsMustHaveAnnotations extends BaseStyleRule {
 
   /**
-   * Construct a new ArgumentsMustHaveAnnotations object.
+   * Construct a new object.
    *
    * @param {Function} xpath An XPath object with the required namespaces defined.
    * @since 1.0.0

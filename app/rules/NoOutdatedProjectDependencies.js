@@ -12,7 +12,7 @@ import * as util from "util";
 export class NoOutdatedProjectDependencies extends BaseProjectRule {
 
  /**
-  * Construct a new NoOutdatedProjectDependencies object.
+  * Construct a new object.
   *
   * @param {object} project An instantiated UiPathProject object.
   * @since 1.0.0

@@ -12,7 +12,7 @@ import * as util from "util";
 export class VariablesMustHaveAnnotations extends BaseStyleRule {
 
   /**
-   * Construct a new VariablesMustHaveAnnotations object.
+   * Construct a new object.
    *
    * @param {Function} xpath An XPath object with the required namespaces defined.
    * @since 1.0.0

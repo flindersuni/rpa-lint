@@ -10,7 +10,7 @@ import { BaseStyleRule } from "./BaseStyleRule.js";
 export class PublicWorkflowsMustHaveAnnotations extends BaseStyleRule {
 
   /**
-   * Construct a new PublicWorkflowsMustHaveAnnotations object.
+   * Construct a new object.
    *
    * @param {Function} xpath An XPath object with the required namespaces defined.
    * @since 1.0.0

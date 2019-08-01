@@ -5,7 +5,7 @@ import * as assert from "assert";
 import * as fs from "fs";
 
 /**
- * Test the base style rule class that all other style rules extend.
+ * Test the BaseStyleRule object.
  */
 describe( "BaseStyleRule", function() {
 

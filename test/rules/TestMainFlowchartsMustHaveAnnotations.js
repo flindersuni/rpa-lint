@@ -6,7 +6,7 @@ import * as assert from "assert";
 import * as fs from "fs";
 
 /**
- * Test the class that checks the style rule requiring all main flow charts to have annotations.
+ * Test the MainFlowchartsHaveAnnotations object.
  */
 describe( "MainFlowchartsHaveAnnotations", function() {
 

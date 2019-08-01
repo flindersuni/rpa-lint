@@ -6,7 +6,7 @@ import * as assert from "assert";
 import * as fs from "fs";
 
 /**
- * Test the class that checks the style rule requiring all variables to start with a lower case letter.
+ * Test the VariablesMustStartLowerCase object.
  */
 describe( "VariablesMustStartLowerCase", function() {
 

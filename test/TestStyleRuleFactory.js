@@ -6,7 +6,7 @@ import * as assert from "assert";
 const expectedNamespaceCount = 4;
 
 /**
- * Test the static functions of the StyleRuleFactory class.
+ * Test the StyleRuleFactory object.
  */
 describe( "StyleRuleFactory", function() {
 

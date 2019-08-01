@@ -7,7 +7,7 @@ import sinon from "sinon";
 import * as request from "sync-request";
 
 /**
- * Test the base project rule class that all other project based style rules extend.
+ * Test the NoOutdatedProjectDependencies object.
  */
 describe( "NoOutdatedProjectDependencies", function() {
 
@@ -74,8 +74,7 @@ describe( "NoOutdatedProjectDependencies", function() {
       it( "should complete with no errors", function() {
         let projectInfo = new UiPathProject( "./test/artefacts" );
 
-        // Replace the real sync-request with a mock function.
-        // NOTE: This does not work when generating test coverage using nyc.
+        // Replace the real sync-request with a mock object.
         sinon.stub( request, "default" ).callsFake( function( verb, url ) {
           return new MyGetApiMock( verb, url );
         } );
@@ -86,7 +85,7 @@ describe( "NoOutdatedProjectDependencies", function() {
           styleCheck.checkStyleRule();
         }, Error );
 
-        // Restore the proper sync-request.
+        // Restore the proper sync-request object.
         request.default.restore();
 
       } );
@@ -117,8 +116,7 @@ describe( "NoOutdatedProjectDependencies", function() {
 
         let styleCheck = new NoOutdatedProjectDependencies( projectInfo );
 
-        // Replace the real sync-request with a mock function.
-        // NOTE: This does not work when generating test coverage using nyc.
+        // Replace the real sync-request with a mock object.
         sinon.stub( request, "default" ).callsFake( function( verb, url ) {
           return new MyGetApiMock( verb, url );
         } );
@@ -129,7 +127,7 @@ describe( "NoOutdatedProjectDependencies", function() {
         assert.ok( Array.isArray( errors ) );
         assert.strictEqual( errors.length, 3 );
 
-        // Restore the proper sync-request.
+        // Restore the proper sync-request object.
         request.default.restore();
       } );
     } );

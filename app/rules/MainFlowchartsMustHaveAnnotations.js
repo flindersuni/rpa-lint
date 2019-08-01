@@ -10,7 +10,7 @@ import { BaseStyleRule } from "./BaseStyleRule.js";
 export class MainFlowchartsHaveAnnotations extends BaseStyleRule {
 
   /**
-   * Construct a new MainFlowchartsHaveAnnotations object.
+   * Construct a new object.
    *
    * @param {Function} xpath An XPath object with the required namespaces defined.
    * @since 1.0.0

@@ -4,7 +4,7 @@ import { UiPathProject } from "../../app/UiPathProject.js";
 import * as assert from "assert";
 
 /**
- * Test the base project rule class that all other project based style rules extend.
+ * Test the BaseProjectRule object.
  */
 describe( "BaseProjectRule", function() {
 

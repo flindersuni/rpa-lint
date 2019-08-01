@@ -6,7 +6,7 @@ import * as assert from "assert";
 import * as fs from "fs";
 
 /**
- * Test the class that checks the style rule warning of code based activities.
+ * Test the WorkflowsShouldNotContainCodeActivities object.
  */
 describe( "WorkflowsShouldNotContainCodeActivities", function() {
 

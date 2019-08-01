@@ -6,7 +6,7 @@ import * as assert from "assert";
 import * as fs from "fs";
 
 /**
- * Test the class that checks the style rule requiring all main sequences to have annotations.
+ * Test the MainSequencesMustHaveAnnotations object.
  */
 describe( "MainSequencesMustHaveAnnotations", function() {
 

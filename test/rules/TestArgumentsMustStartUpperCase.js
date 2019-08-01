@@ -6,7 +6,7 @@ import * as assert from "assert";
 import * as fs from "fs";
 
 /**
- * Test the class that checks the style rule requiring all arguments to start with an upper case letter.
+ * Test the ArgumentsMustStartUpperCase object.
  */
 describe( "ArgumentsMustStartUpperCase", function() {
 

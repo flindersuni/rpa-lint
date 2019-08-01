@@ -3,7 +3,7 @@ import { MyGetApiMock } from "../../app/mocks/MyGetApiMock.js";
 import * as assert from "assert";
 
 /**
- * Test the MyGet Api mock object.
+ * Test the MyGetApiMock object.
  */
 describe( "MyGetApiMock", function() {
 

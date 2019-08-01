@@ -6,7 +6,7 @@ import * as assert from "assert";
 import * as fs from "fs";
 
 /**
- * Test the class that requires public workflows to have annotations.
+ * Test the PublicWorkflowsMustHaveAnnotations object.
  */
 describe( "PublicWorkflowsMustHaveAnnotations", function() {
 

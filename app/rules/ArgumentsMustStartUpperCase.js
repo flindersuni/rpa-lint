@@ -12,7 +12,7 @@ import * as util from "util";
 export class ArgumentsMustStartUpperCase extends BaseStyleRule {
 
   /**
-   * Construct a new ArgumentsMustStartUpper object.
+   * Construct a new object.
    *
    * @param {Function} xpath An XPath object with the required namespaces defined.
    * @since 1.0.0

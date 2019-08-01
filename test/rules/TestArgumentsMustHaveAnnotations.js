@@ -6,7 +6,7 @@ import * as assert from "assert";
 import * as fs from "fs";
 
 /**
- * Test the class that checks the style rule requiring all arguments to have annotations.
+ * Test the ArgumentsMustHaveAnnotations object.
  */
 describe( "ArgumentsMustHaveAnnotations", function() {
 
