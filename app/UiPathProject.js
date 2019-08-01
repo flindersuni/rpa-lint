@@ -1,4 +1,3 @@
-// Required modules.
 import * as path from "path";
 import * as fs from "fs";
 
@@ -27,19 +26,19 @@ export class UiPathProject {
     this.fileContents = JSON.parse( fs.readFileSync( path.join( projectPath, "project.json" ) ) );
   }
 
-    /**
-     * Return the name of the UiPath project.
-     *
-     * @returns {string} The Name of the UiPath project or an empty string if it is not found.
-     * @since 1.0.0
-     */
-    getName() {
-      if ( typeof( this.fileContents.name ) === "undefined" ) {
-        return "";
-      } else {
-        return this.fileContents.name.toString();
-      }
+  /**
+   * Return the name of the UiPath project.
+   *
+   * @returns {string} The Name of the UiPath project or an empty string if it is not found.
+   * @since 1.0.0
+   */
+  getName() {
+    if ( typeof( this.fileContents.name ) === "undefined" ) {
+      return "";
+    } else {
+      return this.fileContents.name.toString();
     }
+  }
 
   /**
    * Return the description of the UiPath project.

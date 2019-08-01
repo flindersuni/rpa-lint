@@ -1,20 +1,23 @@
 import { BaseStyleRule } from "./BaseStyleRule.js";
-import * as util from "util";
 
-/**
- * Implement the rule that all variable names must start with a lower case letter.
- *
- * This is important as it makes it easier for others to differentiate between arguments and variables.
- * Especially when used in complex expressions.
- *
- * Extends [BaseStyleRule]{@link BaseStyleRule}.
- */
+import * as util from "util";
+import * as xpath from "xpath";
+
 export class VariablesMustStartLowerCase extends BaseStyleRule {
 
   /**
    * Construct a new object.
    *
-   * @param {Function} xpath An XPath object with the required namespaces defined.
+   * @classdesc Implement the rule that all variable names must start with a lower case letter.
+   *
+   * This is important as it makes it easier for others to differentiate between arguments and variables.
+   * Especially when used in complex expressions.
+   *
+   * @augments BaseStyleRule
+   *
+   * @constructs
+   *
+   * @param {xpath} xpath An XPath object with the required namespaces defined.
    * @since 1.0.0
    */
   constructor( xpath ) {

@@ -1,3 +1,4 @@
+import { UiPathProject } from "./UiPathProject.js";
 
 import * as xpath from "xpath";
 import * as path from "path";
@@ -70,7 +71,7 @@ export class StyleRuleFactory {
    * Filter the list of XAML files and only return those that are public.
    *
    * @param {Array} xamlFiles An array of XAML files.
-   * @param {object} projectInfo An instance of the UiPathProject object.
+   * @param {UiPathProject} projectInfo An instance of the UiPathProject object.
    * @returns {Array} An array of XAML files which are public.
    * @throws {TypeError} Parameter targetPath is required and must be a string.
    * @since 1.0.0

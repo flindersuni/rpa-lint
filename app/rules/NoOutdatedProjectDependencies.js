@@ -1,20 +1,22 @@
+import { UiPathProject } from "../UiPathProject.js";
 import { BaseProjectRule } from "./BaseProjectRule.js";
 
 import compareVersions from "compare-versions";
 import request from "sync-request";
 import * as util from "util";
 
-/**
- * Implement the rule that a UiPath project must not have any outdated dependencies.
- *
- * Extends [BaseProjectRule]{@link BaseProjectRule}.
- */
 export class NoOutdatedProjectDependencies extends BaseProjectRule {
 
  /**
   * Construct a new object.
   *
-  * @param {object} project An instantiated UiPathProject object.
+  * @classdesc Implement the rule that a UiPath project must not have any outdated dependencies.
+  *
+  * @augments BaseProjectRule
+  *
+  * @constructs
+  *
+  * @param {UiPathProject} project An instantiated UiPathProject object.
   * @since 1.0.0
   */
   constructor( project ) {

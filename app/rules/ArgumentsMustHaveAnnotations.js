@@ -1,20 +1,22 @@
 import { BaseStyleRule } from "./BaseStyleRule.js";
-import * as util from "util";
 
-/**
- * Implement the rule that all arguments must have annotations.
- *
- * This is important as it makes it easier for others to tell what an argument is used for.
- * Without needing to take a deep dive into the code.
- *
- * Extends [BaseStyleRule]{@link BaseStyleRule}.
- */
+import * as util from "util";
+import * as xpath from "xpath";
+
 export class ArgumentsMustHaveAnnotations extends BaseStyleRule {
 
   /**
    * Construct a new object.
    *
-   * @param {Function} xpath An XPath object with the required namespaces defined.
+   * @classdesc Implement the rule that all arguments must have annotations.
+   *
+   * This is important as it makes it easier for others to tell what an argument is used for.
+   * Without needing to take a deep dive into the code.
+   *
+   * @augments BaseStyleRule
+   *
+   * @constructs
+   * @param {xpath} xpath An XPath object with the required namespaces defined.
    * @since 1.0.0
    */
   constructor( xpath ) {

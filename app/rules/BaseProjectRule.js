@@ -1,16 +1,15 @@
 import { UiPathProject } from "../UiPathProject.js";
 
-/**
- * Base class for all UiPath project related rules.
- *
- * Retrieves project information from a [UiPathProject]{@link UiPathProject} object.
- */
  export class BaseProjectRule {
 
   /**
    * Construct a new object.
    *
-   * @param {object} project An instantiated UiPathProject object.
+   * @classdesc Base class for all UiPath project related rules.
+   *
+   * @constructs
+   *
+   * @param {UiPathProject} project An instantiated UiPathProject object.
    * @throws {TypeError} When the project parameter is missing or the incorrect type.
    * @since 1.0.0
    */

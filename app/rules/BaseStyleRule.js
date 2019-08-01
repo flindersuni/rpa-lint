@@ -1,4 +1,5 @@
 import { DOMParser as dom } from "xmldom";
+import * as xpath from "xpath";
 
 /**
  * Base class for all style rules.
@@ -8,7 +9,11 @@ import { DOMParser as dom } from "xmldom";
   /**
    * Construct a new object.
    *
-   * @param {Function} xpath An XPath object with the required namespaces defined.
+   * @classdesc Base class for all style rules.
+   *
+   * @constructs
+   *
+   * @param {xpath} xpath An XPath object with the required namespaces defined.
    * @since 1.0.0
    */
   constructor( xpath ) {
