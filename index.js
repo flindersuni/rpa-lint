@@ -1,12 +1,13 @@
 const startTime = process.hrtime.bigint();
 
-import commander from "commander";
-import chalk from "chalk";
-import path from "path";
-import fs from "fs";
-
 import { StyleRuleFactory } from "./app/StyleRuleFactory.js";
 import { UiPathProject } from "./app/UiPathProject.js";
+
+import commander from "commander";
+import chalk from "chalk";
+import fs from "fs";
+import path from "path";
+import prettyMS from "pretty-ms";
 
 const appPackage = require( "./package.json" );
 
@@ -213,7 +214,7 @@ if ( program.depCheck ) {
 const endTime = process.hrtime.bigint();
 const totalTime = Number( endTime - startTime ) * 1e-6;
 
-log( "INFO: Process took: %sms.", totalTime.toFixed( 2 ) );
+log( "INFO: Elapsed time:", prettyMS( totalTime ) );
 
 // Exit with an error status code for errors only, not warnings.
 if ( haveErrors ) {
