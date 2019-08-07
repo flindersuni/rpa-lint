@@ -20,10 +20,10 @@
     "academic"
   ],
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --require esm",
     "lint": "eslint .",
     "docs": "jsdoc -c .jsdocrc.json",
-    "coverage": "c8 mocha"
+    "coverage": "c8 mocha --require esm"
   },
   "bin": {
     "rpa-lint": "bin/rpa-lint"
