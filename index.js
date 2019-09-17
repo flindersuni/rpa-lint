@@ -80,6 +80,7 @@ const MainSequencesMustHaveAnnotations = require( "./app/rules/MainSequencesMust
 const MainFlowchartsHaveAnnotations = require( "./app/rules/MainFlowchartsMustHaveAnnotations.js" ).MainFlowchartsHaveAnnotations;
 const VariablesMustHaveAnnotations = require( "./app/rules/VariablesMustHaveAnnotations.js" ).VariablesMustHaveAnnotations;
 const VariablesMustStartLowerCase = require( "./app/rules/VariablesMustStartLowerCase.js" ).VariablesMustStartLowerCase;
+const WarnArgumentsWithDefaultValues = require( "./app/rules/WarnArgumentsWithDefaultValues.js" ).WarnArgumentsWithDefaultValues;
 const WarnVariablesWithDefaultValues = require( "./app/rules/WarnVariablesWithDefaultValues.js" ).WarnVariablesWithDefaultValues;
 const WorkflowsShouldNotContainCodeActivities = require( "./app/rules/WorkflowsShouldNotContainCodeActivities.js" ).WorkflowsShouldNotContainCodeActivities;
 
@@ -91,6 +92,7 @@ let styleRules = [
   new MainFlowchartsHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
   new VariablesMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
   new VariablesMustStartLowerCase(  StyleRuleFactory.getXpathProcessor() ),
+  new WarnArgumentsWithDefaultValues( StyleRuleFactory.getXpathProcessor() ),
   new WarnVariablesWithDefaultValues( StyleRuleFactory.getXpathProcessor() ),
   new WorkflowsShouldNotContainCodeActivities(  StyleRuleFactory.getXpathProcessor() )
 ];
