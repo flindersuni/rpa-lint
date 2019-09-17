@@ -10,9 +10,6 @@ export class WarnVariablesWithDefaultValues extends BaseStyleRule {
    *
    * @classdesc Implement the rule that warns when variables contain default values.
    *
-   * This is important as it makes it easier for others to differentiate between arguments and variables.
-   * Especially when used in complex expressions.
-   *
    * @augments BaseStyleRule
    *
    * @constructs

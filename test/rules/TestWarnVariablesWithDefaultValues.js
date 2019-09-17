@@ -248,9 +248,6 @@ describe( "WarnVariablesWithDefaultValues", function() {
           warnings[ 1 ],
           "The variable with name 'zwei' has a default value. Check to ensure the value is appropriate."
         );
-
-        console.log( warnings );
-
       } );
     } );
 
