@@ -80,6 +80,7 @@ const MainSequencesMustHaveAnnotations = require( "./app/rules/MainSequencesMust
 const MainFlowchartsHaveAnnotations = require( "./app/rules/MainFlowchartsMustHaveAnnotations.js" ).MainFlowchartsHaveAnnotations;
 const VariablesMustHaveAnnotations = require( "./app/rules/VariablesMustHaveAnnotations.js" ).VariablesMustHaveAnnotations;
 const VariablesMustStartLowerCase = require( "./app/rules/VariablesMustStartLowerCase.js" ).VariablesMustStartLowerCase;
+const WarnVariablesWithDefaultValues = require( "./app/rules/WarnVariablesWithDefaultValues.js" ).WarnVariablesWithDefaultValues;
 const WorkflowsShouldNotContainCodeActivities = require( "./app/rules/WorkflowsShouldNotContainCodeActivities.js" ).WorkflowsShouldNotContainCodeActivities;
 
 // Build a list of style rules.
@@ -90,6 +91,7 @@ let styleRules = [
   new MainFlowchartsHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
   new VariablesMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
   new VariablesMustStartLowerCase(  StyleRuleFactory.getXpathProcessor() ),
+  new WarnVariablesWithDefaultValues( StyleRuleFactory.getXpathProcessor() ),
   new WorkflowsShouldNotContainCodeActivities(  StyleRuleFactory.getXpathProcessor() )
 ];
 
@@ -163,7 +165,6 @@ if ( program.quiet === true ) {
     haveIssues = false;
   }
 }
-
 
 // Were any issues found?
 if ( haveIssues ) {

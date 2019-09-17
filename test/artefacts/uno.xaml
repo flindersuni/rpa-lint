@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="uno" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="uno" this:uno.Ichi="A default string value" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="First argument using Japanese numbers." Name="Ichi" Type="InArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Second argument using Japanese numbers." Name="Ni" Type="InArgument(x:String)" />
@@ -58,8 +58,8 @@
   </TextExpression.ReferencesForImplementation>
   <Sequence sap2010:Annotation.AnnotationText="This test XAML file is used as an artefact for the majority of unit tests" DisplayName="uno" sap:VirtualizedContainerService.HintSize="222,371" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="This is the first variable" Name="eins" />
-      <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="This is the second variable" Name="zwei" />
+      <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="This is the first variable" Default="Default value" Name="eins" />
+      <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="This is the second variable" Default="[0]" Name="zwei" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
