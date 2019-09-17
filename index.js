@@ -25,6 +25,16 @@ program.version( appPackage.version, "-v, --version" )
   .option( "--dep-check", "Check for outdated project dependencies" )
   .option( "-q, --quiet", "Suppress warnings" );
 
+// Extend help with custom message.
+program.on( "--help", function() {
+  log( "" );
+  log( "Ignored files:" );
+
+  UiPathProject.getIgnoreFiles().forEach( function( name ) {
+    log( "  - " + name );
+  } );
+} );
+
 // Parse the command line parameters.
 program.parse( process.argv );
 

@@ -112,4 +112,16 @@ export class UiPathProject {
   getDependencies() {
     return new Map( Object.entries( this.fileContents.dependencies ) );
   }
+
+  /**
+   * Return an array of workflows that should be ignored.
+   *
+   * @returns {Array} An array of workflow file names.
+   * @since 1.1.0
+   */
+  static getIgnoreFiles() {
+    return [
+      "ConstantValues.xaml"
+    ];
+  }
 }

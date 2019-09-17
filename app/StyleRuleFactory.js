@@ -65,6 +65,13 @@ export class StyleRuleFactory {
       return path.extname( element ) === ".xaml" && path.basename( element ).startsWith( "~" ) === false;
     } );
 
+    // Filter out any ignored files.
+    let ignoreFiles = UiPathProject.getIgnoreFiles();
+
+    xamlFiles = xamlFiles.filter( function( element ) {
+      return ignoreFiles.indexOf( element ) === -1;
+    } );
+
     return xamlFiles;
   }
 
