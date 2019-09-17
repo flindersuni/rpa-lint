@@ -30,6 +30,8 @@ import * as xpath from "xpath";
 
     this.warnings = [];
     this.errors = [];
+
+    this.xamlDoc = null;
   }
 
   /**
@@ -55,6 +57,8 @@ import * as xpath from "xpath";
     if ( this.xpathMatchSpecific !== null ) {
       this.strictMatches = this.xpath( this.xpathMatchSpecific, doc );
     }
+
+    this.xamlDoc = doc;
   }
 
   /**

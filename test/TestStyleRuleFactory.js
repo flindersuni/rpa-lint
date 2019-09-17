@@ -3,7 +3,7 @@ import { UiPathProject } from "../app/UiPathProject.js";
 import * as assert from "assert";
 
 // Use a constant to make updating this value during development / test cycles easier.
-const expectedNamespaceCount = 4;
+const expectedNamespaceCount = 5;
 
 /**
  * Test the StyleRuleFactory object.
