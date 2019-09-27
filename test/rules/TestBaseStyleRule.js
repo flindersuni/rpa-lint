@@ -291,4 +291,90 @@ describe( "BaseStyleRule", function() {
       } );
     } );
   } );
+
+  /**
+   * Test parsing a complex annotation.
+   */
+  describe( "#parseComplexAnnotation", function() {
+
+    let complexAnnotation = "UPTF000001E0eyI8SGVscExpbms+a19fQmFja2luZ0ZpZWxkIjoiaHR0cHM6XC9cL2dpdGh1Yi5jb21cL2ZsaW5kZXJzdW5pXC9ycGEtRmxpbmRlcnMuRm91bmRhdGlvblwvd2lraVwvTG9naW5Ub09rdGFEYXNoYm9hcmQiLCI8SW5pdGlhbFRvb2x0aXA+a19fQmFja2luZ0ZpZWxkIjoiTG9naW4gdG8gRmxpbmRlcnMgRGFzaGJvYXJkIChPa3RhKVx1MDAwYVx1MDAwYVRoaXMgYWN0aXZpdHkgd2lsbCBsb2dpbiB0byB0aGUgRmxpbmRlcnMgRGFzaGJvYXJkIChPa3RhKSB1c2luZyB0aGUgdXNlcm5hbWUgYW5kIHBhc3N3b3JkIHRoYXQgaXMgc3RvcmVkIGluIHRoZSBmb3VuZCBjcmVkZW50aWFsLiIsIjxWZXJzaW9uPmtfX0JhY2tpbmdGaWVsZCI6MX0=";
+
+    context( "With invalid parameters", function() {
+      it( "should throw a TypeError", function() {
+        let styleCheck = new BaseStyleRule(
+          StyleRuleFactory.getXpathProcessor()
+        );
+
+        assert.throws( function() {
+          styleCheck.parseComplexAnnotation();
+        },  TypeError );
+
+        assert.throws( function() {
+          styleCheck.parseComplexAnnotation( [] );
+        },  TypeError );
+
+        assert.throws( function() {
+          styleCheck.parseComplexAnnotation( "encdata" );
+        }, {
+          name: /^TypeError$/,
+          message: /must start with 'UPTF000001E0'$/
+        } );
+
+        assert.doesNotThrow( function() {
+          styleCheck.parseComplexAnnotation( complexAnnotation );
+        }, /must start with 'UPTF000001E0'$/ );
+      } );
+    } );
+
+    context( "Wth valid parameters", function() {
+      it( "should return a JSON object ", function() {
+
+        let styleCheck = new BaseStyleRule(
+          StyleRuleFactory.getXpathProcessor()
+        );
+
+        assert.doesNotThrow( function() {
+          styleCheck.parseComplexAnnotation( complexAnnotation );
+        }, TypeError );
+
+        assert.doesNotThrow( function() {
+          styleCheck.parseComplexAnnotation( complexAnnotation );
+        }, SyntaxError );
+
+        let decodedObj = styleCheck.parseComplexAnnotation( complexAnnotation );
+        assert.strictEqual( typeof decodedObj, "object" );
+      } );
+
+      it( "should return a JSON object with three properties", function() {
+        let styleCheck = new BaseStyleRule(
+          StyleRuleFactory.getXpathProcessor()
+        );
+
+        let decodedObj = styleCheck.parseComplexAnnotation( complexAnnotation );
+
+        assert.ok(
+          Object.prototype.hasOwnProperty.call( decodedObj, "HelpLink" )
+        );
+
+        assert.ok(
+          Object.prototype.hasOwnProperty.call( decodedObj, "InitialTooltip" )
+        );
+
+        assert.ok(
+          Object.prototype.hasOwnProperty.call( decodedObj, "Version" )
+        );
+
+        assert.ok( decodedObj.HelpLink.includes(
+          "github.com/flindersuni/rpa-Flinders.Foundation/wiki"
+        ) );
+
+        assert.ok( decodedObj.InitialTooltip.includes(
+          "Login to Flinders Dashboard (Okta)"
+        ) );
+
+        assert.strictEqual( decodedObj.Version, 1 );
+
+      } );
+    } );
+  } );
 } );

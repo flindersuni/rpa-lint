@@ -162,4 +162,41 @@ import * as xpath from "xpath";
     } );
   }
 
+  /**
+   * Parse the encoded value for a complex activity annotation.
+   *
+   * @param {string} encodedData An encoded string for a complex activity annotation.
+   *
+   * @returns {object} An object decoded from the supplied complex activity annotation.
+   *
+   * @throws {TypeError} Parameter source is required and must be a string.
+   * @throws {SyntaxError} The encoded data must be able to be decoded from JSON into an object.
+   * @since 1.1.0
+   */
+  parseComplexAnnotation( encodedData ) {
+
+    if ( !encodedData || typeof( encodedData ) !== "string" ) {
+      throw new TypeError( "encodedData parameter is required and must be a string" );
+    }
+
+    // Check to make sure it starts with the right prefix.
+    if ( encodedData.startsWith( "UPTF000001E0" ) === false ) {
+      throw new TypeError( "encodedData parameter must start with 'UPTF000001E0'" );
+    }
+
+    // Trim the prefix from the encoded data.
+    encodedData = encodedData.substring( 12 );
+
+    // Decode the remaining data from Base64 Encoding to a string.
+    let stringData = Buffer.from( encodedData, "base64" ).toString( "utf8" );
+
+    // Replace the odd .Net serialisation hangover.
+    stringData = stringData.replace( /(>k__BackingField")|("<)/gi, "\"" );
+
+    // Decode the string as a JSON object.
+    let jsonObj = JSON.parse( stringData );
+
+    return jsonObj;
+  }
+
  }
