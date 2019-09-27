@@ -84,15 +84,19 @@ let haveIssues = false;
 let haveErrors = false;
 
 // Load classes that have implemented the style rules.
-const ArgumentsMustHaveAnnotations = require( "./app/rules/ArgumentsMustHaveAnnotations.js" ).ArgumentsMustHaveAnnotations;
-const ArgumentsMustStartUpperCase = require( "./app/rules/ArgumentsMustStartUpperCase.js" ).ArgumentsMustStartUpperCase;
-const MainSequencesMustHaveAnnotations = require( "./app/rules/MainSequencesMustHaveAnnotations.js" ).MainSequencesMustHaveAnnotations;
-const MainFlowchartsHaveAnnotations = require( "./app/rules/MainFlowchartsMustHaveAnnotations.js" ).MainFlowchartsHaveAnnotations;
-const VariablesMustHaveAnnotations = require( "./app/rules/VariablesMustHaveAnnotations.js" ).VariablesMustHaveAnnotations;
-const VariablesMustStartLowerCase = require( "./app/rules/VariablesMustStartLowerCase.js" ).VariablesMustStartLowerCase;
-const WarnArgumentsWithDefaultValues = require( "./app/rules/WarnArgumentsWithDefaultValues.js" ).WarnArgumentsWithDefaultValues;
-const WarnVariablesWithDefaultValues = require( "./app/rules/WarnVariablesWithDefaultValues.js" ).WarnVariablesWithDefaultValues;
-const WorkflowsShouldNotContainCodeActivities = require( "./app/rules/WorkflowsShouldNotContainCodeActivities.js" ).WorkflowsShouldNotContainCodeActivities;
+import { ArgumentsMustHaveAnnotations } from "./app/rules/ArgumentsMustHaveAnnotations.js";
+import { ArgumentsMustStartUpperCase  } from "./app/rules/ArgumentsMustStartUpperCase.js";
+import { MainSequencesMustHaveAnnotations } from "./app/rules/MainSequencesMustHaveAnnotations.js";
+import { MainFlowchartsHaveAnnotations } from "./app/rules/MainFlowchartsMustHaveAnnotations.js";
+import { VariablesMustHaveAnnotations } from "./app/rules/VariablesMustHaveAnnotations.js";
+import { VariablesMustStartLowerCase } from "./app/rules/VariablesMustStartLowerCase.js";
+import { WarnArgumentsWithDefaultValues } from "./app/rules/WarnArgumentsWithDefaultValues.js";
+import { WarnVariablesWithDefaultValues } from "./app/rules/WarnVariablesWithDefaultValues.js";
+import { WorkflowsShouldNotContainCodeActivities } from "./app/rules/WorkflowsShouldNotContainCodeActivities.js";
+import { PublicWorkflowsMustHaveAnnotations } from "./app/rules/PublicWorkflowsMustHaveAnnotations.js";
+
+// Load other classes that assess the project.
+import { NoOutdatedProjectDependencies } from "./app/rules/NoOutdatedProjectDependencies.js";
 
 // Build a list of style rules.
 let styleRules = [
@@ -112,7 +116,6 @@ let libraryPublicWorkflows = [];
 
 // Build a list of library specific style rules if required.
 if ( projectInfo.isLibrary() ) {
-  const PublicWorkflowsMustHaveAnnotations = require( "./app/rules/PublicWorkflowsMustHaveAnnotations.js" ).PublicWorkflowsMustHaveAnnotations;
 
   libraryStyleRules = [
     new PublicWorkflowsMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() )
@@ -207,8 +210,6 @@ if ( haveIssues ) {
 // Check the UiPath project dependencies if required.
 if ( program.depCheck ) {
   console.log( "INFO: Checking UiPath project dependencies. This will take some time..." );
-
-  const NoOutdatedProjectDependencies = require( "./app/rules/NoOutdatedProjectDependencies.js" ).NoOutdatedProjectDependencies;
 
   let depCheck = new NoOutdatedProjectDependencies( projectInfo );
   depCheck.checkStyleRule();
