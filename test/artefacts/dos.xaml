@@ -59,6 +59,7 @@
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="Eins" />
       <Variable x:TypeArguments="x:String" Name="Zwei" />
+      <Variable x:TypeArguments="x:String" Name="Ichi" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">

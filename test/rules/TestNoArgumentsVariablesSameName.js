@@ -1,14 +1,14 @@
 import { StyleRuleFactory } from "../../app/StyleRuleFactory.js";
 
-import { VariablesMustStartLowerCase } from "../../app/rules/VariablesMustStartLowerCase.js";
+import { NoArgumentsVariablesSameName } from "../../app/rules/NoArgumentsVariablesSameName.js";
 
 import * as assert from "assert";
 import * as fs from "fs";
 
 /**
- * Test the VariablesMustStartLowerCase object.
+ * Test the NoArgumentsVariablesSameName object.
  */
-describe( "VariablesMustStartLowerCase", function() {
+describe( "NoArgumentsVariablesSameName", function() {
 
   /**
    * Test the constructor.
@@ -16,13 +16,13 @@ describe( "VariablesMustStartLowerCase", function() {
   describe( "#constructor", function() {
     it( "should throw an error if the parameter is not supplied", function() {
       assert.throws( function() {
-        new VariablesMustStartLowerCase();
+        new NoArgumentsVariablesSameName();
       }, TypeError );
     } );
 
     it( "should throw an error if the parameter is not a function", function() {
       assert.throws( function() {
-        new VariablesMustStartLowerCase( new Object() );
+        new NoArgumentsVariablesSameName( new Object() );
       }, TypeError );
     } );
   } );
@@ -33,7 +33,7 @@ describe( "VariablesMustStartLowerCase", function() {
   describe( "#checkStyleRule", function() {
     it( "should throw an error if the parameter is not supplied", function() {
       assert.throws( function() {
-        let styleCheck = new VariablesMustStartLowerCase(
+        let styleCheck = new NoArgumentsVariablesSameName(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -44,7 +44,7 @@ describe( "VariablesMustStartLowerCase", function() {
 
     it( "should throw an error if the parameter is not a function", function() {
       assert.throws( function() {
-        let styleCheck = new VariablesMustStartLowerCase(
+        let styleCheck = new NoArgumentsVariablesSameName(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -60,7 +60,7 @@ describe( "VariablesMustStartLowerCase", function() {
 
     context( "With no XAML processed", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new VariablesMustStartLowerCase(
+        let styleCheck = new NoArgumentsVariablesSameName(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -74,7 +74,7 @@ describe( "VariablesMustStartLowerCase", function() {
 
     context( "With valid XAML to process", function() {
       it( "should return an array with four matching nodes", function() {
-        let styleCheck = new VariablesMustStartLowerCase(
+        let styleCheck = new NoArgumentsVariablesSameName(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -92,8 +92,8 @@ describe( "VariablesMustStartLowerCase", function() {
     } );
 
     context( "With invalid XAML to process", function() {
-      it( "should return an array with five matching nodes", function() {
-        let styleCheck = new VariablesMustStartLowerCase(
+      it( "should return an array with four matching nodes", function() {
+        let styleCheck = new NoArgumentsVariablesSameName(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -105,14 +105,14 @@ describe( "VariablesMustStartLowerCase", function() {
         let lenientMatches = styleCheck.getLenientMatches();
 
         assert.ok( Array.isArray( lenientMatches ) );
-        assert.strictEqual( lenientMatches.length, 5 );
+        assert.strictEqual( lenientMatches.length, 4 );
 
       } );
     } );
 
     context( "With partially valid XAML to process", function() {
       it( "should return an array with four matching nodes", function() {
-        let styleCheck = new VariablesMustStartLowerCase(
+        let styleCheck = new NoArgumentsVariablesSameName(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -137,7 +137,7 @@ describe( "VariablesMustStartLowerCase", function() {
 
     context( "With no XAML processed", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new VariablesMustStartLowerCase(
+        let styleCheck = new NoArgumentsVariablesSameName(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -150,8 +150,8 @@ describe( "VariablesMustStartLowerCase", function() {
     } );
 
     context( "With valid XAML to process", function() {
-      it( "should return an empty array", function() {
-        let styleCheck = new VariablesMustStartLowerCase(
+      it( "should return an array with four elements", function() {
+        let styleCheck = new NoArgumentsVariablesSameName(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -163,14 +163,14 @@ describe( "VariablesMustStartLowerCase", function() {
         let matches = styleCheck.getStrictMatches();
 
         assert.ok( Array.isArray( matches ) );
-        assert.strictEqual( matches.length, 0 );
+        assert.strictEqual( matches.length, 4 );
 
       } );
     } );
 
     context( "With invalid XAML to process", function() {
-      it( "should return an empty array", function() {
-        let styleCheck = new VariablesMustStartLowerCase(
+      it( "should return an array with five elements", function() {
+        let styleCheck = new NoArgumentsVariablesSameName(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -182,14 +182,14 @@ describe( "VariablesMustStartLowerCase", function() {
         let matches = styleCheck.getStrictMatches();
 
         assert.ok( Array.isArray( matches ) );
-        assert.strictEqual( matches.length, 0 );
+        assert.strictEqual( matches.length, 5 );
 
       } );
     } );
 
     context( "With partially valid XAML to process", function() {
-      it( "should return an empty array", function() {
-        let styleCheck = new VariablesMustStartLowerCase(
+      it( "should return array with four elements", function() {
+        let styleCheck = new NoArgumentsVariablesSameName(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -201,7 +201,7 @@ describe( "VariablesMustStartLowerCase", function() {
         let matches = styleCheck.getStrictMatches();
 
         assert.ok( Array.isArray( matches ) );
-        assert.strictEqual( matches.length, 0 );
+        assert.strictEqual( matches.length, 4 );
 
       } );
     } );
@@ -214,7 +214,7 @@ describe( "VariablesMustStartLowerCase", function() {
 
     context( "With no XAML processed", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new VariablesMustStartLowerCase(
+        let styleCheck = new NoArgumentsVariablesSameName(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -227,7 +227,7 @@ describe( "VariablesMustStartLowerCase", function() {
 
     context( "With valid XAML to process", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new VariablesMustStartLowerCase(
+        let styleCheck = new NoArgumentsVariablesSameName(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -244,7 +244,7 @@ describe( "VariablesMustStartLowerCase", function() {
 
     context( "With invalid XAML to process", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new VariablesMustStartLowerCase(
+        let styleCheck = new NoArgumentsVariablesSameName(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -261,7 +261,7 @@ describe( "VariablesMustStartLowerCase", function() {
 
     context( "With partially valid XAML to process", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new VariablesMustStartLowerCase(
+        let styleCheck = new NoArgumentsVariablesSameName(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -284,7 +284,7 @@ describe( "VariablesMustStartLowerCase", function() {
 
     context( "With no XAML processed", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new VariablesMustStartLowerCase(
+        let styleCheck = new NoArgumentsVariablesSameName(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -297,7 +297,7 @@ describe( "VariablesMustStartLowerCase", function() {
 
     context( "With valid XAML to process", function() {
       it( "should return an empty array", function() {
-        let styleCheck = new VariablesMustStartLowerCase(
+        let styleCheck = new NoArgumentsVariablesSameName(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -313,8 +313,8 @@ describe( "VariablesMustStartLowerCase", function() {
     } );
 
     context( "With invalid XAML to process", function() {
-      it( "should return an array with five elements", function() {
-        let styleCheck = new VariablesMustStartLowerCase(
+      it( "should return an array with one element", function() {
+        let styleCheck = new NoArgumentsVariablesSameName(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -324,22 +324,19 @@ describe( "VariablesMustStartLowerCase", function() {
         let errors = styleCheck.getErrors();
 
         assert.ok( Array.isArray( errors ) );
-        assert.strictEqual( errors.length, 5 );
+        assert.strictEqual( errors.length, 1 );
 
         errors = errors.join();
 
-        assert.ok( errors.includes( "Eins" ) );
-        assert.ok( errors.includes( "Zwei" ) );
-        assert.ok( errors.includes( "Drei" ) );
-        assert.ok( errors.includes( "Vier" ) );
         assert.ok( errors.includes( "Ichi" ) );
+        assert.ok( errors.includes( "ichi" ) );
 
       } );
     } );
 
     context( "With partially valid XAML to process", function() {
-      it( "should return an array with three elements", function() {
-        let styleCheck = new VariablesMustStartLowerCase(
+      it( "should return an array with no elements", function() {
+        let styleCheck = new NoArgumentsVariablesSameName(
           StyleRuleFactory.getXpathProcessor()
         );
 
@@ -349,70 +346,11 @@ describe( "VariablesMustStartLowerCase", function() {
         let errors = styleCheck.getErrors();
 
         assert.ok( Array.isArray( errors ) );
-        assert.strictEqual( errors.length, 3 );
+        assert.strictEqual( errors.length, 0 );
 
         errors = errors.join();
 
-        assert.ok( errors.includes( "Zwei" ) );
-        assert.ok( errors.includes( "Drei" ) );
-        assert.ok( errors.includes( "Vier" ) );
-
       } );
     } );
   } );
-
-  /**
-   * Test checking the first character of a string.
-   */
-  describe( "#isFirstCharLowerCase", function() {
-
-    context( "With no parameter supplied", function() {
-      it( "should throw an error if the parameter is not supplied", function() {
-        assert.throws( function() {
-          let styleCheck = new VariablesMustStartLowerCase(
-            StyleRuleFactory.getXpathProcessor()
-          );
-
-          styleCheck.isFirstCharLowerCase();
-
-        }, TypeError );
-      } );
-
-      it( "should throw an error if the parameter is not a function", function() {
-        assert.throws( function() {
-          let styleCheck = new VariablesMustStartLowerCase(
-            StyleRuleFactory.getXpathProcessor()
-          );
-
-          styleCheck.isFirstCharLowerCase(  new Object() );
-        }, TypeError );
-      } );
-    } );
-
-    context( "With a valid string supplied", function() {
-
-      it( "should return true if the string starts with a lower case letter", function() {
-        let styleCheck = new VariablesMustStartLowerCase(
-          StyleRuleFactory.getXpathProcessor()
-        );
-
-        assert.ok(
-          styleCheck.isFirstCharLowerCase(  "thisIsValid" )
-        );
-      } );
-    } );
-
-    context( "With an invalid string supplied", function() {
-      it( "should return false if the string starts with a lower case letter", function() {
-        let styleCheck = new VariablesMustStartLowerCase(
-          StyleRuleFactory.getXpathProcessor()
-        );
-
-        assert.ok(
-          styleCheck.isFirstCharLowerCase(  "ThisIsInValid" ) === false
-        );
-      } );
-    } );
-  } );
-
 } );

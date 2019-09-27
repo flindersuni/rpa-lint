@@ -38,11 +38,11 @@ export class ArgumentsMustStartUpperCase extends BaseStyleRule {
 
     // Check the names of the arguments.
     if ( this.lenientMatches.length > 0 ) {
-      let variablesList = this.getAttributeValues( "Name", this.lenientMatches );
+      let nameList = this.getAttributeValues( "Name", this.lenientMatches );
 
       let self = this;
 
-      variablesList.forEach( function( name ) {
+      nameList.forEach( function( name ) {
         if ( !self.isFirstCharUpperCase( name ) ) {
           errors.push(
             util.format( "The argument name '%s' must start with an upper case letter.", name )

@@ -92,7 +92,7 @@ describe( "WarnVariablesWithDefaultValues", function() {
     } );
 
     context( "With invalid XAML to process", function() {
-      it( "should return an array with four matching nodes", function() {
+      it( "should return an array with five matching nodes", function() {
         let styleCheck = new WarnVariablesWithDefaultValues(
           StyleRuleFactory.getXpathProcessor()
         );
@@ -105,7 +105,7 @@ describe( "WarnVariablesWithDefaultValues", function() {
         let lenientMatches = styleCheck.getLenientMatches();
 
         assert.ok( Array.isArray( lenientMatches ) );
-        assert.strictEqual( lenientMatches.length, 4 );
+        assert.strictEqual( lenientMatches.length, 5 );
 
       } );
     } );

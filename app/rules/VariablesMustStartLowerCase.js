@@ -38,11 +38,11 @@ export class VariablesMustStartLowerCase extends BaseStyleRule {
 
     // Check the names of the variables.
     if ( this.lenientMatches.length > 0 ) {
-      let variablesList = this.getAttributeValues( "Name", this.lenientMatches );
+      let nameList = this.getAttributeValues( "Name", this.lenientMatches );
 
       let self = this;
 
-      variablesList.forEach( function( name ) {
+      nameList.forEach( function( name ) {
         if ( !self.isFirstCharLowerCase( name ) ) {
           errors.push(
             util.format( "The variable name '%s' must start with a lower case letter.", name )

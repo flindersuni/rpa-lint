@@ -185,7 +185,7 @@ describe( "BaseStyleRule", function() {
     } );
 
     context( "With valid parameters and nodes with matching attributes", function() {
-      it( "should return an array of attribute values", function() {
+      it( "should return an array of five attribute values", function() {
         let styleCheck = new BaseStyleRule(
           StyleRuleFactory.getXpathProcessor()
         );
@@ -198,7 +198,7 @@ describe( "BaseStyleRule", function() {
         let attributes = styleCheck.getAttributeValues( "Name", styleCheck.lenientMatches );
 
         assert.ok( Array.isArray( attributes ) );
-        assert.strictEqual( attributes.length, 4 );
+        assert.strictEqual( attributes.length, 5 );
 
         attributes = attributes.join();
 
@@ -206,6 +206,7 @@ describe( "BaseStyleRule", function() {
         assert.ok( attributes.includes( "Zwei" ) );
         assert.ok( attributes.includes( "Drei" ) );
         assert.ok( attributes.includes( "Vier" ) );
+        assert.ok( attributes.includes( "Ichi" ) );
 
       } );
 
