@@ -32,13 +32,50 @@ export class PublicWorkflowsMustHaveAnnotations extends BaseStyleRule {
    */
   getErrors() {
 
+    let errors = [];
+
     // Check to see if errors have been detected.
     if ( this.strictMatches.length === 0 ) {
       return [
         "Public workflows in libraries without annotations are not allowed."
       ];
     } else {
-      return [];
+
+      // Check the content of the annotation.
+      try {
+        let workflowProperties = this.parseComplexAnnotation(
+          this.strictMatches[ 0 ].textContent
+        );
+
+        if ( workflowProperties.HelpLink.length === 0 ) {
+          errors.push(
+            "Public workflows in libraries must have a help link."
+          );
+        }
+
+        if ( workflowProperties.InitialTooltip.length === 0 ) {
+          errors.push(
+            "Public workflows in libraries must have a description."
+          );
+        }
+
+        return errors;
+
+      } catch ( thrownError ) {
+        if ( thrownError instanceof TypeError ) {
+          return [
+            "Value of annotation appears to be invalid."
+          ];
+        } else if ( thrownError instanceof SyntaxError ) {
+          return [
+            "Unable to parse the JSON value in the annotation."
+          ];
+        } else {
+          return [
+            "An unexpected error occurred processing this annotation."
+          ];
+        }
+      }
     }
   }
 }

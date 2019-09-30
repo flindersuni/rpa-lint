@@ -24,7 +24,7 @@ describe( "StyleRuleFactory", function() {
   /**
    * Test getting the list of supported XML namespaces.
    */
-  describe( "#getXamlNamespaces()", function() {
+  describe( "#getXamlNamespaces", function() {
     it( "should return an object", function() {
       assert.strictEqual( typeof StyleRuleFactory.getXamlNamespaces(), "object" );
     } );
@@ -48,7 +48,7 @@ describe( "StyleRuleFactory", function() {
   /**
    * Test getting a xpath processor.
    */
-  describe( "#getXpathProcessor()", function() {
+  describe( "#getXpathProcessor", function() {
     it( "should return a function", function() {
       assert.strictEqual( typeof StyleRuleFactory.getXpathProcessor(), "function" );
     } );
