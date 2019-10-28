@@ -21,6 +21,12 @@ export class WarnVariablesWithDefaultValues extends BaseStyleRule {
     super( xpath );
 
     this.xpathMatchAll = "//xaml:Variable";
+
+    // Maintain a list of variables to always ignore.
+    this.ignoreVariableNameList = [
+      "defaultDelayValue",
+      "validStudyPeriods"
+    ];
   }
 
   /**
@@ -32,17 +38,26 @@ export class WarnVariablesWithDefaultValues extends BaseStyleRule {
   getWarnings() {
 
     let warnings = [];
+    let self = this;
 
     // Check the variables for default values.
     if ( this.lenientMatches.length > 0 ) {
       this.lenientMatches.forEach( function( element ) {
-        if ( element.hasAttribute( "Default" ) === true ) {
-          warnings.push(
-            util.format(
-              "The variable with name '%s' has a default value. Check to ensure the value is appropriate.",
-              element.getAttribute( "Name" )
-            )
-          );
+
+        // Get the name of the variable which is always available.
+        let variableName = element.getAttribute( "Name" );
+
+        // Make sure this name isn't on the ignore list.
+        if ( self.ignoreVariableNameList.includes( variableName ) === false ) {
+
+          if ( element.hasAttribute( "Default" ) === true ) {
+            warnings.push(
+              util.format(
+                "The variable with name '%s' has a default value. Check to ensure the value is appropriate.",
+                variableName
+              )
+            );
+          }
         }
       } );
     }
