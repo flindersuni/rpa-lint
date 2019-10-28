@@ -117,6 +117,8 @@ let libraryPublicWorkflows = [];
 // Build a list of library specific style rules if required.
 if ( projectInfo.isLibrary() ) {
 
+  log( "INFO: UiPath Library project detected." );
+
   libraryStyleRules = [
     new PublicWorkflowsMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() )
   ];
@@ -125,6 +127,8 @@ if ( projectInfo.isLibrary() ) {
     xamlFiles,
     projectInfo
   );
+} else {
+  log( "INFO: UiPath Process project detected." );
 }
 
 // Process the files.
