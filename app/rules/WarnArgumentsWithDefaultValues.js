@@ -28,6 +28,12 @@ export class WarnArgumentsWithDefaultValues extends BaseStyleRule {
     super( xpath );
 
     this.xpathMatchAll = "/xaml:Activity/x:Members/x:Property";
+
+    // Maintain a list of attributes to always ignore.
+    this.ignoreAttributeNameList = [
+      "TestSuiteName",
+      "TestResultsFolder"
+    ];
   }
 
   /**
@@ -48,17 +54,20 @@ export class WarnArgumentsWithDefaultValues extends BaseStyleRule {
         // Get the name of the argument which is always available.
         let argumentName = element.getAttribute( "Name" );
 
+        // Make sure this name isn't on the ignore list.
+        if ( self.ignoreAttributeNameList.includes( argumentName ) === false ) {
 
-        // Get the default value if one has been specified.
-        let defaultValue = self.getArgumentDefaultValue( self.xamlDoc, argumentName );
+          // Get the default value if one has been specified.
+          let defaultValue = self.getArgumentDefaultValue( self.xamlDoc, argumentName );
 
-        if ( defaultValue !== "" ) {
-          warnings.push(
-            util.format(
-              "The argument with name '%s' has a default value. Check to ensure the value is appropriate.",
-              element.getAttribute( "Name" )
-            )
-          );
+          if ( defaultValue !== "" ) {
+            warnings.push(
+              util.format(
+                "The argument with name '%s' has a default value. Check to ensure the value is appropriate.",
+                element.getAttribute( "Name" )
+              )
+            );
+          }
         }
       } );
     }
