@@ -1,2 +1,7 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+# Ensure JSON and XAML files are treated as text
+*.json diff
+*.xaml diff
+# Ensure JavaScript files always have LF line endings
+*.js text eol=lf
