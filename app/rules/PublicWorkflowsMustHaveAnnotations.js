@@ -21,7 +21,7 @@ export class PublicWorkflowsMustHaveAnnotations extends BaseStyleRule {
   constructor( xpath ) {
     super( xpath );
 
-    this.xpathMatchSpecific = "/xaml:Activity/sap2010:Annotation.AnnotationText[string-length(text())!=0]";
+    this.xpathMatchSpecific = "/xaml:Activity/sap2010:Annotation.AnnotationText[string-length(text())!=0] | /xaml:Activity[@sap2010:Annotation.AnnotationText and string-length( @sap2010:Annotation.AnnotationText )!=0]";
   }
 
   /**
@@ -41,10 +41,19 @@ export class PublicWorkflowsMustHaveAnnotations extends BaseStyleRule {
       ];
     } else {
 
+      // Workaround the fact that the complex annotation can be in two places.
+      let complexAnnotation = "";
+
+      if ( this.strictMatches[ 0 ].nodeName === "sap2010:Annotation.AnnotationText" ) {
+        complexAnnotation = this.strictMatches[ 0 ].textContent;
+      } else if ( this.strictMatches[ 0 ].nodeName === "Activity" ) {
+        complexAnnotation = this.strictMatches[ 0 ].getAttribute( "sap2010:Annotation.AnnotationText" );
+      }
+
       // Check the content of the annotation.
       try {
         let workflowProperties = this.parseComplexAnnotation(
-          this.strictMatches[ 0 ].textContent
+          complexAnnotation
         );
 
         if ( workflowProperties.HelpLink.length === 0 ) {
