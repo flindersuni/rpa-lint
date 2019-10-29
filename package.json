@@ -31,7 +31,7 @@
   "author": "Corey Wallis <corey.wallis@flinders.edu.au>",
   "license": "BSD-3-Clause",
   "devDependencies": {
-    "c8": "^5.0.4",
+    "c8": "^6.0.1",
     "eslint": "^6.6.0",
     "eslint-config-jquery": "^2.0.0",
     "eslint-plugin-import": "^2.18.2",
