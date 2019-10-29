@@ -13,3 +13,11 @@ strictMatch  = "/xaml:Activity//xaml:Sequence[@sap2010:Annotation.AnnotationText
 description  = "Flowcharts"
 lenientMatch = "/xaml:Activity//xaml:Flowchart"
 strictMatch  = "/xaml:Activity//xaml:Flowchart[@sap2010:Annotation.AnnotationText and string-length(@sap2010:Annotation.AnnotationText)!=0]"
+[dataset.trycatch]
+description  = "Try Catch activities"
+lenientMatch = "/xaml:Activity//xaml:TryCatch"
+strictMatch  = "/xaml:Activity//xaml:TryCatch[@sap2010:Annotation.AnnotationText and string-length(@sap2010:Annotation.AnnotationText)!=0]"
+[dataset.if]
+description  = "If activities"
+lenientMatch = "/xaml:Activity//xaml:If"
+strictMatch  = "/xaml:Activity//xaml:If[@sap2010:Annotation.AnnotationText and string-length(@sap2010:Annotation.AnnotationText)!=0]"

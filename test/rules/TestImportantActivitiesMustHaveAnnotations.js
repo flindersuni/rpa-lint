@@ -5,7 +5,7 @@ import * as assert from "assert";
 import * as fs from "fs";
 
 // Declare a constant here for ease of maintenance.
-const expectedErrorCount = 2;
+const expectedErrorCount = 4;
 
 /**
  * Test the BaseStyleRule object.
