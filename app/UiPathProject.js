@@ -24,6 +24,7 @@ export class UiPathProject {
 
     // eslint-disable-next-line security/detect-non-literal-fs-filename
     this.fileContents = JSON.parse( fs.readFileSync( path.join( projectPath, "project.json" ) ) );
+    this.projectPath = projectPath;
   }
 
   /**
@@ -99,7 +100,14 @@ export class UiPathProject {
     } else if ( !Array.isArray( this.fileContents.libraryOptions.privateWorkflows ) ) { // eslint-disable-line max-len
       return [];
     } else {
-      return this.fileContents.libraryOptions.privateWorkflows;
+      let privateWorkflows = this.fileContents.libraryOptions.privateWorkflows;
+      let self = this;
+
+      privateWorkflows = privateWorkflows.map( function( element ) {
+        return path.join( self.projectPath, element );
+      } );
+
+      return privateWorkflows;
     }
   }
 
