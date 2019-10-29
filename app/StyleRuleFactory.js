@@ -1,9 +1,17 @@
 import { UiPathProject } from "./UiPathProject.js";
-import * as recursiveReaddirSync from "recursive-readdir-sync";
 
-import * as xpath from "xpath";
-import * as path from "path";
 import * as fs from "fs";
+import * as path from "path";
+import * as recursiveReaddirSync from "recursive-readdir-sync";
+import * as TOML from "@iarna/toml";
+import * as util from "util";
+import * as xpath from "xpath";
+
+/**
+ * The TomlError object as part of the [@iarna-toml]{@link https://github.com/iarna/iarna-toml} package.
+ *
+ * @typedef {Error} TomlError
+ */
 
 /**
  * Contains a number of static utility functions that are used throughout the app.
@@ -127,5 +135,42 @@ export class StyleRuleFactory {
 
     return publicWorkflows;
 
+  }
+
+  /**
+   * Load a dataset from a TOML file.
+   *
+   * @param {string} datasetName Name of the dataset to load.
+   * @returns {Map} The parsed TOML data as a Map object.
+   * @throws {TypeError} Parameter datasetName is required and must be a string.
+   * @throws {TomlError} If the TOML data cannot be parsed.
+   * @since 1.2.0
+   */
+  static getTomlData( datasetName ) {
+    if ( !datasetName || typeof( datasetName ) !== "string" ) {
+      throw new TypeError( "datasetName parameter is required and must be a string" );
+    }
+
+    let fileName = util.format( "%s.toml", datasetName );
+
+    let datasetPath = path.join( __dirname, "./toml/", fileName );
+
+    // eslint-disable-next-line security/detect-non-literal-fs-filename
+    if ( fs.existsSync( datasetPath ) === false ) {
+      throw new Error( util.format(
+        "Unable to find the TOML file for dataset '%s'",
+        datasetName
+        )
+      );
+    }
+
+    //let xamlContent = fs.readFileSync( file );
+    // eslint-disable-next-line security/detect-non-literal-fs-filename
+    let tomlContent = fs.readFileSync( datasetPath );
+    let tomlObject = TOML.parse( tomlContent );
+
+    return new Map(
+      Object.entries( tomlObject.dataset )
+    );
   }
 }

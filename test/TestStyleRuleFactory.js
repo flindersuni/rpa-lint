@@ -157,4 +157,47 @@ describe( "StyleRuleFactory", function() {
     assert.ok( Array.isArray( publicXaml ) );
     assert.strictEqual( ( files.length - 1 ), publicXaml.length );
    } );
+
+  /**
+   * Test getting data from a TOML file.
+   */
+  describe( "#getTomlData", function() {
+    it( "should throw an error if the parameter is not supplied", function() {
+      assert.throws( function() {
+        StyleRuleFactory.getTomlData();
+      }, TypeError );
+    } );
+
+    it( "should throw an error if the parameter is of the wrong type", function() {
+      assert.throws( function() {
+        StyleRuleFactory.getTomlData( new Object() );
+      }, TypeError );
+    } );
+
+    it( "should throw an error if the dataset cannot be found", function() {
+      assert.throws( function() {
+        StyleRuleFactory.getTomlData( "MissingDataset.toml" );
+      }, Error );
+    } );
+
+    it( "should return a Map object with data from the TOML file", function() {
+      let tomlData = StyleRuleFactory.getTomlData( "ImportantActivities" );
+
+      assert.ok( tomlData instanceof Map );
+      assert.ok( tomlData.size > 0 );
+      assert.ok( tomlData.has( "sequence" ) );
+      assert.ok( tomlData.get( "sequence" ) instanceof Object );
+    } );
+
+    it( "should return a Map of objects with the expected properties", function() {
+      let tomlData = StyleRuleFactory.getTomlData( "ImportantActivities" );
+
+      let keys = Object.keys( tomlData.get( "sequence" ) );
+      assert.ok( keys.length = 3 );
+      assert.ok( keys.includes( "description" ) );
+      assert.ok( keys.includes( "lenientMatch" ) );
+      assert.ok( keys.includes( "strictMatch" ) );
+
+    } );
+  } );
 } );

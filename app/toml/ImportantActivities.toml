@@ -1,0 +1,15 @@
+# A table of important activities that need to be annotated.
+#
+# Sub tables define the name of the activity with the following keys:
+# description  = Name of the activity used in messages
+# lenientMatch = XPath used to find activity instances that do not have annotations
+# strictMatch  = XPath used to find activity instances that have annotations
+[dataset]
+[dataset.sequence]
+description  = "Sequences"
+lenientMatch = "/xaml:Activity//xaml:Sequence"
+strictMatch  = "/xaml:Activity//xaml:Sequence[@sap2010:Annotation.AnnotationText and string-length(@sap2010:Annotation.AnnotationText)!=0]"
+[dataset.flowchart]
+description  = "Flowcharts"
+lenientMatch = "/xaml:Activity//xaml:Flowchart"
+strictMatch  = "/xaml:Activity//xaml:Flowchart[@sap2010:Annotation.AnnotationText and string-length(@sap2010:Annotation.AnnotationText)!=0]"
