@@ -24,7 +24,8 @@ program.version( appPackage.version, "-v, --version" )
   .option( "-i, --input <required>", "Path to UiPath project directory" )
   .option( "--dep-check", "Check for outdated project dependencies" )
   .option( "-q, --quiet", "Suppress warnings" )
-  .option( "-r, --recursive", "Find XAML files in project sub directories" );
+  .option( "-r, --recursive", "Find XAML files in project sub directories" )
+  .option( "--include-private", "Include private workflows in library projects" );
 
 // Extend help with custom message.
 program.on( "--help", function() {
@@ -123,6 +124,10 @@ let libraryStyleRules = [];
 let libraryPublicWorkflows = [];
 
 // Build a list of library specific style rules if required.
+if ( projectInfo.isLibrary() === false && program.includePrivate === true ) {
+  log( warn( "WARN: " ) + "--include-private option is only applicable to library projects" );
+}
+
 if ( projectInfo.isLibrary() ) {
 
   log( "INFO: UiPath Library project detected." );
@@ -131,10 +136,17 @@ if ( projectInfo.isLibrary() ) {
     new PublicWorkflowsMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() )
   ];
 
-  libraryPublicWorkflows = StyleRuleFactory.filterPublicWorkflows(
-    xamlFiles,
-    projectInfo
-  );
+  // Filter out private workflows if required.
+  if ( program.IncludePrivate === false ) {
+    log( "INFO: Ignoring private workflows." );
+    libraryPublicWorkflows = StyleRuleFactory.filterPublicWorkflows(
+      xamlFiles,
+      projectInfo
+    );
+  } else {
+    log( "INFO: Including private workflows." );
+    libraryPublicWorkflows = xamlFiles;
+  }
 } else {
   log( "INFO: UiPath Process project detected." );
 }
