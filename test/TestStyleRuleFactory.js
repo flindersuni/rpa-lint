@@ -4,6 +4,8 @@ import * as assert from "assert";
 
 // Use a constant to make updating this value during development / test cycles easier.
 const expectedNamespaceCount = 5;
+const expectedXamlFileCount = 5;
+const expectedRecursiveXamlFileCount = 6;
 
 /**
  * Test the StyleRuleFactory object.
@@ -62,14 +64,14 @@ describe( "StyleRuleFactory", function() {
        let files = StyleRuleFactory.getXamlFileList( "./test/artefacts" );
 
        assert.ok( Array.isArray( files ) );
-       assert.strictEqual( files.length, 4 );
+       assert.strictEqual( files.length, expectedXamlFileCount );
      } );
 
-     it( "should return an array of five string elements", function() {
+     it( "should return an array of the right number of string elements", function() {
       let files = StyleRuleFactory.getXamlFileList( "./test/artefacts", true );
 
       assert.ok( Array.isArray( files ) );
-      assert.strictEqual( files.length, 5 );
+      assert.strictEqual( files.length, expectedRecursiveXamlFileCount );
     } );
 
      it( "should throw an error if the targetPath parameter is not supplied", function() {

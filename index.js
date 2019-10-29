@@ -103,6 +103,7 @@ import { WarnArgumentsWithDefaultValues } from "./app/rules/WarnArgumentsWithDef
 import { WarnVariablesWithDefaultValues } from "./app/rules/WarnVariablesWithDefaultValues.js";
 import { WorkflowsShouldNotContainCodeActivities } from "./app/rules/WorkflowsShouldNotContainCodeActivities.js";
 import { PublicWorkflowsMustHaveAnnotations } from "./app/rules/PublicWorkflowsMustHaveAnnotations.js";
+import { ImportantActivitiesMustHaveAnnotations } from "./app/rules/ImportantActivitiesMustHaveAnnotations.js";
 
 // Load other classes that assess the project.
 import { NoOutdatedProjectDependencies } from "./app/rules/NoOutdatedProjectDependencies.js";
@@ -117,7 +118,8 @@ let styleRules = [
   new VariablesMustStartLowerCase(  StyleRuleFactory.getXpathProcessor() ),
   new WarnArgumentsWithDefaultValues( StyleRuleFactory.getXpathProcessor() ),
   new WarnVariablesWithDefaultValues( StyleRuleFactory.getXpathProcessor() ),
-  new WorkflowsShouldNotContainCodeActivities(  StyleRuleFactory.getXpathProcessor() )
+  new WorkflowsShouldNotContainCodeActivities( StyleRuleFactory.getXpathProcessor() ),
+  new ImportantActivitiesMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() )
 ];
 
 let libraryStyleRules = [];
