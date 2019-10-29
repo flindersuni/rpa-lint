@@ -65,17 +65,30 @@ describe( "StyleRuleFactory", function() {
        assert.strictEqual( files.length, 4 );
      } );
 
-     it( "should throw an error if the parameter is not supplied", function() {
+     it( "should return an array of five string elements", function() {
+      let files = StyleRuleFactory.getXamlFileList( "./test/artefacts", true );
+
+      assert.ok( Array.isArray( files ) );
+      assert.strictEqual( files.length, 5 );
+    } );
+
+     it( "should throw an error if the targetPath parameter is not supplied", function() {
        assert.throws( function() {
          StyleRuleFactory.getXamlFileList();
        }, TypeError );
      } );
 
-     it( "should throw an error if the parameter is not a string", function() {
+     it( "should throw an error if the targetPath parameter is not a string", function() {
        assert.throws( function() {
          StyleRuleFactory.getXamlFileList( new Object );
        }, TypeError );
      } );
+
+     it( "should throw an error if the recursive parameter is not a boolean", function() {
+      assert.throws( function() {
+        StyleRuleFactory.getXamlFileList( "./test/artefacts", new Object );
+      }, TypeError );
+    } );
    } );
 
    /**

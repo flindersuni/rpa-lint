@@ -23,7 +23,8 @@ program.version( appPackage.version, "-v, --version" )
   .description( "Lint UiPath projects against rules developed by the Flinders RPA team" )
   .option( "-i, --input <required>", "Path to UiPath project directory" )
   .option( "--dep-check", "Check for outdated project dependencies" )
-  .option( "-q, --quiet", "Suppress warnings" );
+  .option( "-q, --quiet", "Suppress warnings" )
+  .option( "-r, --recursive", "Find XAML files in project sub directories" );
 
 // Extend help with custom message.
 program.on( "--help", function() {
@@ -57,7 +58,14 @@ if ( !path.isAbsolute( program.input ) ) {
 }
 
 // Get a list of files to process.
-const xamlFiles = StyleRuleFactory.getXamlFileList( program.input );
+if ( program.recursive === true ) {
+  log( "INFO: Searching recursively for XAML files" );
+}
+
+const xamlFiles = StyleRuleFactory.getXamlFileList(
+  program.input,
+  program.recursive
+);
 
 // Check to make sure XAML files were found.
 if ( xamlFiles.length === 0 ) {
@@ -139,7 +147,7 @@ xamlFiles.forEach( function( file ) {
   };
 
   // eslint-disable-next-line security/detect-non-literal-fs-filename
-  let xamlContent = fs.readFileSync( path.join( program.input, file ) );
+  let xamlContent = fs.readFileSync( file );
   xamlContent = xamlContent.toString();
 
   // Apply the style rules to the XAML file.

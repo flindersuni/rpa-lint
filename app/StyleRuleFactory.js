@@ -1,4 +1,5 @@
 import { UiPathProject } from "./UiPathProject.js";
+import * as recursiveReaddirSync from "recursive-readdir-sync";
 
 import * as xpath from "xpath";
 import * as path from "path";
@@ -47,18 +48,38 @@ export class StyleRuleFactory {
    * Get a list of XAML files to check.
    *
    * @param {string} targetPath Path to the directory to search.
+   * @param {boolean} recursive Flag to indicate recursive file search.
    * @returns {Array} An array of XAML file paths.
    * @throws {TypeError} Parameter targetPath is required and must be a string.
-   * @since 1.0.0
+   * @since 1.2.0
    */
-  static getXamlFileList( targetPath ) {
+  static getXamlFileList( targetPath, recursive = false ) {
     if ( !targetPath || typeof( targetPath ) !== "string" ) {
       throw new TypeError( "targetPath parameter is required and must be a string" );
     }
 
+    if ( typeof( recursive ) !== "boolean" ) {
+      throw new TypeError( "recursive parameter must be a boolean" );
+    }
+
     // Get a list of files in the target directory.
-    // Disable this rule as user is expected to provide a path.
-    let fileList = fs.readdirSync( targetPath ); // eslint-disable-line security/detect-non-literal-fs-filename
+    let fileList = [];
+
+    // Is a recursive search for files required?
+    if ( recursive === true ) {
+
+      // Yes.
+      fileList = recursiveReaddirSync.default( targetPath );
+    } else {
+
+      // No.
+      fileList = fs.readdirSync( targetPath ); // eslint-disable-line security/detect-non-literal-fs-filename
+
+      // Ensure the list of files has the full path.
+      fileList = fileList.map( function( element ) {
+        return path.join( targetPath, element );
+      } );
+    }
 
     // Filter the list of files to only XAML files.
     let xamlFiles = fileList.filter( function( element ) {
@@ -69,7 +90,7 @@ export class StyleRuleFactory {
     let ignoreFiles = UiPathProject.getIgnoreFiles();
 
     xamlFiles = xamlFiles.filter( function( element ) {
-      return ignoreFiles.indexOf( element ) === -1;
+      return ignoreFiles.indexOf( path.basename( element ) ) === -1;
     } );
 
     return xamlFiles;
