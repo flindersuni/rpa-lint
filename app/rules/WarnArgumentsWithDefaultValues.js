@@ -1,6 +1,5 @@
 import { BaseStyleRule } from "./BaseStyleRule.js";
 
-//import { DOMParser } from "xmldom";
 import * as util from "util";
 import * as xpath from "xpath";
 
@@ -32,7 +31,10 @@ export class WarnArgumentsWithDefaultValues extends BaseStyleRule {
     // Maintain a list of arguments to always ignore.
     this.ignoreArgumentNameList = [
       "TestSuiteName",
-      "TestResultsFolder"
+      "TestResultsFolder",
+      "TestOrder",
+      "TestCategory",
+      "TestEnvironmentBlackList"
     ];
   }
 
