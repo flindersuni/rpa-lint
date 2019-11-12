@@ -70,19 +70,56 @@ export class UiPathProject {
   }
 
   /**
+   * Return the schema version of the project.json file.
+   *
+   * @returns {number} The schema version number.
+   * @since 1.2.0
+   */
+  getSchemaVersion() {
+    if ( typeof( this.fileContents.schemaVersion ) === "undefined" ) {
+      return Number.NaN;
+    } else {
+      let schemaVersion = Number.parseFloat( this.fileContents.schemaVersion );
+
+      if ( Number.isNaN( schemaVersion ) === true ) {
+        return Number.NaN;
+      }
+
+      return schemaVersion;
+    }
+  }
+
+  /**
    * Return a flag indicating if this project is a library or not.
    *
    * @returns {boolean} True if the project is a library, false if it is not.
    * @since 1.0.0
    */
   isLibrary() {
-    if ( typeof( this.fileContents.projectType ) === "undefined" ) {
-      return false;
-    } else if ( this.fileContents.projectType === "Library" ) {
-      return true;
+
+    // Check the schema version prior to checking if this is a library or not.
+    let schemaVersion = this.getSchemaVersion();
+
+    if ( schemaVersion < 4 ) {
+      if ( typeof( this.fileContents.projectType ) === "undefined" ) {
+        return false;
+      } else if ( this.fileContents.projectType === "Library" ) {
+        return true;
+      } else {
+        return false;
+      }
     } else {
-      return false;
+      if ( typeof( this.fileContents.designOptions ) === "undefined" ) {
+        return false;
+      } else if ( this.fileContents.designOptions.outputType === "undefined" ) {
+        return false;
+      } else if ( this.fileContents.designOptions.outputType === "Library" ) {
+        return true;
+      } else {
+        return false;
+      }
     }
+
   }
 
   /**

@@ -99,6 +99,33 @@ describe( "UiPathProject", function() {
   } );
 
   /**
+   * Test getting the schema version of the UiPath project.json file.
+   */
+  describe( "#schemaVersion", function() {
+    it( "should return a number", function() {
+      let projectInfo = new UiPathProject( "./test/artefacts" );
+      assert.strictEqual( typeof( projectInfo.getSchemaVersion() ), "number" );
+    } );
+
+    it( "should return a float that in the JSON file", function() {
+      let projectInfo = new UiPathProject( "./test/artefacts" );
+      assert.strictEqual( projectInfo.getSchemaVersion(), 3.2 );
+    } );
+
+    it( "should return a float that in the newer JSON file", function() {
+      let projectInfo = new UiPathProject( "./test/artefacts/subfolder/" );
+      assert.strictEqual( projectInfo.getSchemaVersion(), 4.0 );
+    } );
+
+    it( "should return NAN when the schema version is missing", function() {
+      let projectInfo = new UiPathProject( "./test/artefacts" );
+      projectInfo.fileContents = {};
+      assert.strictEqual( projectInfo.getSchemaVersion(), Number.NaN );
+    } );
+  } );
+
+
+  /**
    * Test determining if this is a library project or not.
    */
   describe( "#isLibrary", function() {
@@ -109,6 +136,11 @@ describe( "UiPathProject", function() {
 
     it( "should return true if this is a library project", function() {
       let projectInfo = new UiPathProject( "./test/artefacts" );
+      assert.strictEqual(  projectInfo.isLibrary(), true );
+    } );
+
+    it( "should return true if this is a newer a library project", function() {
+      let projectInfo = new UiPathProject( "./test/artefacts/subfolder" );
       assert.strictEqual(  projectInfo.isLibrary(), true );
     } );
 
