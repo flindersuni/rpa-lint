@@ -23,7 +23,8 @@
     "test": "mocha --require esm",
     "lint": "eslint .",
     "docs": "jsdoc -c .jsdocrc.json",
-    "coverage": "c8 mocha --require esm"
+    "coverage": "c8 mocha --require esm",
+    "coveralls": "c8 --reporter=text-lcov mocha --require esm | coveralls"
   },
   "bin": {
     "rpa-lint": "bin/rpa-lint"
@@ -32,6 +33,7 @@
   "license": "BSD-3-Clause",
   "devDependencies": {
     "c8": "^6.0.1",
+    "coveralls": "^3.0.9",
     "eslint": "^6.6.0",
     "eslint-config-jquery": "^2.0.0",
     "eslint-plugin-import": "^2.18.2",

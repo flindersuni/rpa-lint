@@ -1,6 +1,8 @@
 <!-- markdownlint-disable no-trailing-punctuation -->
 # RPA Lint #
 
+[![Build Status](https://travis-ci.org/flindersuni/rpa-lint.svg?branch=master)](https://travis-ci.org/flindersuni/rpa-lint)
+
 This app is used by the Robotic Process Automation (RPA) team at [Flinders University][flinders] to lint our RPA projects against an agreed set of rules. We apply these style rules so that our automations are consistent.
 
 We use [UiPath][uipath] to develop and manage our automations.
