@@ -2,12 +2,7 @@ import { BaseStyleRule } from "./BaseStyleRule.js";
 
 import * as util from "util";
 import * as xpath from "xpath";
-
-/**
- * The DomParser object as part of the [xmldom]{@link https://www.npmjs.com/package/xmldom} package.
- *
- * @typedef {object} DomParser
- */
+import { DOMParser } from "xmldom";
 
 export class WarnArgumentsWithDefaultValues extends BaseStyleRule {
 
@@ -80,10 +75,10 @@ export class WarnArgumentsWithDefaultValues extends BaseStyleRule {
   /**
    * Get the name of the underlying class for this activity.
    *
-   * @param {DomParser} xamlDoc The XAML code represented as an XML DOMParser object.
+   * @param {DOMParser} xamlDoc The XAML code represented as an XML DOMParser object.
    *
    * @returns {string} The name of the underlying CLR class.
-   * @throws {TypeError} Parameter xamlDoc is required and must be a DomParser object.
+   * @throws {TypeError} Parameter xamlDoc is required and must be a DOMParser object.
    * @since 1.1.0
    */
   getClassName( xamlDoc ) {
@@ -101,11 +96,11 @@ export class WarnArgumentsWithDefaultValues extends BaseStyleRule {
   /**
    * Get the name of the underlying class for this activity.
    *
-   * @param {DomParser} xamlDoc The XAML code represented as an XML DOMParser object.
+   * @param {DOMParser} xamlDoc The XAML code represented as an XML DOMParser object.
    * @param {string} argumentName The name of the argument.
    *
    * @returns {string} The default value for the argument if it is specified.
-   * @throws {TypeError} Parameter xamlDoc is required and must be a DomParser object.
+   * @throws {TypeError} Parameter xamlDoc is required and must be a DOMParser object.
    * @since 1.1.0
    */
   getArgumentDefaultValue( xamlDoc, argumentName ) {
