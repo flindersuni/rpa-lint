@@ -130,21 +130,46 @@ export class UiPathProject {
    * @since 1.0.0
    */
   getPrivateWorkflows() {
-    if ( typeof( this.fileContents.libraryOptions ) === "undefined" ) {
-      return [];
-    } else if (  typeof( this.fileContents.libraryOptions.privateWorkflows ) === "undefined" ) {
-      return [];
-    } else if ( !Array.isArray( this.fileContents.libraryOptions.privateWorkflows ) ) { // eslint-disable-line max-len
-      return [];
+
+    // Check the schema version prior to finding private workflows.
+    let schemaVersion = this.getSchemaVersion();
+
+    if ( schemaVersion < 4 ) {
+
+      if ( typeof( this.fileContents.libraryOptions ) === "undefined" ) {
+        return [];
+      } else if (  typeof( this.fileContents.libraryOptions.privateWorkflows ) === "undefined" ) {
+        return [];
+      } else if ( !Array.isArray( this.fileContents.libraryOptions.privateWorkflows ) ) { // eslint-disable-line max-len
+        return [];
+      } else {
+        let privateWorkflows = this.fileContents.libraryOptions.privateWorkflows;
+        let self = this;
+
+        privateWorkflows = privateWorkflows.map( function( element ) {
+          return path.join( self.projectPath, element );
+        } );
+
+        return privateWorkflows;
+      }
     } else {
-      let privateWorkflows = this.fileContents.libraryOptions.privateWorkflows;
-      let self = this;
+      if ( typeof( this.fileContents.designOptions ) === "undefined" ) {
+        return [];
+      } else if ( typeof( this.fileContents.designOptions.libraryOptions ) === "undefined" ) {
+        return [];
+      } else if ( typeof( this.fileContents.designOptions.libraryOptions.privateWorkflows ) === "undefined" ) {
+        return [];
+      } else {
+        let privateWorkflows =
+          this.fileContents.designOptions.libraryOptions.privateWorkflows;
+        let self = this;
 
-      privateWorkflows = privateWorkflows.map( function( element ) {
-        return path.join( self.projectPath, element );
-      } );
+        privateWorkflows = privateWorkflows.map( function( element ) {
+          return path.join( self.projectPath, element );
+        } );
 
-      return privateWorkflows;
+        return privateWorkflows;
+      }
     }
   }
 

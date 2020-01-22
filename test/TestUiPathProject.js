@@ -196,6 +196,17 @@ describe( "UiPathProject", function() {
       assert.ok( Array.isArray( projectInfo.getPrivateWorkflows() ) );
       assert.strictEqual( projectInfo.getPrivateWorkflows().length, 0 );
     } );
+
+    it( "should return an array for a newer project library", function() {
+      let projectInfo = new UiPathProject( "./test/artefacts/subfolder" );
+      assert.ok( Array.isArray( projectInfo.getPrivateWorkflows() ) );
+    } );
+
+    it( "should return an array of 19 elements for a newer project library", function() {
+      let projectInfo = new UiPathProject( "./test/artefacts/subfolder" );
+      assert.ok( Array.isArray( projectInfo.getPrivateWorkflows() ) );
+      assert.strictEqual( projectInfo.getPrivateWorkflows().length, 2 );
+    } );
   } );
 
   /**
