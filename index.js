@@ -35,6 +35,13 @@ program.on( "--help", function() {
   UiPathProject.getIgnoreFiles().forEach( function( name ) {
     log( "  - " + name );
   } );
+
+  log( "" );
+  log( "Ignored directory names:" );
+
+  UiPathProject.getIgnoreDirNames().forEach( function( name ) {
+    log( "  - " + name );
+  } );
 } );
 
 // Parse the command line parameters.

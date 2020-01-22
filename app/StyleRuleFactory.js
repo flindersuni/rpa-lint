@@ -101,6 +101,15 @@ export class StyleRuleFactory {
       return ignoreFiles.indexOf( path.basename( element ) ) === -1;
     } );
 
+    // Filter out any ignored paths.
+    let ignoreDirNames = UiPathProject.getIgnoreDirNames();
+
+    ignoreDirNames.forEach( function( ignoreDirName ) {
+      xamlFiles = xamlFiles.filter( function( element ) {
+        return !element.includes( ignoreDirName );
+      } );
+    } );
+
     return xamlFiles;
   }
 

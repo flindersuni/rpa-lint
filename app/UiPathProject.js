@@ -194,4 +194,16 @@ export class UiPathProject {
       "ConstantValues.xaml"
     ];
   }
+
+  /**
+   * Return an array of directory names that should be ignored.
+   *
+   * @returns {Array} An array of path elements.
+   * @since 1.1.0
+   */
+  static getIgnoreDirNames() {
+    return [
+      "node_modules"
+    ];
+  }
 }
