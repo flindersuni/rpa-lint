@@ -202,6 +202,18 @@ describe( "UiPathProject", function() {
       assert.ok( Array.isArray( projectInfo.getPrivateWorkflows() ) );
     } );
 
+    it( "should return an empty array for a newer project library", function() {
+      let projectInfo = new UiPathProject( "./test/artefacts/subfolder" );
+      projectInfo.fileContents.designOptions.libraryOptions.privateWorkflows = [];
+      assert.ok( Array.isArray( projectInfo.getPrivateWorkflows() ) );
+    } );
+
+    it( "should return an empty array for a newer project library if the element is missing", function() {
+      let projectInfo = new UiPathProject( "./test/artefacts/subfolder" );
+      delete projectInfo.fileContents.designOptions.libraryOptions.privateWorkflows;
+      assert.ok( Array.isArray( projectInfo.getPrivateWorkflows() ) );
+    } );
+
     it( "should return an array of 19 elements for a newer project library", function() {
       let projectInfo = new UiPathProject( "./test/artefacts/subfolder" );
       assert.ok( Array.isArray( projectInfo.getPrivateWorkflows() ) );
