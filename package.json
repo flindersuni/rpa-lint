@@ -32,28 +32,28 @@
   "author": "Corey Wallis <corey.wallis@flinders.edu.au>",
   "license": "BSD-3-Clause",
   "devDependencies": {
-    "c8": "^7.0.1",
+    "c8": "^7.1.0",
     "coveralls": "^3.0.9",
     "eslint": "^6.7.2",
     "eslint-config-jquery": "^2.0.0",
-    "eslint-plugin-import": "^2.19.1",
-    "eslint-plugin-jsdoc": "^20.3.1",
-    "eslint-plugin-mocha": "^6.2.2",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsdoc": "^22.0.1",
+    "eslint-plugin-mocha": "^6.3.0",
     "eslint-plugin-security": "^1.4.0",
     "jsdoc": "^3.6.3",
-    "mocha": "^7.0.0",
-    "sinon": "^8.1.0"
+    "mocha": "^7.1.0",
+    "sinon": "^9.0.1"
   },
   "dependencies": {
     "@iarna/toml": "^2.2.3",
     "chalk": "^3.0.0",
-    "commander": "^4.1.0",
-    "compare-versions": "^3.5.1",
+    "commander": "^5.0.0",
+    "compare-versions": "^3.6.0",
     "esm": "^3.2.25",
-    "pretty-ms": "^5.1.0",
+    "pretty-ms": "^6.0.1",
     "recursive-readdir-sync": "^1.0.6",
     "sync-request": "^6.1.0",
-    "xmldom": "^0.2.1",
+    "xmldom": "^0.3.0",
     "xpath": "0.0.27"
   },
   "directories": {
