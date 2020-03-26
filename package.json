@@ -24,7 +24,9 @@
     "lint": "eslint .",
     "docs": "jsdoc -c .jsdocrc.json",
     "coverage": "c8 mocha --require esm",
-    "coveralls": "c8 --reporter=text-lcov mocha --require esm | coveralls"
+    "precoverage": "rimraf ./coverage",
+    "coveralls": "c8 --reporter=text-lcov mocha --require esm | coveralls",
+    "precoveralls": "rimraf ./coverage"
   },
   "bin": {
     "rpa-lint": "bin/rpa-lint"
@@ -42,6 +44,7 @@
     "eslint-plugin-security": "^1.4.0",
     "jsdoc": "^3.6.3",
     "mocha": "^7.1.1",
+    "rimraf": "^3.0.2",
     "sinon": "^9.0.1"
   },
   "dependencies": {
