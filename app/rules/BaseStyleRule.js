@@ -181,7 +181,7 @@ import * as xpath from "xpath";
 
     // Check to make sure it starts with the right prefix.
     if ( encodedData.startsWith( "UPTF" ) === false ) {
-      throw new TypeError( "encodedData parameter must start with 'UPTF000001E0'" );
+      throw new TypeError( "encodedData parameter must start with 'UPTF'" );
     }
 
     // Trim the prefix from the encoded data.
