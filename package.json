@@ -25,7 +25,7 @@
     "docs": "jsdoc -c .jsdocrc.json",
     "coverage": "c8 mocha --require esm",
     "precoverage": "rimraf ./coverage",
-    "coveralls": "c8 --reporter=text-lcov mocha --require esm | coveralls",
+    "coveralls": "c8 --reporter=lcovonly mocha --require esm",
     "precoveralls": "rimraf ./coverage"
   },
   "bin": {
