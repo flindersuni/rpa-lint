@@ -317,12 +317,12 @@ describe( "BaseStyleRule", function() {
           styleCheck.parseComplexAnnotation( "encdata" );
         }, {
           name: /^TypeError$/,
-          message: /must start with 'UPTF000001E0'$/
+          message: /must start with 'UPTF'$/
         } );
 
         assert.doesNotThrow( function() {
           styleCheck.parseComplexAnnotation( complexAnnotation );
-        }, /must start with 'UPTF000001E0'$/ );
+        }, /must start with 'UPTF'$/ );
       } );
     } );
 

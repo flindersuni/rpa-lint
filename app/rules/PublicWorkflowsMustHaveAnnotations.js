@@ -56,7 +56,8 @@ export class PublicWorkflowsMustHaveAnnotations extends BaseStyleRule {
           complexAnnotation
         );
 
-        if ( workflowProperties.HelpLink.length === 0 ) {
+        // eslint-disable-next-line max-len
+        if ( workflowProperties.HelpLink === null || workflowProperties.HelpLink.length === 0 ) {
           errors.push(
             "Public workflows in libraries must have a help link."
           );
