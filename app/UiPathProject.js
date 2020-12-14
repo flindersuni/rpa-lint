@@ -134,6 +134,8 @@ export class UiPathProject {
     // Check the schema version prior to finding private workflows.
     let schemaVersion = this.getSchemaVersion();
 
+    let privateWorkflows = [];
+
     if ( schemaVersion < 4 ) {
 
       if ( typeof( this.fileContents.libraryOptions ) === "undefined" ) {
@@ -143,14 +145,13 @@ export class UiPathProject {
       } else if ( !Array.isArray( this.fileContents.libraryOptions.privateWorkflows ) ) { // eslint-disable-line max-len
         return [];
       } else {
-        let privateWorkflows = this.fileContents.libraryOptions.privateWorkflows;
+        privateWorkflows = this.fileContents.libraryOptions.privateWorkflows;
         let self = this;
 
         privateWorkflows = privateWorkflows.map( function( element ) {
           return path.join( self.projectPath, element );
         } );
 
-        return privateWorkflows;
       }
     } else {
       if ( typeof( this.fileContents.designOptions ) === "undefined" ) {
@@ -160,17 +161,17 @@ export class UiPathProject {
       } else if ( typeof( this.fileContents.designOptions.libraryOptions.privateWorkflows ) === "undefined" ) {
         return [];
       } else {
-        let privateWorkflows =
+        privateWorkflows =
           this.fileContents.designOptions.libraryOptions.privateWorkflows;
         let self = this;
 
         privateWorkflows = privateWorkflows.map( function( element ) {
           return path.join( self.projectPath, element );
         } );
-
-        return privateWorkflows;
       }
     }
+
+    return privateWorkflows;
   }
 
   /**

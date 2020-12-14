@@ -1,6 +1,7 @@
 import { StyleRuleFactory } from "../app/StyleRuleFactory.js";
 import { UiPathProject } from "../app/UiPathProject.js";
 import * as assert from "assert";
+import fs from "fs";
 
 // Use a constant to make updating this value during development / test cycles easier.
 const expectedNamespaceCount = 5;
@@ -202,4 +203,102 @@ describe( "StyleRuleFactory", function() {
 
     } );
   } );
+
+  /**
+   * Test getting a list of default style rules.
+   */
+  describe( "#getDefaultStyleRules", function() {
+    it( "should return an array", function() {
+      let styleRules = StyleRuleFactory.getDefaultStyleRules();
+      assert.ok( Array.isArray( styleRules ) );
+    } );
+
+    it( "should return an array with the right number of elements", function() {
+      let styleRules = StyleRuleFactory.getDefaultStyleRules();
+      const elementCount = 10;
+
+      assert.ok( Array.isArray( styleRules ) );
+      assert.ok( styleRules.length === elementCount );
+    } );
+  } );
+
+  /**
+   * Test filter the output to a specific file.
+   */
+  describe( "#filterResults", function() {
+    this.slow( 500 );
+
+    it( "should throw an error if the parameter is not supplied", function() {
+      assert.throws( function() {
+        StyleRuleFactory.filterResults();
+      }, TypeError );
+    } );
+
+    it( "should throw an error if the parameter is of the wrong type", function() {
+      assert.throws( function() {
+        StyleRuleFactory.filterResults( "invalid" );
+      }, TypeError );
+    } );
+
+    it( "should throw an error if the parameter object does not have the required elements", function() {
+
+      let testOutput = "";
+
+      assert.throws( function() {
+        StyleRuleFactory.filterResults( testOutput );
+      }, TypeError );
+
+      testOutput = new Map();
+      assert.doesNotThrow( function() {
+        StyleRuleFactory.filterResults( testOutput, " " );
+      }, TypeError );
+
+      assert.throws( function() {
+        StyleRuleFactory.filterResults( testOutput );
+      }, TypeError );
+
+      assert.doesNotThrow( function() {
+        StyleRuleFactory.filterResults( testOutput, "test-file" );
+      }, TypeError );
+
+    } );
+
+    it( "should return a filtered list of files containing the right number of elements", function() {
+
+      const styleRules = StyleRuleFactory.getDefaultStyleRules();
+      const xamlFiles = StyleRuleFactory.getXamlFileList( "./test/artefacts" );
+
+      let results = new Map();
+
+      xamlFiles.forEach( function( file ) {
+
+        let output = {
+          warnings: [],
+          errors: []
+        };
+
+        // eslint-disable-next-line security/detect-non-literal-fs-filename
+        let xamlContent = fs.readFileSync( file );
+        xamlContent = xamlContent.toString();
+
+        // Apply the style rules to the XAML file.
+        styleRules.forEach( function( styleRule ) {
+          styleRule.checkStyleRule( xamlContent );
+
+          output.warnings = output.warnings.concat( styleRule.getWarnings() );
+          output.errors = output.errors.concat( styleRule.getErrors() );
+        } );
+
+        results.set( file, output );
+      } );
+
+      assert.ok( results.size > 0 );
+
+      let updatedResults = StyleRuleFactory.filterResults( results, "dos.xaml" );
+
+      assert.ok( updatedResults.size === 1 );
+
+    } );
+  } );
+
 } );
