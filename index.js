@@ -25,7 +25,8 @@ program.version( appPackage.version, "-v, --version" )
   .option( "--dep-check", "Check for outdated project dependencies" )
   .option( "-q, --quiet", "Suppress warnings" )
   .option( "-r, --recursive", "Find XAML files in project sub directories" )
-  .option( "-p, --include-private", "Include private workflows in library projects" );
+  .option( "-p, --include-private", "Include private workflows in library projects" )
+  .option(  "-f, --filter <required>", "Filter list of output to a specific file" );
 
 // Extend help with custom message.
 program.on( "--help", function() {
@@ -99,35 +100,12 @@ let results = new Map;
 let haveIssues = false;
 let haveErrors = false;
 
-// Load classes that have implemented the style rules.
-import { ArgumentsMustHaveAnnotations } from "./app/rules/ArgumentsMustHaveAnnotations.js";
-import { ArgumentsMustStartUpperCase  } from "./app/rules/ArgumentsMustStartUpperCase.js";
-import { MainSequencesMustHaveAnnotations } from "./app/rules/MainSequencesMustHaveAnnotations.js";
-import { MainFlowchartsHaveAnnotations } from "./app/rules/MainFlowchartsMustHaveAnnotations.js";
-import { VariablesMustHaveAnnotations } from "./app/rules/VariablesMustHaveAnnotations.js";
-import { VariablesMustStartLowerCase } from "./app/rules/VariablesMustStartLowerCase.js";
-import { WarnArgumentsWithDefaultValues } from "./app/rules/WarnArgumentsWithDefaultValues.js";
-import { WarnVariablesWithDefaultValues } from "./app/rules/WarnVariablesWithDefaultValues.js";
-import { WorkflowsShouldNotContainCodeActivities } from "./app/rules/WorkflowsShouldNotContainCodeActivities.js";
-import { PublicWorkflowsMustHaveAnnotations } from "./app/rules/PublicWorkflowsMustHaveAnnotations.js";
-import { ImportantActivitiesMustHaveAnnotations } from "./app/rules/ImportantActivitiesMustHaveAnnotations.js";
-
 // Load other classes that assess the project.
+import { PublicWorkflowsMustHaveAnnotations } from "./app/rules/PublicWorkflowsMustHaveAnnotations.js";
 import { NoOutdatedProjectDependencies } from "./app/rules/NoOutdatedProjectDependencies.js";
 
 // Build a list of style rules.
-let styleRules = [
-  new ArgumentsMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
-  new ArgumentsMustStartUpperCase( StyleRuleFactory.getXpathProcessor() ),
-  new MainSequencesMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
-  new MainFlowchartsHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
-  new VariablesMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
-  new VariablesMustStartLowerCase(  StyleRuleFactory.getXpathProcessor() ),
-  new WarnArgumentsWithDefaultValues( StyleRuleFactory.getXpathProcessor() ),
-  new WarnVariablesWithDefaultValues( StyleRuleFactory.getXpathProcessor() ),
-  new WorkflowsShouldNotContainCodeActivities( StyleRuleFactory.getXpathProcessor() ),
-  new ImportantActivitiesMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() )
-];
+let styleRules = StyleRuleFactory.getDefaultStyleRules();
 
 let libraryStyleRules = [];
 let libraryPublicWorkflows = [];
@@ -218,12 +196,22 @@ if ( program.quiet === true ) {
   }
 }
 
+// Filter the results list if required.
+if ( program.filter !== undefined ) {
+  log( warn( "WARN: " ) + "Results are filtered." );
+  results = StyleRuleFactory.filterResults( results, program.filter );
+
+  if ( results.size === 0 ) {
+    haveIssues = false;
+  }
+}
+
 // Were any issues found?
 if ( haveIssues ) {
   log( "INFO: Found XAML files that do not pass validation." );
 
   // Output the found issues.
- results.forEach( function( output, file ) {
+  results.forEach( function( output, file ) {
 
     // Are there any warnings?
     if ( output.warnings.length > 0 && program.quiet !== true ) {
@@ -242,7 +230,6 @@ if ( haveIssues ) {
     }
   } );
 }
-
 
 // Check the UiPath project dependencies if required.
 if ( program.depCheck ) {

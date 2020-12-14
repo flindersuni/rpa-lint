@@ -7,6 +7,18 @@ import * as TOML from "@iarna/toml";
 import * as util from "util";
 import * as xpath from "xpath";
 
+// Load classes that have implemented the style rules.
+import { ArgumentsMustHaveAnnotations } from "./rules/ArgumentsMustHaveAnnotations.js";
+import { ArgumentsMustStartUpperCase  } from "./rules/ArgumentsMustStartUpperCase.js";
+import { MainSequencesMustHaveAnnotations } from "./rules/MainSequencesMustHaveAnnotations.js";
+import { MainFlowchartsHaveAnnotations } from "./rules/MainFlowchartsMustHaveAnnotations.js";
+import { VariablesMustHaveAnnotations } from "./rules/VariablesMustHaveAnnotations.js";
+import { VariablesMustStartLowerCase } from "./rules/VariablesMustStartLowerCase.js";
+import { WarnArgumentsWithDefaultValues } from "./rules/WarnArgumentsWithDefaultValues.js";
+import { WarnVariablesWithDefaultValues } from "./rules/WarnVariablesWithDefaultValues.js";
+import { WorkflowsShouldNotContainCodeActivities } from "./rules/WorkflowsShouldNotContainCodeActivities.js";
+import { ImportantActivitiesMustHaveAnnotations } from "./rules/ImportantActivitiesMustHaveAnnotations.js";
+
 /**
  * The TomlError object as part of the [@iarna-toml]{@link https://github.com/iarna/iarna-toml} package.
  *
@@ -181,5 +193,56 @@ export class StyleRuleFactory {
     return new Map(
       Object.entries( tomlObject.dataset )
     );
+  }
+
+  /**
+   * Filter the results to a specific file.
+   *
+   * @param {Map} results The results to filter.
+   * @param {string} filter The file name filter to apply.
+   * @returns {Map} The results list containing only the files included by the filter.
+   * @throws {TypeError} Parameter output is required and must be a Map.
+   * @since 1.4.0
+   */
+  static filterResults( results, filter ) {
+
+    let updatedResults = new Map();
+
+    if ( !results || typeof( results ) !== "object" ) {
+      throw new TypeError( "results parameter is required and must be a Map" );
+    }
+
+    if ( !filter || typeof( filter ) !== "string" ) {
+      throw new TypeError( "filter parameter is required and must be a string" );
+    }
+
+    results.forEach( function( output, file ) {
+      if ( file.endsWith( filter ) === true ) {
+        updatedResults.set( file, output );
+      }
+    } );
+
+    return updatedResults;
+  }
+
+ /**
+  * Return the list of default style rules.
+  *
+  * @returns {Array} A list of default style ryles.
+  * @since 1.4.0
+  */
+  static getDefaultStyleRules() {
+    return [
+      new ArgumentsMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
+      new ArgumentsMustStartUpperCase( StyleRuleFactory.getXpathProcessor() ),
+      new MainSequencesMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
+      new MainFlowchartsHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
+      new VariablesMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() ),
+      new VariablesMustStartLowerCase(  StyleRuleFactory.getXpathProcessor() ),
+      new WarnArgumentsWithDefaultValues( StyleRuleFactory.getXpathProcessor() ),
+      new WarnVariablesWithDefaultValues( StyleRuleFactory.getXpathProcessor() ),
+      new WorkflowsShouldNotContainCodeActivities( StyleRuleFactory.getXpathProcessor() ),
+      new ImportantActivitiesMustHaveAnnotations( StyleRuleFactory.getXpathProcessor() )
+    ];
   }
 }
