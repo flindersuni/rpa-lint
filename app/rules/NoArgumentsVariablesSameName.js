@@ -9,15 +9,11 @@ export class NoArgumentsVariablesSameName extends BaseStyleRule {
    * Construct a new object.
    *
    * @classdesc Implement the rule that the arguments and variables cannot have the same names.
-   *
    * Argument and variable names are case insensitive in UiPath projects.
    * Therefore it is possible to have an argument and a variable with the same
    * name. If this happens unexpected behaviour is likely.
-   *
    * @augments BaseStyleRule
-   *
    * @constructs
-   *
    * @param {xpath} xpath An XPath object with the required namespaces defined.
    * @since 1.1.0
    */

@@ -9,14 +9,10 @@ export class VariablesMustHaveAnnotations extends BaseStyleRule {
    * Construct a new object.
    *
    * @classdesc Implement the rule that all variables must have annotations.
-   *
    * This is important as it makes it easier for others to tell what a variable is used for.
    * Without needing to take a deep dive into the code.
-   *
    * @augments BaseStyleRule
-   *
    * @constructs
-   *
    * @param {xpath} xpath An XPath object with the required namespaces defined.
    * @since 1.0.0
    */

@@ -6,9 +6,7 @@ import { UiPathProject } from "../UiPathProject.js";
    * Construct a new object.
    *
    * @classdesc Base class for all UiPath project related rules.
-   *
    * @constructs
-   *
    * @param {UiPathProject} project An instantiated UiPathProject object.
    * @throws {TypeError} When the project parameter is missing or the incorrect type.
    * @since 1.0.0
