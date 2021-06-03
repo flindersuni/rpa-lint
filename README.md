@@ -1,7 +1,7 @@
 <!-- markdownlint-disable no-trailing-punctuation -->
 # RPA Lint #
 
-![Node.js CI](https://github.com/flindersuni/rpa-lint/workflows/Node.js%20CI/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/flindersuni/rpa-lint/badge.svg)](https://coveralls.io/github/flindersuni/rpa-lint)
+![Node.js CI](https://github.com/flindersuni/rpa-lint/workflows/Node.js%20CI/badge.svg)
 
 This app is used by the Robotic Process Automation (RPA) team at [Flinders University][flinders] to lint our RPA projects against an agreed set of rules. We apply these style rules so that our automations are consistent.
 

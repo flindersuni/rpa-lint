@@ -11,11 +11,8 @@ export class NoOutdatedProjectDependencies extends BaseProjectRule {
   * Construct a new object.
   *
   * @classdesc Implement the rule that a UiPath project must not have any outdated dependencies.
-  *
   * @augments BaseProjectRule
-  *
   * @constructs
-  *
   * @param {UiPathProject} project An instantiated UiPathProject object.
   * @since 1.0.0
   */

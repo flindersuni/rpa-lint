@@ -10,9 +10,7 @@ import * as xpath from "xpath";
    * Construct a new object.
    *
    * @classdesc Base class for all style rules.
-   *
    * @constructs
-   *
    * @param {xpath} xpath An XPath object with the required namespaces defined.
    * @since 1.0.0
    */
@@ -166,9 +164,7 @@ import * as xpath from "xpath";
    * Parse the encoded value for a complex activity annotation.
    *
    * @param {string} encodedData An encoded string for a complex activity annotation.
-   *
    * @returns {object} An object decoded from the supplied complex activity annotation.
-   *
    * @throws {TypeError} Parameter source is required and must be a string.
    * @throws {SyntaxError} The encoded data must be able to be decoded from JSON into an object.
    * @since 1.1.0
