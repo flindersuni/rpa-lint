@@ -24,7 +24,7 @@
     "lint": "eslint .",
     "docs": "jsdoc -c .jsdocrc.json",
     "coverage": "c8 mocha --require esm",
-    "precoverage": "rimraf ./coverage",
+    "precoverage": "rimraf ./coverage"
   },
   "bin": {
     "rpa-lint": "bin/rpa-lint"
