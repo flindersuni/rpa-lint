@@ -48,32 +48,35 @@ program.on( "--help", function() {
 // Parse the command line parameters.
 program.parse( process.argv );
 
+// Get the specified options.
+const options = program.opts();
+
 // Check for required input path option.
 // If missing assume current working directory.
-if ( typeof( program.input ) === "undefined" ) {
-  program.input = process.cwd();
+if ( typeof( options.input ) === "undefined" ) {
+  options.input = process.cwd();
 }
 
 // Output some useful information.
 log( chalk.bold( "RPA Lint - " + appPackage.version ) );
 
 // Resolve a relative path if required.
-if ( !path.isAbsolute( program.input ) ) {
-  program.input = path.resolve( process.cwd().toString(), program.input );
+if ( !path.isAbsolute( options.input ) ) {
+  options.input = path.resolve( process.cwd().toString(), options.input );
 } else {
 
   // Normalise the path for sanity.
-  program.input = path.normalize( program.input );
+  options.input = path.normalize( options.input );
 }
 
 // Get a list of files to process.
-if ( program.recursive === true ) {
+if ( options.recursive === true ) {
   log( "INFO: Searching recursively for XAML files" );
 }
 
 let xamlFiles = StyleRuleFactory.getXamlFileList(
-  program.input,
-  program.recursive
+  options.input,
+  options.recursive
 );
 
 // Check to make sure XAML files were found.
@@ -83,15 +86,15 @@ if ( xamlFiles.length === 0 ) {
 }
 
 // Get some information about the project.
-const projectInfo = new UiPathProject( program.input );
+const projectInfo = new UiPathProject( options.input );
 
 log( "INFO: Project name: %s", projectInfo.getName() );
 log( "INFO: Project version: %s", projectInfo.getVersion() );
 
 // Output some additional information.
-log( "INFO: Found %d files in %s", xamlFiles.length, program.input );
+log( "INFO: Found %d files in %s", xamlFiles.length, options.input );
 
-if ( program.quiet === true ) {
+if ( options.quiet === true ) {
   log( warn( "WARN:" ) + " Warning messages are being suppressed" );
 }
 
@@ -111,7 +114,7 @@ let libraryStyleRules = [];
 let libraryPublicWorkflows = [];
 
 // Build a list of library specific style rules if required.
-if ( projectInfo.isLibrary() === false && program.includePrivate === true ) {
+if ( projectInfo.isLibrary() === false && options.includePrivate === true ) {
   log( warn( "WARN: " ) + "--include-private option is only applicable to library projects" );
 }
 
@@ -129,7 +132,7 @@ if ( projectInfo.isLibrary() ) {
   );
 
   // Filter out private workflows if required.
-  if ( program.includePrivate !== true ) {
+  if ( options.includePrivate !== true ) {
     log( "INFO: Ignoring private workflows." );
     xamlFiles = StyleRuleFactory.filterPublicWorkflows(
       xamlFiles,
@@ -186,7 +189,7 @@ xamlFiles.forEach( function( file ) {
 } );
 
 // Suppress warnings if required.
-if ( program.quiet === true ) {
+if ( options.quiet === true ) {
 
   // Check to see if only warnings have been found.
   if ( haveErrors === false && haveIssues === true ) {
@@ -197,9 +200,9 @@ if ( program.quiet === true ) {
 }
 
 // Filter the results list if required.
-if ( program.filter !== undefined ) {
+if ( options.filter !== undefined ) {
   log( warn( "WARN: " ) + "Results are filtered." );
-  results = StyleRuleFactory.filterResults( results, program.filter );
+  results = StyleRuleFactory.filterResults( results, options.filter );
 
   if ( results.size === 0 ) {
     haveIssues = false;
@@ -232,7 +235,7 @@ if ( haveIssues ) {
 }
 
 // Check the UiPath project dependencies if required.
-if ( program.depCheck ) {
+if ( options.depCheck ) {
   console.log( "INFO: Checking UiPath project dependencies. This will take some time..." );
 
   let depCheck = new NoOutdatedProjectDependencies( projectInfo );
